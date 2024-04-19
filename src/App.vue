@@ -7,10 +7,10 @@ export default{
 <template>
     <nav>
         <ul>
-            <li><a href="">Inicio</a></li>
-            <li><a href="">Inicio</a></li>
-            <li><a href="">Inicio</a></li>
-            <li><a href="">Inicio</a></li>
+            <li>Inicio</li>
+            <li>Inicio</li>
+            <li>Inicio</li>
+            <li>Inicio</li>
         </ul>
     </nav>
 
