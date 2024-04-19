@@ -5,5 +5,6 @@ export default{
 </script>
 
 <template>
+    <h1>Perfil de:</h1>
 
 </template>
