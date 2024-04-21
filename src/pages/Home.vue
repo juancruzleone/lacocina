@@ -3,18 +3,55 @@ export default{
     name: 'Home'
 }
 </script>
+
 <template>
-    <div class="bg-portada h-[1000]">
-        <h1 class="font-montserrat font-bold text-4xl">La cocina</h1>
-        <p>Comunidad crypto hispana</p>
+    <div class="bg-portada text-center">
+        <h1 class="font-montserrat font-bold text-6xl">La cocina</h1>
+        <p class="font-montserrat text-2xl">Comunidad crypto hispana</p>
     </div>
     <section>
-        <h2>Quienes somos?</h2>
+        <div class="flex p-10">
+            <div>
+                <h2 class="font-montserrat font-bold text-3xl">Quienes somos?</h2>
+            </div>
+            <div>
+                <p class="font-montserrat text-xl p-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id facilisis sapien, non aliquet dui. Proin justo eros, dapibus in ligula et, tristique dictum purus. Nam mollis justo nulla, sit amet sollicitudin quam tristique ultrices. Morbi finibus, justo pretium euismod pulvinar, purus magna sagittis odio, id dictum massa massa eu enim. Nunc nisi mi, tincidunt ac lacinia ullamcorper, tempor vel eros.</p>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
+
+            </div>
+            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
+
+            </div>
+            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
+
+            </div>
+            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
+
+            </div>
+            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
+
+            </div>
+        </div>
     </section>
-    <section>
-        <h2>Forma parte de nuestra comunidad</h2>
+    <section class="p-10">
+        <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>
+        <div>
+            
+        </div>
     </section>
-    <section>
-        <h2>Preguntas frecuentes</h2>
+    <section class="p-10">
+        <h2 class="font-montserrat font-bold text-3xl">Preguntas frecuentes</h2>
+        <div>
+            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+        </div>
     </section>
 </template>
