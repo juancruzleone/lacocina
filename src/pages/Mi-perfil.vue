@@ -5,6 +5,8 @@ export default{
 </script>
 
 <template>
-    <h1>Perfil de:</h1>
-
+    <div class="bg-portada">
+        <h1>Perfil de:</h1>
+    </div>
+    <div></div>
 </template>
