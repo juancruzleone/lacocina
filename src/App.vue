@@ -12,7 +12,9 @@ export default{
             <li><router-link to="/vip" class="font-montserrat text-white m-2">Vip</router-link></li>
             <li><router-link to="/panel" class="font-montserrat text-white m-2">Panel</router-link></li>
             <li><router-link to="/contacto" class="font-montserrat text-white m-2">Contacto</router-link></li>
-            <li><router-link to="/login" class="font-montserrat text-white m-2">Login</router-link></li>
+            <li><router-link to="/login" class="font-montserrat text-white m-2">
+                <img src="/usuario.webp" alt="icono login">
+            </router-link></li>
         </ul>
     </nav>
     <main>
