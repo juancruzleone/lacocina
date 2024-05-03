@@ -38,20 +38,20 @@ export default{
     </section>
     <section class="p-10">
         <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>
-        <div>
+        <div class="">
             
         </div>
     </section>
     <section class="p-10">
         <h2 class="font-montserrat font-bold text-3xl">Preguntas frecuentes</h2>
         <div>
-            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-16 rounded-ls bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-lg bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-lg bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-lg bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-lg bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-lg bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-lg bg-contenedores m-5 ml-0"></div>
+            <div class="w-120 h-16 rounded-lg bg-contenedores m-5 ml-0"></div>
         </div>
     </section>
 </template>

@@ -1,6 +1,6 @@
 import Home from '../pages/Home.vue'
 import Comunidad from '../pages/Comunidad.vue'
-import Chat from '../pages/Chat.vue'
+import ChatPrivado from '../pages/ChatPrivado.vue'
 import Vip from '../pages/Vip.vue'
 import Contacto from '../pages/Contacto.vue'
 import Login from '../pages/Login.vue'
@@ -12,8 +12,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 const routes = [
     { path: '/',                    component: Home},
     { path: '/comunidad',           component: Comunidad},
+    { path: '/chat-privado',        component: ChatPrivado},
     { path: '/vip',                 component: Vip},
-    { path: '/chat',                component: Chat},
     { path: '/contacto',            component: Contacto},
     { path: '/login',               component: Login},
     { path: '/register',            component: Register},
