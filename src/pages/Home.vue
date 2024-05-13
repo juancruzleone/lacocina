@@ -19,22 +19,23 @@ export default{
             </div>
         </div>
         <div class="flex justify-center">
-            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
-
+            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+                <img src="/nacherx.jpg" alt="foto de usuario de nacherx" class="rounded-full">
             </div>
-            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
-
+            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+                <img src="/cromer.jpg" alt="foto de usuario de cromer" class="rounded-full">
             </div>
-            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
-
+            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+                <img src="/chefao.jpg" alt="foto de usuario de chefao" class="rounded-full">
             </div>
-            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
-
+            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+                <img src="/teos.jpg" alt="foto de usuario de teos" class="rounded-full">
             </div>
-            <div class="w-20 h-20 bg-contenedores rounded-full m-3">
-
+            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+                <img src="/kichiro.jpg" alt="foto de usuario de kichiro" class="rounded-full">
             </div>
         </div>
+
     </section>
     <section class="pl-10 pt-20 mb-20">
         <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>

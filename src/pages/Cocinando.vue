@@ -6,6 +6,6 @@ export default{
 
 <template>
     <div class="bg-portada">
-        <h1 class="font-montserrat font-semibold text-5xl pl-10 mt-20">Cocinando</h1>
+        <h1 class="font-montserrat font-bold text-5xl pl-12 mt-20">Cocinando</h1>
     </div>
 </template>
