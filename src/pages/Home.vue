@@ -1,58 +1,86 @@
 <script>
-export default{
-    name: 'Home'
+export default {
+  name: 'Home',
+  data() {
+    return {
+      preguntas: [
+        {
+          pregunta: '¿Qué es La Cocina?',
+          respuesta: 'La Cocina es una comunidad hispana de criptomonedas dedicada a brindar contenido educativo, informativo y entretenido sobre el mundo de las criptomonedas. Nuestro objetivo es proporcionar un espacio donde los entusiastas de las criptomonedas puedan aprender, compartir conocimientos y participar en discusiones sobre diversos temas relacionados con este apasionante campo. En nuestra sección "Cocinando", nuestros expertos, también conocidos como chefs, publicarán contenido especializado sobre diferentes aspectos del mundo cripto. Cada chef tiene su especialidad y compartirá su experiencia y conocimientos únicos para enriquecer la experiencia de la comunidad. Además, en "Cocinando", los usuarios tendrán la oportunidad de interactuar, hacer preguntas y dejar comentarios para fomentar la colaboración y el aprendizaje colectivo.'
+        },
+        {
+          pregunta: '¿Cuáles son los temas que se tratan en La Cocina?',
+          respuesta: 'En La Cocina, cubrimos una amplia gama de temas relacionados con las criptomonedas, incluyendo introducción a blockchain, análisis de proyectos, tutoriales de trading, seguridad de criptoactivos, noticias del mercado, entre otros.'
+        },
+        {
+          pregunta: '¿Qué es una criptomoneda?',
+          respuesta: 'Una criptomoneda es una forma de dinero digital que utiliza criptografía para asegurar y verificar transacciones, así como para controlar la creación de nuevas unidades. A diferencia de las monedas tradicionales, las criptomonedas operan de forma descentralizada utilizando tecnología blockchain.'
+        },
+        {
+          pregunta: '¿Cuál es la diferencia entre Bitcoin y Ethereum?',
+          respuesta: 'Bitcoin y Ethereum son dos de las criptomonedas más populares, pero tienen diferencias fundamentales. Bitcoin se creó principalmente como un sistema de pago peer-to-peer, mientras que Ethereum es una plataforma que permite a los desarrolladores construir aplicaciones descentralizadas (DApps) utilizando contratos inteligentes.'
+        }
+      ]
+    }
+  }
 }
 </script>
 
 <template>
+  <div>
     <div class="bg-portada text-center h-96">
-        <h1 class="font-montserrat font-bold text-6xl">La cocina</h1>
-        <p class="font-montserrat text-2xl">Comunidad crypto hispana</p>
+      <h1 class="font-montserrat font-bold text-6xl">La cocina</h1>
+      <p class="font-montserrat text-2xl">Comunidad crypto hispana</p>
     </div>
     <section>
-        <div class="flex mt-20 p-10">
-            <div class="mr-20">
-                <h2 class="font-montserrat font-bold text-6xl">Quiénes somos?</h2>
-            </div>
-            <div>
-                <p class="font-montserrat text-xl w-82">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id facilisis sapien, non aliquet dui. Proin justo eros, dapibus in ligula et, tristique dictum purus. Nam mollis justo nulla, sit amet sollicitudin quam tristique ultrices. Morbi finibus, justo pretium euismod pulvinar, purus magna sagittis odio, id dictum massa massa eu enim. Nunc nisi mi, tincidunt ac lacinia ullamcorper, tempor vel eros.</p>
-            </div>
+      <div class="flex mt-20 p-10">
+        <div class="mr-20">
+          <h2 class="font-montserrat font-bold text-6xl">Quiénes somos?</h2>
         </div>
-        <div class="flex justify-center">
-            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-                <img src="/nacherx.jpg" alt="foto de usuario de nacherx" class="rounded-full">
-            </div>
-            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-                <img src="/cromer.jpg" alt="foto de usuario de cromer" class="rounded-full">
-            </div>
-            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-                <img src="/chefao.jpg" alt="foto de usuario de chefao" class="rounded-full">
-            </div>
-            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-                <img src="/teos.jpg" alt="foto de usuario de teos" class="rounded-full">
-            </div>
-            <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-                <img src="/kichiro.jpg" alt="foto de usuario de kichiro" class="rounded-full">
-            </div>
+        <div>
+          <p class="font-montserrat text-xl w-82">
+            <span class="font-bold">La Cocina</span> es una comunidad hispana de criptomonedas dedicada a brindar contenido educativo, informativo y entretenido sobre el mundo de las criptomonedas. Nuestro objetivo es proporcionar un espacio donde los entusiastas de las criptomonedas puedan aprender, compartir conocimientos y participar en discusiones sobre diversos temas relacionados con este apasionante campo. En nuestra sección "Cocinando", nuestros expertos, también conocidos como chefs, publicarán contenido especializado sobre diferentes aspectos del mundo cripto. Cada chef tiene su especialidad y compartirá su experiencia y conocimientos únicos para enriquecer la experiencia de la comunidad. Además, en "Cocinando", los usuarios tendrán la oportunidad de interactuar, hacer preguntas y dejar comentarios para fomentar la colaboración y el aprendizaje colectivo.
+          </p>
         </div>
-
+      </div>
+      <div class="flex justify-center">
+        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <img src="/nacherx.jpg" alt="foto de usuario de nacherx" class="rounded-full">
+        </div>
+        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <img src="/cromer.jpg" alt="foto de usuario de cromer" class="rounded-full">
+        </div>
+        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <img src="/chefao.jpg" alt="foto de usuario de chefao" class="rounded-full">
+        </div>
+        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <img src="/teos.jpg" alt="foto de usuario de teos" class="rounded-full">
+        </div>
+        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <img src="/kichiro.jpg" alt="foto de usuario de kichiro" class="rounded-full">
+        </div>
+      </div>
     </section>
     <section class="pl-10 pt-20 mb-20">
-        <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>
-        <div class="">
-            
-        </div>
+      <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>
+      <div>
+        <!-- Aquí puedes agregar contenido para la comunidad -->
+      </div>
     </section>
     <section class="p-10">
-        <h2 class="font-montserrat font-bold text-3xl">Preguntas frecuentes</h2>
-        <div>
-            <div class="w-120 h-14 rounded-lg bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-14 rounded-lg bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-14 rounded-lg bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-14 rounded-lg bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-14 rounded-lg bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-14 rounded-lg bg-contenedores m-5 ml-0"></div>
-            <div class="w-120 h-14 rounded-lg bg-contenedores m-5 ml-0"></div>
+      <h2 class="font-montserrat font-bold text-3xl">Preguntas frecuentes</h2>
+      <div class="mt-5">
+        <div v-for="(pregunta, index) in preguntas" :key="index" class="mb-3">
+          <input type="checkbox" :id="'pregunta' + (index + 1)" class="ocultar hidden">
+          <label :for="'pregunta' + (index + 1)" class="boton-acordeon bg-contenedores rounded-lg py-3 px-5 inline-block cursor-pointer w-full">
+            <span class="inline-block text-white font-montserrat">{{ pregunta.pregunta }}</span>
+            <img src="/flecha-abajo.webp" alt="Flecha Abajo" class="float-right ml-auto transform transition-transform duration-300 w-5 h-5">
+          </label>
+          <div class="respuesta bg-gray-800 rounded-lg p-5 mb-3 hidden text-white font-montserrat">
+            <p v-html="pregunta.respuesta"></p>
+          </div>
         </div>
+      </div>
     </section>
+  </div>
 </template>

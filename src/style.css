@@ -9,3 +9,18 @@
 .bg-portada{
     background-color: #FCFDBE;
 }
+
+.respuesta {
+    display: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    margin-top: -10px;
+  }
+  
+  .ocultar:checked ~ .respuesta {
+    display: block;
+  }
+
+  .ocultar:checked ~ .boton-acordeon img {
+    transform: rotate(180deg); 
+}
