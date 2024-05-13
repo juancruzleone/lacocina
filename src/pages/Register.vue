@@ -17,11 +17,8 @@ export default{
 
         </div>
         <div>
-            <h1>Register</h1>
+            <h1 class="font-montserrat font-semibold text-5xl pl-10 mt-20">Register</h1>
             <form action=""></form>
         </div>
     </div>
- 
-
-
 </template>

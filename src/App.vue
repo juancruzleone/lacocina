@@ -5,17 +5,18 @@ export default{
 </script>
 
 <template>
-    <nav class="bg-contenedores p-10">
+    <nav class="bg-contenedores p-10 flex items-center justify-between"> 
         <ul class="flex">
-            <li><router-link to="/" class="font-montserrat text-white m-2">Inicio</router-link></li>
-            <li><router-link to="/comunidad" class="font-montserrat text-white m-2">Comunidad</router-link></li>
-            <li><router-link to="/vip" class="font-montserrat text-white m-2">Vip</router-link></li>
-            <li><router-link to="/panel" class="font-montserrat text-white m-2">Panel</router-link></li>
-            <li><router-link to="/contacto" class="font-montserrat text-white m-2">Contacto</router-link></li>
-            <li><router-link to="/login" class="font-montserrat text-white m-2">
-                <img src="/usuario.webp" alt="icono login">
-            </router-link></li>
+            <li><router-link to="/" class="font-montserrat text-white m-2 text-lg">Inicio</router-link></li>
+            <li><router-link to="/comunidad" class="font-montserrat text-white m-2 text-lg">Comunidad</router-link></li>
+            <li><router-link to="/cocinando" class="font-montserrat text-white m-2 text-lg">Cocinando</router-link></li>
+            <li><router-link to="/vip" class="font-montserrat text-white m-2 text-lg">Vip</router-link></li>
+            <li><router-link to="/panel" class="font-montserrat text-white m-2 text-lg">Panel</router-link></li>
+            <li><router-link to="/contacto" class="font-montserrat text-white m-2 text-lg">Contacto</router-link></li>
         </ul>
+        <router-link to="/login" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-3"> 
+            <img src="/usuario.webp" alt="icono login" class="w-10 h-10">
+        </router-link>
     </nav>
     <main>
         <router-view></router-view>
@@ -23,5 +24,4 @@ export default{
     <footer class="p-10 bg-contenedores mt-20">
         <h4 class="font-montserrat text-white text-3xl font-bold">La cocinaa</h4>
     </footer>
-
 </template>

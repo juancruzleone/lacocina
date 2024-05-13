@@ -6,9 +6,8 @@ export default{
 
 <template>
     <div class="bg-portada">
-        <h1 class="font-monserrat font-bold text-3xl p-10">Comunidad</h1>
+        <h1 class="font-montserrat font-semibold text-5xl pl-10 mt-20">Comunidad</h1>
     </div>
-    
     <div class="flex p-10">
         <div>
             <h2 class="font-montserrat text-xl">Chat general</h2>
