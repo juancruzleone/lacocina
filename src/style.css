@@ -24,3 +24,7 @@
   .ocultar:checked ~ .boton-acordeon img {
     transform: rotate(180deg); 
 }
+
+.radius-comunidad{
+  border-radius: 20px;
+}
