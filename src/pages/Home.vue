@@ -1,6 +1,11 @@
 <script>
+import MainH2 from '../components/MainH2.vue';
+
+
+
 export default {
   name: 'Home',
+  components: { MainH2 },
   data() {
     return {
       preguntas: [
@@ -67,7 +72,7 @@ export default {
       </div>
     </section>
     <section class="pl-10 pt-20 mb-20">
-      <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>
+      <MainH2>Forma parte de nuestra comunidad</MainH2>
       <div class="flex mt-5">
         <div>
           <img src="/olla.jpg" alt="foto de olla" class="w-[150px]">     
@@ -77,7 +82,7 @@ export default {
       </div>
     </section>
     <section class="p-10">
-      <h2 class="font-montserrat font-bold text-3xl">Preguntas frecuentes</h2>
+      <MainH2>Preguntas frecuentes</MainH2>
       <div class="mt-5">
         <div v-for="(pregunta, index) in preguntas" :key="index" class="mb-3">
           <input type="checkbox" :id="'pregunta' + (index + 1)" class="ocultar hidden">
@@ -92,7 +97,7 @@ export default {
       </div>
     </section>
     <section class="p-10">
-      <h2 class="font-montserrat font-bold text-3xl ml-3">Post destacado</h2>
+      <MainH2>Post destacado</MainH2>
     </section>
   </div>
 </template>

@@ -1,10 +1,11 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
+import MainH2 from '../components/MainH2.vue';
 
 
 export default{
     name: 'Vip',
-    components: { MainH1 }
+    components: { MainH1, MainH2 }
 }
 </script>
 
@@ -13,6 +14,6 @@ export default{
         <MainH1>VIP</MainH1>
     </div>
     <section>
-        <h2 class="font-montserrat font-semibold text-3xl pl-10 mt-20">¿Como acceder al VIP?</h2>
+        <MainH2 class="pl-10 p-10">¿Como acceder al VIP?</MainH2>
     </section>
 </template>

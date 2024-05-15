@@ -2,6 +2,7 @@
 import Loader from '../components/Loader.vue';
 import MainButton from '../components/MainButton.vue';
 import MainH1 from '../components/MainH1.vue';
+import MainH2 from '../components/MainH2.vue';
 import MainInput from '../components/MainInput.vue';
 import MainLabel from '../components/MainLabel.vue';
 import { subscribeToAuth } from '../services/auth';
@@ -10,7 +11,7 @@ import { saveChatMessage, subscribeToChatMessages } from '../services/chat';
 
 export default {
     name: "Chat",
-    components: { MainH1, Loader, MainLabel, MainButton, MainInput },
+    components: { MainH1, MainH2, Loader, MainLabel, MainButton, MainInput },
     data: () => {
         return {
             messages: [],
@@ -79,7 +80,7 @@ export default {
 
     <div class="flex gap-4">
         <section class="w-3/4">
-            <h2 class="font-montserat font-bold text-3xl pl-16 pt-10 pb-4">Chat general</h2>
+            <MainH2 class="pl-16 p-10 pb-3">Chat general</MainH2>
             <div class="min-h-[400px] p-4 bg-gray-400 rounded-lg ml-16">
                 <ul v-if="!loadingMessages">
                     <li 
