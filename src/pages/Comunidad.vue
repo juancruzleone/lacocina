@@ -1,33 +1,162 @@
 <script>
-export default{
-    name: 'Comunidad'
+import Loader from '../components/Loader.vue';
+import MainButton from '../components/MainButton.vue';
+import MainH1 from '../components/MainH1.vue';
+import MainInput from '../components/MainInput.vue';
+import MainLabel from '../components/MainLabel.vue';
+import { subscribeToAuth } from '../services/auth';
+import { saveChatMessage, subscribeToChatMessages } from '../services/chat';
+
+// const defaultMessages = [
+//     {
+//         email: 'sara@za.com',
+//         content: 'Hola, ¿cómo andan?',
+//     },
+//     {
+//         email: 'pepe@trueno.com',
+//         content: 'hola sara q tal todo bien?',
+//     },
+//     {
+//         email: 'sara@za.com',
+//         content: 'Sí, gracias. ¿Vos pepe?',
+//     },
+// ];
+
+export default {
+    name: "Chat",
+    components: { MainH1, Loader, MainLabel, MainButton, MainInput },
+    data: () => {
+        return {
+            messages: [],
+            loadingMessages: true,
+            unsubscribeFromChat: () => {},
+
+            newMessage: {
+                content: '',
+            },
+
+            authUser: {
+                id: null,
+                email: null,
+            },
+            unsubscribeFromAuth: () => {},
+        }
+    },
+    methods: {
+        sendMessage() {
+            saveChatMessage({
+                userId: this.authUser.id,
+                email: this.authUser.email,
+                content: this.newMessage.content,
+            });
+            // this.messages.push({
+            //     email: this.newMessage.email,
+            //     content: this.newMessage.content,
+            // });
+            this.newMessage.content = '';
+        },
+
+        /**
+         * Transforma un objeto Date a un string con formato "DD/MM/AAAA HH:mm".
+         * 
+         * @param {Date} date 
+         * @returns {string}
+         */
+        formatDate(date) {
+            // Vamos a usar la clase Intl para darle formato a la fecha.
+            return Intl.DateTimeFormat('es-AR', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', /*second: '2-digit',*/
+            }).format(date).replace(',', '');
+        },
+
+        userRoute(id) {
+            return id !== this.authUser.id ?
+                `/usuario/${id}` :
+                '/perfil';
+        }
+    },
+    mounted() {
+        this.unsubscribeFromChat = subscribeToChatMessages(newMessages => {
+            this.messages = newMessages;
+            this.loadingMessages = false;
+        });
+
+        // Guardamos la función para cancelar la suscripción.
+        this.unsubscribeFromAuth = subscribeToAuth(newUserData => this.authUser = newUserData);
+
+        // Obtenemos los mensajes del chat.
+        // this.messages = [...defaultMessages];
+    },
+    unmounted() {
+        // Al desmontar el componente, cancelamos todas las suscripciones que hayamos
+        // abierto.
+        this.unsubscribeFromAuth();
+        this.unsubscribeFromChat();
+    }
 }
 </script>
 
 <template>
-    <div class="bg-portada h-96">
-        <h1 class="font-montserrat font-bold text-5xl pl-12 pt-20">Comunidad</h1>
-    </div>
-    <div class="flex p-10">
-        <div>
-            <h2 class="font-montserrat text-xl">Chat general</h2>
-            <div class="w-96 h-40">
-         
+    <MainH1>Chat Global</MainH1>
+
+    <div class="flex gap-4">
+        <section class="w-3/4">
+            <h2 class="sr-only">Lista de Mensajes</h2>
+
+            <div class="min-h-[400px] p-4 border border-gray-300 rounded">
+                <ul v-if="!loadingMessages">
+                    <li 
+                        v-for="message in messages"
+                        class="mb-2"
+                    >
+                        <p>
+                            <router-link 
+                                class="text-blue-600 underline"
+                                :to="userRoute(message.userId)"
+                            >
+                                <b>{{ message.email }}</b>
+                            </router-link> 
+                            dijo:
+                        </p>
+                        <p>{{ message.content }}</p>
+                        <p>{{ formatDate(message.created_at) }}</p>
+                    </li>
+                </ul>
+                <!-- <div v-else class="flex justify-center items-center h-full"> -->
+                <Loader v-else />
+                <!-- </div> -->
             </div>
-        </div>
-        <div class="w-120 ">
-            <form action="">
-                <input type="text" name="" id="">
-                <label for=""></label>
-                <input type="text">
-                <label for=""></label>
-                <button></button>
+        </section> 
+        <section class="w-1/4">
+            <h2 class="mb-4">Enviar un Mensaje</h2>
+
+            <form 
+                action="#"
+                @submit.prevent="sendMessage"
+            >
+                <div class="mb-3">
+                    <span class="block mb-2">Email</span>
+                    <span>{{ authUser.email }}</span>
+                    <!-- 
+                    Cuando se usa en un componente, el v-model se expande a:
+                        :model-value="newMessage.email"
+                        @update:model-value="newValue => newMessage.email = newValue"
+                    -->
+                </div>
+                <div class="mb-3">
+                    <MainLabel for="message">Mensaje</MainLabel>
+                    <!-- TODO: Adapten el textarea a un componente MainTextarea. -->
+                    <textarea
+                        id="message"
+                        class="w-full p-2 border border-gray-500 rounded"
+                        v-model="newMessage.content"
+                    ></textarea>
+                </div>
+                <MainButton 
+                    type="submit"
+                />
             </form>
-
-        </div>
-        <div>
-            <h3 class="font-montserrat text-xl">Listado de usuarios</h3>
-        </div>
+        </section>
     </div>
-
 </template>
