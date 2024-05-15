@@ -35,7 +35,7 @@ export default {
   <div>
     <div class="bg-portada h-[600px] pl-10">
       <h1 class="font-montserrat font-bold text-7xl pt-[140px]">La cocina</h1>
-      <p class="font-montserrat text-3xl">Comunidad crypto hispana</p>
+      <p class="font-montserrat text-3xl mt-2">Comunidad crypto hispana</p>
     </div>
     <section class="flex mt-20 p-10">
       <div class="w-[50%] pr-[12%]">

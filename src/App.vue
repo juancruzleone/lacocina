@@ -14,14 +14,14 @@ export default {
       <li><router-link to="/panel" class="font-montserrat text-white m-2 text-lg">Panel</router-link></li>
       <li><router-link to="/contacto" class="font-montserrat text-white m-2 text-lg">Contacto</router-link></li>
     </ul>
-    <router-link to="/login" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2"> 
-      <img src="/usuario.webp" alt="icono login" class="w-10 h-10">
+    <router-link to="/register" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2"> 
+      <img src="/usuario.webp" alt="icono login" class="w-10 h-10 p-1">
     </router-link>
   </nav>
   <main>
     <router-view></router-view>
   </main>
-  <footer class="p-10 bg-contenedores mt-20 grid grid-cols-2">
+  <footer class="p-10 bg-contenedores grid grid-cols-2">
     <div class="col-span-2 md:col-span-1">
       <h4 class="font-montserrat text-white text-3xl font-bold ml-5">La cocina</h4>
     </div>

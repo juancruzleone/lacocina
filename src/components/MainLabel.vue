@@ -5,5 +5,5 @@ export default {
 </script>
 
 <template>
-    <label class="block mb-2"><slot /></label>
+    <label class="block mb-2 font-montserrat"><slot /></label>
 </template>
