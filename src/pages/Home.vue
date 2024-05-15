@@ -63,9 +63,15 @@ export default {
     </section>
     <section class="pl-10 pt-20 mb-20">
       <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>
-      <div>
+      <div class="flex mt-5">
+        <div>
+          
+        </div>
+        <div class="bg-contenedores w-[50%] h-20 rounded-lg">
         <!-- Aquí puedes agregar contenido para la comunidad -->
+        </div>
       </div>
+      
     </section>
     <section class="p-10">
       <h2 class="font-montserrat font-bold text-3xl">Preguntas frecuentes</h2>

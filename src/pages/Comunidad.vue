@@ -79,9 +79,8 @@ export default {
 
     <div class="flex gap-4">
         <section class="w-3/4">
-            <h2 class="sr-only">Lista de Mensajes</h2>
-
-            <div class="min-h-[400px] p-4 bg-gray-400 rounded-lg">
+            <h2 class="font-montserat font-bold text-3xl pl-16 pt-10 pb-4">Chat general</h2>
+            <div class="min-h-[400px] p-4 bg-gray-400 rounded-lg ml-16">
                 <ul v-if="!loadingMessages">
                     <li 
                         v-for="message in messages"
@@ -105,7 +104,7 @@ export default {
                 <!-- </div> -->
             </div>
         </section> 
-        <section class="w-1/4">
+        <section class="w-1/4 pt-20">
             <h2 class="mb-4">Enviar un Mensaje</h2>
 
             <form 
