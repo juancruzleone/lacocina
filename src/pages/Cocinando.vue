@@ -1,11 +1,16 @@
 <script>
+import MainH1 from '../components/MainH1.vue';
+
+
+
 export default{
-    name: 'Cocinando'
+    name: 'Cocinando',
+    components: { MainH1 }
 }
 </script>
 
 <template>
     <div class="bg-portada h-96">
-        <h1 class="font-montserrat font-bold text-5xl pl-12 pt-20">Cocinando</h1>
+        <MainH1>Cocinando</MainH1>
     </div>
 </template>

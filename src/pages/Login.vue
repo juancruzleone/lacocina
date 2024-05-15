@@ -1,6 +1,10 @@
 <script>
+import MainH1 from '../components/MainH1.vue';
+
+
 export default{
-    name: 'Login'
+    name: 'Login',
+    components: { MainH1 }
 }
 </script>
 
@@ -10,7 +14,7 @@ export default{
 
         </div>
         <div>
-            <h1 class="font-montserrat font-semibold text-5xl pl-10 mt-20">Ingresa en tu cuenta</h1>
+            <MainH1>Ingresa en tu cuenta</MainH1>
             <form action=""></form>
         </div>
     </div>

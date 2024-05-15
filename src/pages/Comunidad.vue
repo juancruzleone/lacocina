@@ -7,20 +7,6 @@ import MainLabel from '../components/MainLabel.vue';
 import { subscribeToAuth } from '../services/auth';
 import { saveChatMessage, subscribeToChatMessages } from '../services/chat';
 
-// const defaultMessages = [
-//     {
-//         email: 'sara@za.com',
-//         content: 'Hola, ¿cómo andan?',
-//     },
-//     {
-//         email: 'pepe@trueno.com',
-//         content: 'hola sara q tal todo bien?',
-//     },
-//     {
-//         email: 'sara@za.com',
-//         content: 'Sí, gracias. ¿Vos pepe?',
-//     },
-// ];
 
 export default {
     name: "Chat",
@@ -49,10 +35,6 @@ export default {
                 email: this.authUser.email,
                 content: this.newMessage.content,
             });
-            // this.messages.push({
-            //     email: this.newMessage.email,
-            //     content: this.newMessage.content,
-            // });
             this.newMessage.content = '';
         },
 
@@ -63,10 +45,9 @@ export default {
          * @returns {string}
          */
         formatDate(date) {
-            // Vamos a usar la clase Intl para darle formato a la fecha.
             return Intl.DateTimeFormat('es-AR', {
                 year: 'numeric', month: '2-digit', day: '2-digit',
-                hour: '2-digit', minute: '2-digit', /*second: '2-digit',*/
+                hour: '2-digit', minute: '2-digit',
             }).format(date).replace(',', '');
         },
 
@@ -82,15 +63,9 @@ export default {
             this.loadingMessages = false;
         });
 
-        // Guardamos la función para cancelar la suscripción.
         this.unsubscribeFromAuth = subscribeToAuth(newUserData => this.authUser = newUserData);
-
-        // Obtenemos los mensajes del chat.
-        // this.messages = [...defaultMessages];
     },
     unmounted() {
-        // Al desmontar el componente, cancelamos todas las suscripciones que hayamos
-        // abierto.
         this.unsubscribeFromAuth();
         this.unsubscribeFromChat();
     }
@@ -98,13 +73,15 @@ export default {
 </script>
 
 <template>
-    <MainH1>Chat Global</MainH1>
+    <div class="bg-portada h-96">
+        <MainH1>Comunidad</MainH1>
+    </div>
 
     <div class="flex gap-4">
         <section class="w-3/4">
             <h2 class="sr-only">Lista de Mensajes</h2>
 
-            <div class="min-h-[400px] p-4 border border-gray-300 rounded">
+            <div class="min-h-[400px] p-4 bg-gray-400 rounded-lg">
                 <ul v-if="!loadingMessages">
                     <li 
                         v-for="message in messages"
@@ -138,11 +115,6 @@ export default {
                 <div class="mb-3">
                     <span class="block mb-2">Email</span>
                     <span>{{ authUser.email }}</span>
-                    <!-- 
-                    Cuando se usa en un componente, el v-model se expande a:
-                        :model-value="newMessage.email"
-                        @update:model-value="newValue => newMessage.email = newValue"
-                    -->
                 </div>
                 <div class="mb-3">
                     <MainLabel for="message">Mensaje</MainLabel>
