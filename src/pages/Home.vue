@@ -32,35 +32,43 @@ export default {
       <h1 class="font-montserrat font-bold text-6xl">La cocina</h1>
       <p class="font-montserrat text-2xl">Comunidad crypto hispana</p>
     </div>
-    <section>
-      <div class="flex mt-20 p-10">
-        <div class="mr-20">
-          <h2 class="font-montserrat font-bold text-6xl">Quiénes somos?</h2>
-        </div>
-        <div>
-          <p class="font-montserrat text-xl w-82">
-            <span class="font-bold">La Cocina</span> es una comunidad hispana de criptomonedas dedicada a brindar contenido educativo, informativo y entretenido sobre el mundo de las criptomonedas. Nuestro objetivo es proporcionar un espacio donde los entusiastas de las criptomonedas puedan aprender, compartir conocimientos y participar en discusiones sobre diversos temas relacionados con este apasionante campo. En nuestra sección "Cocinando", nuestros expertos, también conocidos como chefs, publicarán contenido especializado sobre diferentes aspectos del mundo cripto. Cada chef tiene su especialidad y compartirá su experiencia y conocimientos únicos para enriquecer la experiencia de la comunidad. Además, en "Cocinando", los usuarios tendrán la oportunidad de interactuar, hacer preguntas y dejar comentarios para fomentar la colaboración y el aprendizaje colectivo.
-          </p>
-        </div>
+    <section class="flex mt-20 p-10">
+  <div class="w-[50%] pr-[12%]">
+    <h2 class="font-montserrat font-bold text-7xl justify-center text-center">Quiénes somos?</h2>
+    <div class="flex justify-center m-auto mt-6">
+      <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+        <img src="/nacherx.jpg" alt="foto de usuario de nacherx" class="rounded-full">
       </div>
-      <div class="flex justify-center">
-        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-          <img src="/nacherx.jpg" alt="foto de usuario de nacherx" class="rounded-full">
-        </div>
-        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-          <img src="/cromer.jpg" alt="foto de usuario de cromer" class="rounded-full">
-        </div>
-        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-          <img src="/chefao.jpg" alt="foto de usuario de chefao" class="rounded-full">
-        </div>
-        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-          <img src="/teos.jpg" alt="foto de usuario de teos" class="rounded-full">
-        </div>
-        <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-          <img src="/kichiro.jpg" alt="foto de usuario de kichiro" class="rounded-full">
-        </div>
+      <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+        <img src="/cromer.jpg" alt="foto de usuario de cromer" class="rounded-full">
       </div>
-    </section>
+      <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+        <img src="/chefao.jpg" alt="foto de usuario de chefao" class="rounded-full">
+      </div>
+      <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+        <img src="/teos.jpg" alt="foto de usuario de teos" class="rounded-full">
+      </div>
+      <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+        <img src="/kichiro.jpg" alt="foto de usuario de kichiro" class="rounded-full">
+      </div>
+    </div>
+  </div>
+  <div class="w-[50%]">
+    <div>
+      <p class="font-montserrat text-xl w-82">
+        Somos una comunidad de criptomonedas hispana que se dedica a brindar contenido educativo, informativo y entretenido sobre el mundo de las criptomonedas.
+      </p>
+      <p class="font-montserrat text-xl w-82 mt-2">
+        Nuestro objetivo es proporcionar un espacio donde los entusiastas de las criptomonedas puedan aprender, compartir conocimientos y participar en discusiones sobre diversos temas relacionados con las criptomonedas.</p>
+      <p class="font-montserrat text-xl w-82 mt-2">
+        Contamos con 5 expertos, también conocidos como chefs, que publicarán contenido especializado sobre diferentes temas del mundo cripto. 
+      </p> 
+    </div>
+  </div>
+</section>
+
+
+
     <section class="pl-10 pt-20 mb-20">
       <h2 class="font-montserrat font-bold text-3xl">Forma parte de nuestra comunidad</h2>
       <div class="flex mt-5">
