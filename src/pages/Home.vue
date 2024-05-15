@@ -28,7 +28,7 @@ export default {
 
 <template>
   <div>
-    <div class="bg-portada h-[600px] pl-20">
+    <div class="bg-portada h-[600px] pl-10">
       <h1 class="font-montserrat font-bold text-7xl pt-[140px]">La cocina</h1>
       <p class="font-montserrat text-3xl">Comunidad crypto hispana</p>
     </div>
@@ -90,6 +90,9 @@ export default {
           </div>
         </div>
       </div>
+    </section>
+    <section class="p-10">
+      <h2 class="font-montserrat font-bold text-3xl ml-3">Post destacado</h2>
     </section>
   </div>
 </template>
