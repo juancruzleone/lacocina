@@ -14,7 +14,7 @@ export default {
       <li><router-link to="/panel" class="font-montserrat text-white m-2 text-lg">Panel</router-link></li>
       <li><router-link to="/contacto" class="font-montserrat text-white m-2 text-lg">Contacto</router-link></li>
     </ul>
-    <router-link to="/register" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2"> 
+    <router-link to="/register" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-12"> 
       <img src="/usuario.webp" alt="icono login" class="w-10 h-10 p-1">
     </router-link>
   </nav>

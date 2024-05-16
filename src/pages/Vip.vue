@@ -13,7 +13,16 @@ export default{
     <div class="bg-portada h-96">
         <MainH1>VIP</MainH1>
     </div>
-    <section>
+    <section class="pl-12 pb-20">
+        <MainH2 class="pt-10 ">Beneficios</MainH2>
+        <div class="bg-contenedores w-[200px] h-[100px]">
+
+        </div>
+    </section>
+    <section class="pb-20">
         <MainH2 class="pl-10 p-10">¿Como acceder al VIP?</MainH2>
+        <div class="bg-contenedores w-[1000px] h-[100px] ml-12 radius-comunidad">
+
+        </div>
     </section>
 </template>

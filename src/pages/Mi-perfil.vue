@@ -11,5 +11,7 @@ export default{
     <div class="bg-portada h-96">
         <MainH1>Perfil de:</MainH1>
     </div>
-    <div></div>
+    <div>
+        
+    </div>
 </template>

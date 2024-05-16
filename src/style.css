@@ -37,6 +37,10 @@
   border-radius: 10px;
 }
 
+.radius-categoria{
+  border-radius: 16px;
+}
+
 .shadow-2xl {
   box-shadow: 0 70px 50px -12px rgba(0, 0, 0, 0.25);
 }
