@@ -72,16 +72,21 @@ export default {
       </div>
     </section>
     <section class="pl-10 pt-20 mb-20">
-      <MainH2>Forma parte de nuestra comunidad</MainH2>
-      <div class="flex mt-5">
-        <div>
-          <img src="/olla.jpg" alt="foto de olla" class="w-[150px]">     
-        </div>
-        <div class="bg-contenedores w-[60%]  h-[160px] radius-comunidad">
-        </div>
-      </div>
-    </section>
-    <section class="p-10">
+  <MainH2>Forma parte de nuestra comunidad</MainH2>
+  <div class="flex mt-5 items-center">
+    <div>
+      <img src="/olla.jpg" alt="foto de olla" class="w-[150px] h-[150px] mt-5 rounded-full shadow-2xl">
+    </div>
+    <div class="bg-contenedores w-[87.5%] h-[200px] rounded-lg flex flex-col p-5 shadow-2xl ml-5">
+      <h3 class="text-2xl font-bold mb-2 text-white font-montserrat">Únete a nuestro servidor de Discord</h3>
+      <p class="text-lg mb-4 text-white">Sé parte de una comunidad vibrante y activa donde puedes compartir, aprender y crecer junto a otros entusiastas.</p>
+      <a href="discord.gg/Unahg8Vxur" class="p-3 text-black font-montserrat font-semibold bg-white rounded-lg text-center mt-10 w-96">¡Únete Ahora!</a>
+    </div>
+  </div>
+</section>
+
+
+    <section class="p-10 pt-20 pb-20">
       <MainH2>Preguntas frecuentes</MainH2>
       <div class="mt-5">
         <div v-for="(pregunta, index) in preguntas" :key="index" class="mb-3">
@@ -96,7 +101,7 @@ export default {
         </div>
       </div>
     </section>
-    <section class="p-10">
+    <section class="p-10 pb-20">
       <MainH2>Post destacado</MainH2>
     </section>
   </div>
