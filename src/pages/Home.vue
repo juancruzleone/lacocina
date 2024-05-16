@@ -1,8 +1,6 @@
 <script>
 import MainH2 from '../components/MainH2.vue';
 
-
-
 export default {
   name: 'Home',
   components: { MainH2 },
@@ -25,7 +23,12 @@ export default {
           pregunta: '¿Cuál es la diferencia entre Bitcoin y Ethereum?',
           respuesta: 'Bitcoin y Ethereum son dos de las criptomonedas más populares, pero tienen diferencias fundamentales. Bitcoin se creó principalmente como un sistema de pago peer-to-peer, mientras que Ethereum es una plataforma que permite a los desarrolladores construir aplicaciones descentralizadas (DApps) utilizando contratos inteligentes.'
         }
-      ]
+      ],
+      postDestacado: {
+        titulo: 'Cómo empezar en el mundo de las criptomonedas',
+        descripcion: 'Introducción a las criptomonedas y la tecnología blockchain, guía paso a paso para principiantes.',
+        enlace: '#'
+      }
     }
   }
 }
@@ -35,7 +38,7 @@ export default {
   <div>
     <div class="bg-portada h-[600px] pl-10">
       <h1 class="font-montserrat font-bold text-7xl pt-[140px]">La cocina</h1>
-      <p class="font-montserrat text-3xl mt-2">Comunidad crypto hispana</p>
+      <p class="font-montserrat text-3xl mt-2 pl-1">Comunidad crypto hispana</p>
     </div>
     <section class="flex mt-20 p-10">
       <div class="w-[50%] pr-[12%]">
@@ -72,21 +75,19 @@ export default {
       </div>
     </section>
     <section class="pl-10 pt-20 mb-20">
-  <MainH2>Forma parte de nuestra comunidad</MainH2>
-  <div class="flex mt-5 items-center">
-    <div>
-      <img src="/olla.jpg" alt="foto de olla" class="w-[150px] h-[150px] mt-5 rounded-full shadow-2xl">
-    </div>
-    <div class="bg-contenedores w-[87.5%] h-[200px] rounded-lg flex flex-col p-5 shadow-2xl ml-5">
-      <h3 class="text-2xl font-bold mb-2 text-white font-montserrat">Únete a nuestro servidor de Discord</h3>
-      <p class="text-lg mb-4 text-white">Sé parte de una comunidad vibrante y activa donde puedes compartir, aprender y crecer junto a otros entusiastas.</p>
-      <a href="discord.gg/Unahg8Vxur" class="p-3 text-black font-montserrat font-semibold bg-white rounded-lg text-center mt-10 w-96">¡Únete Ahora!</a>
-    </div>
-  </div>
-</section>
-
-
-    <section class="p-10 pt-20 pb-20">
+      <MainH2>Forma parte de nuestra comunidad</MainH2>
+      <div class="flex mt-5 items-center">
+        <div>
+          <img src="/olla.jpg" alt="foto de olla" class="w-[150px] h-[150px] mt-5 rounded-full shadow-2xl">
+        </div>
+        <div class="bg-contenedores w-[87.5%] h-[200px] rounded-lg flex flex-col p-5 shadow-2xl ml-5">
+          <h3 class="text-2xl font-bold mb-2 text-white font-montserrat">Únete a nuestro servidor de Discord</h3>
+          <p class="text-lg mb-4 text-white">Sé parte de una comunidad vibrante y activa donde puedes compartir, aprender y crecer junto a otros entusiastas.</p>
+          <a href="discord.gg/Unahg8Vxur" class="p-3 text-black font-montserrat font-semibold bg-white rounded-lg text-center mt-10 w-96">¡Únete Ahora!</a>
+        </div>
+      </div>
+    </section>
+    <section class="p-10 pb-20">
       <MainH2>Preguntas frecuentes</MainH2>
       <div class="mt-5">
         <div v-for="(pregunta, index) in preguntas" :key="index" class="mb-3">
@@ -103,6 +104,18 @@ export default {
     </section>
     <section class="p-10 pb-20">
       <MainH2>Post destacado</MainH2>
+      <div class="flex mt-5 bg-contenedores radius-comunidad shadow-2xl overflow-hidden">
+        <div>
+          <img src="/blockchain.jpg" alt="foto de blockchain" class="rounded-l-lg">
+        </div>
+        <div class="p-5">
+          <h3 class="text-3xl font-bold text-white font-montserrat">{{ postDestacado.titulo }}</h3>
+          <p class="text-lg text-white mt-3">
+            {{ postDestacado.descripcion }}
+          </p>
+          <a :href="postDestacado.enlace" class="inline-block mt-5 bg-white text-black font-montserrat font-semibold py-2 px-4 rounded-lg">Leer más</a>
+        </div>     
+      </div>
     </section>
   </div>
 </template>

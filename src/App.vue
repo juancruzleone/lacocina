@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <nav class="bg-contenedores flex items-center justify-between pt-2 pb-2 pl-7"> 
+  <nav class="bg-contenedores flex items-center justify-between pt-2 pb-2 pl-10"> 
     <ul class="flex">
       <li><router-link to="/" class="font-montserrat text-white m-2 text-lg">Inicio</router-link></li>
       <li><router-link to="/comunidad" class="font-montserrat text-white m-2 text-lg">Comunidad</router-link></li>

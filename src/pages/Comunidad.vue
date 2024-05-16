@@ -79,9 +79,9 @@ export default {
     </div>
 
     <div class="flex gap-4">
-        <section class="w-3/4">
-            <MainH2 class="pl-16 p-10 pb-3">Chat general</MainH2>
-            <div class="min-h-[400px] p-4 bg-gray-400 rounded-lg ml-16">
+        <section class="w-[70%] mr-20 mb-20">
+            <MainH2 class="pl-12 p-10 pb-3">Chat general</MainH2>
+            <div class="min-h-[400px] p-4 bg-gray-200 rounded-lg ml-12">
                 <ul v-if="!loadingMessages">
                     <li 
                         v-for="message in messages"
