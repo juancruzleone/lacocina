@@ -77,58 +77,79 @@ export default {
     <div class="bg-portada h-96">
         <MainH1>Comunidad</MainH1>
     </div>
-
-    <div class="flex gap-4">
-        <section class="w-[70%] mr-20 mb-20">
-            <MainH2 class="pl-12 p-10 pb-3">Chat general</MainH2>
-            <div class="min-h-[400px] p-4 bg-gray-200 rounded-lg ml-12">
-                <ul v-if="!loadingMessages">
-                    <li 
-                        v-for="message in messages"
-                        class="mb-2"
-                    >
-                        <p>
-                            <router-link 
-                                class="text-blue-600 underline"
-                                :to="userRoute(message.userId)"
-                            >
-                                <b>{{ message.email }}</b>
-                            </router-link> 
-                            dijo:
-                        </p>
-                        <p>{{ message.content }}</p>
-                        <p>{{ formatDate(message.created_at) }}</p>
-                    </li>
-                </ul>
-                <!-- <div v-else class="flex justify-center items-center h-full"> -->
-                <Loader v-else />
-                <!-- </div> -->
-            </div>
-        </section> 
-        <section class="w-1/4 pt-20">
-            <h2 class="mb-4">Enviar un Mensaje</h2>
-
-            <form 
-                action="#"
-                @submit.prevent="sendMessage"
-            >
-                <div class="mb-3">
-                    <span class="block mb-2">Email</span>
-                    <span>{{ authUser.email }}</span>
+    <div class="flex justify-between">
+        <div class="flex flex-col gap-4 w-full">
+            <section class=" mr-20 mb-10">
+                <MainH2 class="pl-12 p-10 pb-3">Chat general</MainH2>
+                <div class="min-h-[400px] p-4 bg-gray-200 radius-comunidad ml-12">
+                    <ul v-if="!loadingMessages">
+                        <li 
+                            v-for="message in messages"
+                            class="mb-2"
+                        >
+                            <p class="font-montserrat">
+                                <router-link 
+                                    class="text-blue-600 underline font-montserrat"
+                                    :to="userRoute(message.userId)"
+                                >
+                                    <b>{{ message.email }}</b>
+                                </router-link> 
+                                dijo:
+                            </p>
+                            <p class="font-montserrat">{{ message.content }}</p>
+                            <p class="font-montserrat">{{ formatDate(message.created_at) }}</p>
+                        </li>
+                    </ul>
+                    <Loader v-else />
                 </div>
-                <div class="mb-3">
-                    <MainLabel for="message">Mensaje</MainLabel>
-                    <!-- TODO: Adapten el textarea a un componente MainTextarea. -->
-                    <textarea
-                        id="message"
-                        class="w-full p-2 border border-gray-500 rounded"
-                        v-model="newMessage.content"
-                    ></textarea>
-                </div>
-                <MainButton 
-                    type="submit"
-                />
-            </form>
-        </section>
+                <form 
+                    action="#"
+                    @submit.prevent="sendMessage"
+                    class="mt-4 ml-12"
+                >
+                    <div class="mb-3">
+                        <span class="block mb-2 font-montserrat">Email</span>
+                        <span>{{ authUser.email }}</span>
+                    </div>
+                    <div class="mb-3 w-full">
+                        <MainLabel for="message">Mensaje</MainLabel>
+                        <div class="flex items-center">
+                            <textarea
+                                id="message"
+                                class="w-full p-2 border border-gray-500 rounded radius-mensaje mr-4 h-[120px]"
+                                v-model="newMessage.content"
+                                placeholder="Escribe tu mensaje"
+                            ></textarea>
+                            <MainButton 
+                                type="submit"
+                                class="text-center radius-mensaje"
+                            />
+                        </div>
+                    </div>      
+                </form>
+            </section> 
+        </div>
+        <div class="bg-black w-[120px] h-[800px] ml-auto">
+            <ul class="block">
+                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-14">
+                    <router-link></router-link>
+                </li>
+                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
+                    <router-link></router-link>
+                </li>
+                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
+                    <router-link></router-link>
+                </li>
+                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
+                    <router-link></router-link>
+                </li>
+                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
+                    <router-link></router-link>
+                </li>
+                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
+                    <router-link></router-link>
+                </li>
+            </ul>
+        </div>     
     </div>
 </template>
