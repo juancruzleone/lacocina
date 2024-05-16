@@ -45,19 +45,19 @@ export default {
         <h2 class="font-montserrat font-bold text-7xl justify-center text-center">Quiénes somos?</h2>
         <div class="flex justify-center m-auto mt-6">
           <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-            <img src="/nacherx.jpg" alt="foto de usuario de nacherx" class="rounded-full">
+            <img src="/nacherx.webp" alt="foto de usuario de nacherx" class="rounded-full">
           </div>
           <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-            <img src="/cromer.jpg" alt="foto de usuario de cromer" class="rounded-full">
+            <img src="/cromer.webp" alt="foto de usuario de cromer" class="rounded-full">
           </div>
           <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-            <img src="/chefao.jpg" alt="foto de usuario de chefao" class="rounded-full">
+            <img src="/chefao.webp" alt="foto de usuario de chefao" class="rounded-full">
           </div>
           <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-            <img src="/teos.jpg" alt="foto de usuario de teos" class="rounded-full">
+            <img src="/teos.webp" alt="foto de usuario de teos" class="rounded-full">
           </div>
           <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
-            <img src="/kichiro.jpg" alt="foto de usuario de kichiro" class="rounded-full">
+            <img src="/kichiro.webp" alt="foto de usuario de kichiro" class="rounded-full">
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default {
       <MainH2>Forma parte de nuestra comunidad</MainH2>
       <div class="flex mt-5 items-center">
         <div>
-          <img src="/olla.jpg" alt="foto de olla" class="w-[150px] h-[150px] mt-5 rounded-full shadow-2xl">
+          <img src="/olla.webp" alt="foto de olla" class="w-[150px] h-[150px] mt-5 rounded-full shadow-2xl">
         </div>
         <div class="bg-contenedores w-[87.5%] h-[200px] rounded-lg flex flex-col p-5 shadow-2xl ml-5">
           <h3 class="text-2xl font-bold mb-2 text-white font-montserrat">Únete a nuestro servidor de Discord</h3>
@@ -106,7 +106,7 @@ export default {
       <MainH2>Post destacado</MainH2>
       <div class="flex mt-5 bg-contenedores radius-comunidad shadow-2xl overflow-hidden">
         <div>
-          <img src="/blockchain.jpg" alt="foto de blockchain" class="rounded-l-lg">
+          <img src="/blockchain.webp" alt="foto de blockchain" class="rounded-l-lg">
         </div>
         <div class="p-5">
           <h3 class="text-3xl font-bold text-white font-montserrat">{{ postDestacado.titulo }}</h3>

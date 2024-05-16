@@ -35,7 +35,7 @@ export default {
 <template>
     <div class="flex">
         <div>
-            <img src="/crypto-2.jpg" alt="foto de bitcoins" class="w-[1400px] h-[1000px]">
+            <img src="/crypto-2.webp" alt="foto de bitcoins" class="w-[1400px] h-[1000px]">
         </div>
         <div>
             <div class="flex pt-20 pl-10">
