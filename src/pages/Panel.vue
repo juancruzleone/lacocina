@@ -15,7 +15,7 @@ export default{
     </div>
     <section class="pl-12 mt-10 pb-20">
         <MainH2>Posts publicados</MainH2>
-        <div>
+        <div class="pt-5">
             <div>
                 <div class="bg-contenedores w-[72%] h-[220px] radius-comunidad p-5">
                     <h3 class="text-white font-montserrat text-2xl font-semibold">Post</h3>
