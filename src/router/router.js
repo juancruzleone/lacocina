@@ -7,6 +7,7 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Panel from '../pages/Panel.vue'
 import MiPerfil from '../pages/Mi-perfil.vue'
+import Detalle from '../pages/Detalle.vue'
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
@@ -14,6 +15,7 @@ const routes = [
     { path: '/comunidad',           component: Comunidad},
     { path: '/vip',                 component: Vip},
     { path: '/cocinando',           component: Cocinando},
+    { path: '/detalle',             component: Detalle},
     { path: '/contacto',            component: Contacto},
     { path: '/login',               component: Login},
     { path: '/register',            component: Register},
