@@ -13,7 +13,7 @@ export default{
     <div class="bg-portada h-96">
         <MainH1>Panel admin</MainH1>
     </div>
-    <section class="pl-12 mt-10">
+    <section class="pl-12 mt-10 pb-20">
         <MainH2>Posts publicados</MainH2>
         <div>
             <div>
