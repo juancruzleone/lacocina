@@ -51,7 +51,7 @@ export default {
             <div class="bg-contenedores rounded-full w-14 h-14 mt-20"></div>
         </div>
     </div>
-    <section class="pl-14 pt-20 pb-10">
+    <section class="pl-14 pt-10 pb-10">
         <MainH2 class="border-b-8 border-black">Contenido</MainH2>
         <div>
             <img src="/tea-protocol.webp" alt="Imagen del post" class="w-full h-[400px] rounded-md mt-4 mb-10">
