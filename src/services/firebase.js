@@ -1,25 +1,18 @@
-// Este archivo va a servir como módulo de inicialización de
-// Firebase en nuestro proyecto.
-// Va a exportar los diferentes elementos de la plataforma,
-// como Firestore o Auth, para que otros servicios lo consuman.
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-// Reemplazar con la configuración de *su* proyecto :)
 const firebaseConfig = {
-    apiKey: "AIzaSyCmw1hNMAforGmePAICo1SoGXktVk3zHJk",
-    authDomain: "dv-cwm-2024-1-m.firebaseapp.com",
-    projectId: "dv-cwm-2024-1-m",
-    storageBucket: "dv-cwm-2024-1-m.appspot.com",
-    messagingSenderId: "722222498480",
-    appId: "1:722222498480:web:fd412261859dbdc868b175"
+  apiKey: "AIzaSyDWRLg1V4IJIaZU1L0Uo897L9eIGFCbL8o",
+  authDomain: "cwm-2023-2-t.firebaseapp.com",
+  projectId: "cwm-2023-2-t",
+  storageBucket: "cwm-2023-2-t.appspot.com",
+  messagingSenderId: "121815330234",
+  appId: "1:121815330234:web:3a21f5e1760e8d10114183"
 };
 
-
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-
-export const db = getFirestore(app);
-
-export const auth = getAuth(app);
+export { app, db, auth };

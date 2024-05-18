@@ -15,22 +15,47 @@ export default {
                 password: '',
             },
             loading: false,
+            errorMessage: '', // Nuevo estado para mensajes de error
         };
     },
     methods: {
         async handleSubmit() {
-            this.loading = true;
+            // Validación de la contraseña
+            if (this.user.password.length < 6) {
+                this.errorMessage = 'La contraseña debe tener al menos 6 caracteres.';
+                return; // Detener el proceso si hay un error de validación
+            }
 
-            await register(this.user.email, this.user.password);
-            this.$router.push({
-                path: '/perfil'
-            });
-            
-            this.loading = false;
+            this.loading = true;
+            this.errorMessage = ''; // Resetear el mensaje de error
+
+            try {
+                const user = await register(this.user.email, this.user.password);
+                
+                // Redireccionar solo si no hay error y el usuario está verificado
+                if (user.emailVerified) {
+                    this.$router.push({ path: '/perfil' });
+                } else {
+                    // Mostrar un mensaje para que el usuario verifique su email
+                    this.errorMessage = 'Por favor, verifica tu dirección de correo electrónico.';
+                }
+            } catch (error) {
+                // Manejar otros errores y mostrar mensajes específicos
+                if (error.code === 'auth/email-already-in-use') {
+                    this.errorMessage = 'La dirección de correo electrónico ya está en uso.';
+                } else if (error.code === 'auth/weak-password') {
+                    this.errorMessage = 'La contraseña debe tener al menos 6 caracteres.';
+                } else {
+                    this.errorMessage = 'Error al registrar. Por favor, inténtalo de nuevo.';
+                }
+            } finally {
+                this.loading = false;
+            }
         }
     }
 }
 </script>
+
 
 <template>
     <div class="flex">
@@ -71,7 +96,12 @@ export default {
                         Crear Cuenta
                     </MainButton>
                 </form>
+                <!-- Mostrar mensajes de error en la pantalla -->
+                <div v-if="errorMessage" class="text-red-500 mt-3">
+                    {{ errorMessage }}
+                </div>
             </div>
         </div>
     </div>
 </template>
+

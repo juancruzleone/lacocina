@@ -15,18 +15,42 @@ export default {
                 password: '',
             },
             loading: false,
+            errorMessage: '', // Nuevo estado para mensajes de error
         }
     },
     methods: {
         async handleSubmit() {
-            this.loading = true;
+            // Validación de los campos
+            if (!this.user.email) {
+                this.errorMessage = 'El campo de email es obligatorio.';
+                return;
+            }
 
-            await login(this.user.email, this.user.password);
-            this.$router.push({
-                path: '/perfil'
-            });
-            
-            this.loading = false;
+            if (!this.user.password) {
+                this.errorMessage = 'El campo de contraseña es obligatorio.';
+                return;
+            }
+
+            this.loading = true;
+            this.errorMessage = ''; // Resetear el mensaje de error
+
+            try {
+                const user = await login(this.user.email, this.user.password);
+                
+                // Redireccionar solo si no hay error
+                if (user) {
+                    this.$router.push({ path: '/perfil' });
+                }
+            } catch (error) {
+                // Manejar otros errores y mostrar mensajes específicos
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    this.errorMessage = 'Correo electrónico o contraseña incorrectos.';
+                } else {
+                    this.errorMessage = 'Error al iniciar sesión. Por favor, inténtalo de nuevo.';
+                }
+            } finally {
+                this.loading = false;
+            }
         }
     }
 }
@@ -44,29 +68,34 @@ export default {
                     action="#"
                     @submit.prevent="handleSubmit"
                 >
-                <div class="mb-3">
-                    <MainLabel for="email">Email</MainLabel>
-                    <MainInput
-                        type="email"
-                        id="email"
-                        v-model="user.email"
-                    />
+                    <div class="mb-3">
+                        <MainLabel for="email">Email</MainLabel>
+                        <MainInput
+                            type="email"
+                            id="email"
+                            v-model="user.email"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <MainLabel for="password">Contraseña</MainLabel>
+                        <MainInput
+                            type="password"
+                            id="password"
+                            v-model="user.password"
+                        />
+                    </div>
+                    <MainButton
+                        type="submit"
+                        class="mb-[120px]"
+                    >Ingresar</MainButton>
+                </form>
+                <!-- Mostrar mensajes de error en la pantalla -->
+                <div v-if="errorMessage" class="text-red-500 mt-3">
+                    {{ errorMessage }}
                 </div>
-                <div class="mb-3">
-                    <MainLabel for="password">Contraseña</MainLabel>
-                    <MainInput
-                        type="password"
-                        id="password"
-                        v-model="user.password"
-                    />
-                </div>
-                <MainButton
-                    type="submit"
-                    class="mb-[120px]"
-                >Ingresar</MainButton>
-            </form>
-            <p></p>
             </div>
-            </div>
+        </div>
     </div>
 </template>
+
+

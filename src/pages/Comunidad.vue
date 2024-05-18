@@ -107,12 +107,12 @@ export default {
                     @submit.prevent="sendMessage"
                     class="mt-4 ml-12"
                 >
-                    <div class="mb-3">
-                        <span class="block mb-2 font-montserrat">Email</span>
+                    <div class="mb-3 font-montserrat">
+                        <span class="block mb-2 font-semibold">Email</span>
                         <span>{{ authUser.email }}</span>
                     </div>
-                    <div class="mb-3 w-full">
-                        <MainLabel for="message">Mensaje</MainLabel>
+                    <div class="mb-3 w-full font-montserrat">
+                        <MainLabel for="message" class="font-semibold">Mensaje</MainLabel>
                         <div class="flex items-center">
                             <textarea
                                 id="message"

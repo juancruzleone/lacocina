@@ -2,7 +2,7 @@ import Home from '../pages/Home.vue'
 import Comunidad from '../pages/Comunidad.vue'
 import Vip from '../pages/Vip.vue'
 import Cocinando from '../pages/Cocinando.vue'
-import Contacto from '../pages/Contacto.vue'
+
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Panel from '../pages/Panel.vue'
@@ -16,7 +16,6 @@ const routes = [
     { path: '/vip',                 component: Vip},
     { path: '/cocinando',           component: Cocinando},
     { path: '/detalle',             component: Detalle},
-    { path: '/contacto',            component: Contacto},
     { path: '/login',               component: Login},
     { path: '/register',            component: Register},
     { path: '/panel',               component: Panel},
