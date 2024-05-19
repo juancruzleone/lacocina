@@ -1,7 +1,26 @@
 <script>
+import { subscribeToAuth, logout } from './services/auth';
+
 export default {
   name: 'App',
-}
+  data() {
+    return {
+      authUser: null,
+    };
+  },
+  mounted() {
+    subscribeToAuth((newUserData) => {
+      this.authUser = newUserData;
+    });
+  },
+  methods: {
+    handleLogout() {
+      logout().then(() => {
+        this.authUser = null; // Reset user data after logout
+      });
+    }
+  }
+};
 </script>
 
 <template>
@@ -14,9 +33,25 @@ export default {
       <li><router-link to="/panel" class="font-montserrat text-white m-2 text-lg">Panel</router-link></li>
       <li><router-link to="/contacto" class="font-montserrat text-white m-2 text-lg">Contacto</router-link></li>
     </ul>
-    <router-link to="/register" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-12"> 
-      <img src="/usuario.webp" alt="icono login" class="w-10 h-10 p-1">
-    </router-link>
+    <div class="flex items-center">
+      <router-link
+        v-if="authUser"
+        :to="'/perfil/' + authUser.id"
+        class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-4"
+      >
+        <img src="/usuario.webp" alt="icono login" class="w-10 h-10 p-1">
+      </router-link>
+      <router-link v-else to="/register" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-4">
+        <img src="/usuario.webp" alt="icono login" class="w-10 h-10 p-1">
+      </router-link>
+      <button
+        v-if="authUser"
+        @click="handleLogout"
+        class="font-montserrat text-white m-2 text-lg bg-red-500 px-4 py-2 rounded"
+      >
+        Deslogear
+      </button>
+    </div>
   </nav>
   <main>
     <router-view></router-view>
