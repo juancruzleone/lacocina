@@ -8,7 +8,6 @@ import MainLabel from '../components/MainLabel.vue';
 import { subscribeToAuth } from '../services/auth';
 import { saveChatMessage, subscribeToChatMessages } from '../services/chat';
 
-
 export default {
     name: "Chat",
     components: { MainH1, MainH2, Loader, MainLabel, MainButton, MainInput },
@@ -53,9 +52,7 @@ export default {
         },
 
         userRoute(id) {
-            return id !== this.authUser.id ?
-                `/usuario/${id}` :
-                '/perfil';
+            return `/perfil/${id}`;
         }
     },
     mounted() {
@@ -85,6 +82,7 @@ export default {
                     <ul v-if="!loadingMessages">
                         <li 
                             v-for="message in messages"
+                            :key="message.id"
                             class="mb-2"
                         >
                             <p class="font-montserrat">
@@ -97,7 +95,7 @@ export default {
                                 dijo:
                             </p>
                             <p class="font-montserrat">{{ message.content }}</p>
-                            <p class="font-montserrat">{{ formatDate(message.created_at) }}</p>
+                            <p class="font-montserrat">{{ formatDate(new Date(message.created_at)) }}</p>
                         </li>
                     </ul>
                     <Loader v-else />

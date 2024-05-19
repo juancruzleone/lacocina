@@ -18,7 +18,7 @@ const routes = [
     { path: '/login',               component: Login},
     { path: '/register',            component: Register},
     { path: '/panel',               component: Panel},
-    { path: '/mi-perfil',           component: MiPerfil},
+    { path: '/perfil/:id',          component: MiPerfil},
 ]
 
 const Router = createRouter({
