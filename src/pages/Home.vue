@@ -4,32 +4,14 @@ import Loader from '../components/Loader.vue';
 import { db } from '../services/firebase.js';
 import { collection, getDocs, query, limit } from "firebase/firestore";
 
-
 export default {
   name: 'Home',
   components: { MainH2, Loader },
   data() {
     return {
       postDestacado: null,
-      preguntas: [
-        {
-          pregunta: '¿Qué es La Cocina?',
-          respuesta: 'La Cocina es una comunidad hispana de criptomonedas dedicada a brindar contenido educativo, informativo y entretenido sobre el mundo de las criptomonedas. Nuestro objetivo es proporcionar un espacio donde los entusiastas de las criptomonedas puedan aprender, compartir conocimientos y participar en discusiones sobre diversos temas relacionados con este apasionante campo. En nuestra sección "Cocinando", nuestros expertos, también conocidos como chefs, publicarán contenido especializado sobre diferentes aspectos del mundo cripto. Cada chef tiene su especialidad y compartirá su experiencia y conocimientos únicos para enriquecer la experiencia de la comunidad. Además, en "Cocinando", los usuarios tendrán la oportunidad de interactuar, hacer preguntas y dejar comentarios para fomentar la colaboración y el aprendizaje colectivo.'
-        },
-        {
-          pregunta: '¿Cuáles son los temas que se tratan en La Cocina?',
-          respuesta: 'En La Cocina, cubrimos una amplia gama de temas relacionados con las criptomonedas, incluyendo introducción a blockchain, análisis de proyectos, tutoriales de trading, seguridad de criptoactivos, noticias del mercado, entre otros.'
-        },
-        {
-          pregunta: '¿Qué es una criptomoneda?',
-          respuesta: 'Una criptomoneda es una forma de dinero digital que utiliza criptografía para asegurar y verificar transacciones, así como para controlar la creación de nuevas unidades. A diferencia de las monedas tradicionales, las criptomonedas operan de forma descentralizada utilizando tecnología blockchain.'
-        },
-        {
-          pregunta: '¿Cuál es la diferencia entre Bitcoin y Ethereum?',
-          respuesta: 'Bitcoin y Ethereum son dos de las criptomonedas más populares, pero tienen diferencias fundamentales. Bitcoin se creó principalmente como un sistema de pago peer-to-peer, mientras que Ethereum es una plataforma que permite a los desarrolladores construir aplicaciones descentralizadas (DApps) utilizando contratos inteligentes.'
-        }
-      ]
-    }
+      loading: true 
+    };
   },
   async created() {
     try {
@@ -39,6 +21,7 @@ export default {
       const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       if (posts.length > 0) {
         this.postDestacado = posts[0];
+        this.loading = false; 
       }
     } catch (error) {
       console.error("Error fetching posts: ", error);
@@ -120,7 +103,6 @@ export default {
       <MainH2>Post destacado</MainH2>
       <div class="pt-5">
         <div v-if="!postDestacado" class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl justify-center items-center">
-          <!-- Aquí agregamos el componente de loader -->
           <Loader/>
         </div>
         <div v-else class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">

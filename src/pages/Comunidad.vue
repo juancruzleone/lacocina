@@ -30,6 +30,8 @@ export default {
     },
     methods: {
         sendMessage() {
+            if (!this.authUser.id) return;
+
             saveChatMessage({
                 userId: this.authUser.id,
                 email: this.authUser.email,
@@ -70,7 +72,6 @@ export default {
 }
 </script>
 
-
 <template>
     <div class="bg-portada h-96">
         <MainH1>Comunidad</MainH1>
@@ -106,11 +107,14 @@ export default {
                     @submit.prevent="sendMessage"
                     class="mt-4 ml-12"
                 >
-                    <div class="mb-3 font-montserrat">
+                    <div v-if="authUser.id" class="mb-3 font-montserrat">
                         <span class="block mb-2 font-semibold">Email</span>
                         <span>{{ authUser.email }}</span>
                     </div>
-                    <div class="mb-3 w-full font-montserrat">
+                    <div v-else class="mb-3 font-montserrat text-white bg-red-500 p-2 rounded-lg">
+                        <span class="block mb-2 font-semibold">Tenes que iniciar sesión para mandar mensajes</span>
+                    </div>
+                    <div v-if="authUser.id" class="mb-3 w-full font-montserrat">
                         <MainLabel for="message" class="font-semibold">Mensaje</MainLabel>
                         <div class="flex items-center">
                             <textarea
@@ -124,10 +128,9 @@ export default {
                                 class="text-center radius-mensaje"
                             />
                         </div>
-                    </div>      
+                    </div>
                 </form>
             </section> 
         </div>
     </div>
 </template>
-
