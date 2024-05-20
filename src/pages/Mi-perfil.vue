@@ -1,8 +1,7 @@
-// Mi-perfil.vue
 <template>
   <div>
     <div class="bg-portada h-96 flex bg-cover bg-center">
-      <MainH1>Perfil de: {{ user.name }}</MainH1>
+      <MainH1>Perfil de: {{ user.email }}</MainH1>
     </div>
     <div class="p-8 pl-14">
       <div v-if="user.id" class="mb-8 font-montserrat">
@@ -36,11 +35,12 @@
 
 <script>
 import MainH1 from '../components/MainH1.vue';
-import { subscribeToAuth } from '../services/auth.js';
+import { getUserProfileById } from '../services/user-profile'; // Asegúrate de tener una función que obtenga datos del usuario
 
 export default {
   name: 'MiPerfil',
   components: { MainH1 },
+  props: ['id'],
   data() {
     return {
       user: {
@@ -56,17 +56,15 @@ export default {
     };
   },
   mounted() {
-    subscribeToAuth((newUserData) => {
-      this.user = {
-        ...newUserData
-      };
-    });
+    this.fetchUserData();
+  },
+  methods: {
+    async fetchUserData() {
+      const userData = await getUserProfileById(this.id); // Usa el id para obtener los datos del usuario
+      this.user = userData;
+    }
   }
 };
 </script>
 
-<style scoped>
-.bg-portada {
-  background-image: url('/path/to/your/image.jpg'); /* Ruta a tu imagen de portada */
-}
-</style>
+

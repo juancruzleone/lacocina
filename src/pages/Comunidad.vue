@@ -1,75 +1,3 @@
-<script>
-import Loader from '../components/Loader.vue';
-import MainButton from '../components/MainButton.vue';
-import MainH1 from '../components/MainH1.vue';
-import MainH2 from '../components/MainH2.vue';
-import MainInput from '../components/MainInput.vue';
-import MainLabel from '../components/MainLabel.vue';
-import { subscribeToAuth } from '../services/auth';
-import { saveChatMessage, subscribeToChatMessages } from '../services/chat';
-
-export default {
-    name: "Chat",
-    components: { MainH1, MainH2, Loader, MainLabel, MainButton, MainInput },
-    data: () => {
-        return {
-            messages: [],
-            loadingMessages: true,
-            unsubscribeFromChat: () => {},
-
-            newMessage: {
-                content: '',
-            },
-
-            authUser: {
-                id: null,
-                email: null,
-            },
-            unsubscribeFromAuth: () => {},
-        }
-    },
-    methods: {
-        sendMessage() {
-            saveChatMessage({
-                userId: this.authUser.id,
-                email: this.authUser.email,
-                content: this.newMessage.content,
-            });
-            this.newMessage.content = '';
-        },
-
-        /**
-         * Transforma un objeto Date a un string con formato "DD/MM/AAAA HH:mm".
-         * 
-         * @param {Date} date 
-         * @returns {string}
-         */
-        formatDate(date) {
-            return Intl.DateTimeFormat('es-AR', {
-                year: 'numeric', month: '2-digit', day: '2-digit',
-                hour: '2-digit', minute: '2-digit',
-            }).format(date).replace(',', '');
-        },
-
-        userRoute(id) {
-            return `/perfil/${id}`;
-        }
-    },
-    mounted() {
-        this.unsubscribeFromChat = subscribeToChatMessages(newMessages => {
-            this.messages = newMessages;
-            this.loadingMessages = false;
-        });
-
-        this.unsubscribeFromAuth = subscribeToAuth(newUserData => this.authUser = newUserData);
-    },
-    unmounted() {
-        this.unsubscribeFromAuth();
-        this.unsubscribeFromChat();
-    }
-}
-</script>
-
 <template>
     <div class="bg-portada h-96">
         <MainH1>Comunidad</MainH1>
@@ -151,3 +79,75 @@ export default {
         </div>     
     </div>
 </template>
+
+<script>
+import Loader from '../components/Loader.vue';
+import MainButton from '../components/MainButton.vue';
+import MainH1 from '../components/MainH1.vue';
+import MainH2 from '../components/MainH2.vue';
+import MainInput from '../components/MainInput.vue';
+import MainLabel from '../components/MainLabel.vue';
+import { subscribeToAuth } from '../services/auth';
+import { saveChatMessage, subscribeToChatMessages } from '../services/chat';
+
+export default {
+    name: "Chat",
+    components: { MainH1, MainH2, Loader, MainLabel, MainButton, MainInput },
+    data: () => {
+        return {
+            messages: [],
+            loadingMessages: true,
+            unsubscribeFromChat: () => {},
+
+            newMessage: {
+                content: '',
+            },
+
+            authUser: {
+                id: null,
+                email: null,
+            },
+            unsubscribeFromAuth: () => {},
+        }
+    },
+    methods: {
+        sendMessage() {
+            saveChatMessage({
+                userId: this.authUser.id,
+                email: this.authUser.email,
+                content: this.newMessage.content,
+            });
+            this.newMessage.content = '';
+        },
+
+        /**
+         * Transforma un objeto Date a un string con formato "DD/MM/AAAA HH:mm".
+         * 
+         * @param {Date} date 
+         * @returns {string}
+         */
+        formatDate(date) {
+            return Intl.DateTimeFormat('es-AR', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit',
+            }).format(date).replace(',', '');
+        },
+
+        userRoute(id) {
+            return `/perfil/${id}`;
+        }
+    },
+    mounted() {
+        this.unsubscribeFromChat = subscribeToChatMessages(newMessages => {
+            this.messages = newMessages;
+            this.loadingMessages = false;
+        });
+
+        this.unsubscribeFromAuth = subscribeToAuth(newUserData => this.authUser = newUserData);
+    },
+    unmounted() {
+        this.unsubscribeFromAuth();
+        this.unsubscribeFromChat();
+    }
+}
+</script>

@@ -4,7 +4,7 @@ import { db } from "./firebase";
 /**
  * 
  * @param {string} id 
- * @returns {Promise<{id: string, email: string}>}
+ * @returns {Promise<{id: string, email: string, bio: string, isChef: boolean, isVip: boolean, posts: Array, comments: Array}>}
  */
 export async function getUserProfileById(id) {
     const userRef = doc(db, `users/${id}`);
@@ -12,12 +12,22 @@ export async function getUserProfileById(id) {
     try {
         const userDoc = await getDoc(userRef);
 
+        if (!userDoc.exists()) {
+            throw new Error("User not found");
+        }
+
+        const userData = userDoc.data();
+        
         return {
             id: userDoc.id,
-            email: userDoc.data().email,
+            email: userData.email,
+            bio: userData.bio || '',
+            isChef: userData.isChef || false,
+            isVip: userData.isVip || false,
+            posts: userData.posts || [],
+            comments: userData.comments || [],
         }
     } catch (error) {
-        // TODO: Manejar el error.
         console.error('[user-profile.js getUserProfileById] Error al traer el perfil del usuario. ', error);
     }
 }
@@ -31,5 +41,5 @@ export async function getUserProfileById(id) {
 export async function createUserProfile(id, data) {
     const userRef = doc(db, `users/${id}`);
 
-    return setDoc(userRef, {...data});
+    return setDoc(userRef, { ...data });
 }
