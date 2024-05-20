@@ -91,7 +91,7 @@ export default {
                     </div>
                     <MainButton
                         type="submit"
-                        class="mb-[120px]"
+                        class="mb-[10px]"
                     >
                         Crear Cuenta
                     </MainButton>

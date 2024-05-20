@@ -7,7 +7,7 @@ import Register from '../pages/Register.vue'
 import Panel from '../pages/Panel.vue'
 import MiPerfil from '../pages/Mi-perfil.vue'
 import PostDetalle from '../pages/Detalle.vue'
-import Page404 from '../pages/404.vue' // Importa la página de 404
+import Page404 from '../pages/404.vue' 
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
@@ -21,8 +21,7 @@ const routes = [
     { path: '/panel',               component: Panel},
     { path: '/perfil/:id',          component: MiPerfil, props:true},
 
-    // Ruta para la página 404
-    { path: '/:catchAll(.*)',       component: Page404 }, // Coincide con cualquier ruta no definida previamente
+    { path: '/:catchAll(.*)',       component: Page404 }, 
 ]
 
 const Router = createRouter({

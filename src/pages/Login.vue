@@ -87,7 +87,7 @@ export default {
           </div>
           <MainButton
             type="submit"
-            class="mb-[120px]"
+            class="mb-[10px]"
           >Ingresar</MainButton>
         </form>
         <!-- Mostrar mensajes de error en la pantalla -->
