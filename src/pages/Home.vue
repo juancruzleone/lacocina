@@ -95,8 +95,7 @@ export default {
         </div>
         <div class="bg-contenedores w-[87.5%] h-[200px] rounded-lg flex flex-col p-5 shadow-2xl ml-5">
           <h3 class="text-2xl font-bold mb-2 text-white font-montserrat">Únete a nuestro servidor de Discord</h3>
-          <p class="text-lg mb-4 text-white">Sé parte de una comunidad vibrante y activa donde puedes compartir, aprender y   crecer junto a otros entusiastas.</p>
-          <!-- Utilizando un enlace externo -->
+          <p class="text-lg mb-4 text-white">Sé parte de una comunidad vibrante y activa donde puedes compartir, aprender y crecer junto a otros entusiastas.</p>
           <a href="https://discord.gg/Unahg8Vxur" target="_blank" rel="noopener noreferrer" class="p-3 text-black font-montserrat font-semibold bg-white rounded-lg text-center mt-10 w-96">¡Únete Ahora!</a>
         </div>
       </div>
@@ -119,20 +118,21 @@ export default {
     <section class="p-10 pb-20">
       <MainH2>Post destacado</MainH2>
       <div class="pt-5">
-        <div v-if="postDestacado" class="bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">
-          <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ postDestacado.titulo_post }}</h3>
-          <p class="font-montserrat bg-white w-[200px] text-center p-1 rounded-lg mt-3 mb-5">{{ postDestacado.categoria_post }}</p>
-          <p class="text-white mt-2 font-montserrat">{{ postDestacado.descripcion_post }}</p>
-          <div class="flex mt-4">
-            <router-link :to="'/post/' + postDestacado.id">
-              <button class="bg-black text-white rounded-xl p-2 mr-2 font-montserrat">Ver más</button>
-            </router-link>
+        <div v-if="postDestacado" class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">
+          <img :src="postDestacado.img1_post" :alt="postDestacado.titulo_post" class="w-60 rounded-lg mb-3 mr-5">
+          <div>
+              <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ postDestacado.titulo_post }}</h3>
+              <p class="font-montserrat bg-white w-[200px] text-center p-1 rounded-lg mt-3 mb-5">{{ postDestacado.categoria_post }}</p>
+              <p class="text-white mt-2 font-montserrat">{{ postDestacado.descripcion_post }}</p>
+              <div class="flex mt-4">
+              <router-link :to="'/post/' + postDestacado.id">
+                <button class="bg-black text-white rounded-xl p-2 mr-2 font-montserrat">Ver más</button>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </div>
 </template>
-
-
 

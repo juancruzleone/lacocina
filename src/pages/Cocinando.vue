@@ -75,17 +75,21 @@ export default {
     <section class="pb-20">
       <MainH2 class="pl-12 pt-10 pb-5 font-montserrat">Posts recientes</MainH2>
       <div class="pl-12">
-        <div v-for="post in posts" :key="post.id" class="bg-contenedores w-[98%] radius-comunidad p-5 mb-8">
-          <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ post.titulo_post }}</h3>
-          <p class="font-montserrat bg-white w-[200px] text-center p-1 rounded-lg mt-3 mb-5">{{ post.categoria_post }}</p>
-          <p class="text-white mt-2 font-montserrat">{{ post.descripcion_post }}</p>
-          <div class="flex mt-4">
-            <router-link :to="'/post/' + post.id">
+        <div v-for="post in posts" :key="post.id" class="bg-contenedores w-[98%] radius-comunidad p-5 mb-8 flex">
+          <img :src="post.img1_post" :alt="post.titulo_post" class="w-60 rounded-lg mb-3 mr-5">
+          <div>
+            <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ post.titulo_post }}</h3>
+            <p class="font-montserrat bg-white w-[200px] text-center p-1 rounded-lg mt-3 mb-5">{{ post.categoria_post }}</p>
+            <p class="text-white mt-2 font-montserrat">{{ post.descripcion_post }}</p>
+            <div class="flex mt-4">
+              <router-link :to="'/post/' + post.id">
               <button class="bg-black text-white rounded-xl  p-2 mr-2">Ver más</button>
             </router-link>
             <button @click="editarCurso(post)" class="bg-black text-white rounded-xl p-2 mr-2">Editar</button>
             <button @click="eliminarCurso(post.id)" class="bg-black text-white rounded-xl py-2 px-2">Eliminar</button>
+            </div>
           </div>
+       
         </div>
       </div>
     </section>
