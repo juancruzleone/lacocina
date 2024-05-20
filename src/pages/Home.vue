@@ -1,12 +1,13 @@
 <script>
 import MainH2 from '../components/MainH2.vue';
+import Loader from '../components/Loader.vue';
 import { db } from '../services/firebase.js';
 import { collection, getDocs, query, limit } from "firebase/firestore";
 
 
 export default {
   name: 'Home',
-  components: { MainH2 },
+  components: { MainH2, Loader },
   data() {
     return {
       postDestacado: null,
@@ -118,7 +119,11 @@ export default {
     <section class="p-10 pb-20">
       <MainH2>Post destacado</MainH2>
       <div class="pt-5">
-        <div v-if="postDestacado" class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">
+        <div v-if="!postDestacado" class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl justify-center items-center">
+          <!-- Aquí agregamos el componente de loader -->
+          <Loader/>
+        </div>
+        <div v-else class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">
           <img :src="postDestacado.img1_post" :alt="postDestacado.titulo_post" class="w-60 rounded-lg mb-3 mr-5">
           <div>
               <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ postDestacado.titulo_post }}</h3>

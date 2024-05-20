@@ -1,6 +1,7 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
 import MainH2 from '../components/MainH2.vue';
+import Loader from '../components/Loader.vue'
 import { db } from '../services/firebase.js';
 import { collection, getDocs } from "firebase/firestore";
 
@@ -21,14 +22,6 @@ export default {
       console.error("Error fetching posts: ", error);
     }
   },
-  methods: {
-    editarCurso(curso) {
-      // Implementa la lógica para editar el curso aquí
-    },
-    eliminarCurso(id) {
-      // Implementa la lógica para eliminar el curso aquí
-    }
-  }
 }
 </script>
 
@@ -85,11 +78,8 @@ export default {
               <router-link :to="'/post/' + post.id">
               <button class="bg-black text-white rounded-xl  p-2 mr-2">Ver más</button>
             </router-link>
-            <button @click="editarCurso(post)" class="bg-black text-white rounded-xl p-2 mr-2">Editar</button>
-            <button @click="eliminarCurso(post.id)" class="bg-black text-white rounded-xl py-2 px-2">Eliminar</button>
             </div>
           </div>
-       
         </div>
       </div>
     </section>
