@@ -7,10 +7,7 @@ const AUTH_EMPTY_STATE = {
     email: null,
 };
 
-
 let authUser = AUTH_EMPTY_STATE;
-
-
 let observers = [];
 
 onAuthStateChanged(auth, user => {
@@ -72,8 +69,6 @@ export function logout() {
     return signOut(auth);
 }
 
-
-
 /**
  * Agrega un observer para la autenticación, y lo ejecuta inmediatamente.
  * 
@@ -102,4 +97,13 @@ function notify(observer) {
  */
 function notifyAll() {
     observers.forEach(obs => notify(obs));
+}
+
+/**
+ * Verifica si el usuario autenticado tiene el correo especificado.
+ * @param {string} email - El correo electrónico a verificar.
+ * @returns {boolean} - true si el correo coincide, false en caso contrario.
+ */
+export function isAuthenticatedEmail(email) {
+    return authUser.email === email;
 }

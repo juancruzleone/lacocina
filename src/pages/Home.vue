@@ -10,7 +10,29 @@ export default {
   data() {
     return {
       postDestacado: null,
-      loading: true 
+      loading: true,
+      preguntas: [
+        {
+          pregunta: "¿Qué es La Cocina?",
+          respuesta: "La Cocina es una comunidad de criptomonedas hispana dedicada a brindar contenido educativo, informativo y entretenido sobre el mundo de las criptomonedas."
+        },
+        {
+          pregunta: "¿Cómo puedo unirme a La Cocina?",
+          respuesta: "Puedes unirte a nuestro servidor de Discord y seguirnos en nuestras redes sociales. En nuestra página principal encontrarás los enlaces para unirte."
+        },
+        {
+          pregunta: "¿Qué tipo de contenido publican?",
+          respuesta: "Publicamos artículos, análisis, tutoriales y noticias sobre diversas criptomonedas y tecnologías relacionadas. También organizamos eventos y discusiones en nuestro servidor de Discord."
+        },
+        {
+          pregunta: "¿Quiénes son los 'chefs'?",
+          respuesta: "Los 'chefs' son los expertos en criptomonedas de nuestra comunidad que publican contenido especializado y lideran las discusiones sobre diversos temas del mundo cripto."
+        },
+        {
+          pregunta: "¿La Cocina es gratuita?",
+          respuesta: "Sí, unirte a nuestra comunidad y acceder a la mayoría de nuestro contenido es completamente gratuito. Sin embargo, también ofrecemos contenido exclusivo para nuestros miembros VIP."
+        }
+      ]
     };
   },
   async created() {
@@ -21,15 +43,14 @@ export default {
       const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       if (posts.length > 0) {
         this.postDestacado = posts[0];
-        this.loading = false; 
       }
+      this.loading = false;
     } catch (error) {
       console.error("Error fetching posts: ", error);
     }
   },
 }
 </script>
-
 
 <template>
   <div>
@@ -102,7 +123,7 @@ export default {
     <section class="p-10 pb-20">
       <MainH2>Post destacado</MainH2>
       <div class="pt-5">
-        <div v-if="!postDestacado" class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl justify-center items-center">
+        <div v-if="loading" class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl justify-center items-center">
           <Loader/>
         </div>
         <div v-else class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">
@@ -122,4 +143,3 @@ export default {
     </section>
   </div>
 </template>
-

@@ -1,3 +1,4 @@
+import { createRouter, createWebHashHistory } from "vue-router";
 import Home from '../pages/Home.vue'
 import Comunidad from '../pages/Comunidad.vue'
 import Vip from '../pages/Vip.vue'
@@ -8,7 +9,7 @@ import Panel from '../pages/Panel.vue'
 import MiPerfil from '../pages/Mi-perfil.vue'
 import PostDetalle from '../pages/Detalle.vue'
 import Page404 from '../pages/404.vue' 
-import { createRouter, createWebHashHistory } from "vue-router";
+import { isAuthenticatedEmail } from '../services/auth';
 
 const routes = [
     { path: '/',                    component: Home},
@@ -18,9 +19,14 @@ const routes = [
     { path: '/post/:id',            component: PostDetalle},
     { path: '/login',               component: Login},
     { path: '/register',            component: Register},
-    { path: '/panel',               component: Panel},
+    { path: '/panel',               component: Panel, beforeEnter: (to, from, next) => {
+        if (isAuthenticatedEmail('juan.leone@davinci.edu.ar')) {
+            next();
+        } else {
+            next('/login');
+        }
+    }},
     { path: '/perfil/:id',          component: MiPerfil, props:true},
-
     { path: '/:catchAll(.*)',       component: Page404 }, 
 ]
 
