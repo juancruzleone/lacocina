@@ -56,7 +56,7 @@ export default {
       </div>
     </div>
     <!-- Show loader while post data is being fetched -->
-    <Loader v-if="!post" />
+    <Loader v-if="!post" class="pl-12"/>
     <section v-if="post" class="pl-14 pt-10 pb-10">
       <MainH2 class="border-b-8 border-black">Contenido</MainH2>
       <div>

@@ -1,13 +1,14 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
 import MainH2 from '../components/MainH2.vue';
-import Loader from '../components/Loader.vue';
+import Loader from '../components/Loader.vue'; // Asegúrate de tener un componente de loader disponible
+
 import { db } from '../services/firebase.js';
 import { collection, getDocs } from "firebase/firestore";
 
 export default {
   name: 'Cocinando',
-  components: { MainH1, MainH2 },
+  components: { MainH1, MainH2, Loader }, // Agrega el componente Loader
   data() {
     return {
       posts: [],
@@ -18,7 +19,8 @@ export default {
         { nombre: 'Onchain', icono: '/onchain.svg' },
         { nombre: 'Airdrops', icono: '/airdrop.svg' }
       ],
-      categoriaSeleccionada: ''
+      categoriaSeleccionada: '',
+      loading: true // Agrega una variable para controlar la visibilidad del loader
     };
   },
   async created() {
@@ -26,6 +28,7 @@ export default {
       const postsCollection = collection(db, 'posts');
       const postsSnapshot = await getDocs(postsCollection);
       this.posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      this.loading = false; // Una vez que los posts se carguen correctamente, establece loading en false
     } catch (error) {
       console.error("Error fetching posts: ", error);
     }
@@ -47,7 +50,6 @@ export default {
 }
 </script>
 
-
 <template>
   <div>
     <div class="bg-portada h-96">
@@ -66,7 +68,9 @@ export default {
     </section>
     <section class="pb-20">
       <MainH2 class="pl-12 pt-10 pb-5 font-montserrat">Posts recientes</MainH2>
-      <div class="pl-12">
+      <!-- Agrega el loader con v-if -->
+      <Loader v-if="loading" class="pl-12"/>
+      <div class="pl-12" v-if="!loading"> <!-- Agrega v-if="!loading" para que el contenido solo se muestre cuando no se esté cargando -->
         <div v-for="post in postsFiltrados" :key="post.id" class="bg-contenedores w-[98%] radius-comunidad p-5 mb-8 flex">
           <img :src="post.img1_post" :alt="post.titulo_post" class="w-60 rounded-lg mb-3 mr-5">
           <div>
@@ -84,4 +88,3 @@ export default {
     </section>
   </div>
 </template>
-
