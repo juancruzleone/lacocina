@@ -68,7 +68,6 @@
           <template v-if="post">
             <p class="font-montserrat text-center bg-black text-white w-[120px] p-2 rounded-lg mt-7">{{ post.categoria_post }}</p>
           </template>
-          <div class="bg-contenedores rounded-full w-14 h-14 mt-20"></div>
         </div>
       </div>
       <section v-if="post" class="pl-14 pt-10 pb-10">

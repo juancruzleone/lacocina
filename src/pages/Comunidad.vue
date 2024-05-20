@@ -1,85 +1,3 @@
-<template>
-    <div class="bg-portada h-96">
-        <MainH1>Comunidad</MainH1>
-    </div>
-    <div class="flex justify-between">
-        <div class="flex flex-col gap-4 w-full">
-            <section class=" mr-20 mb-10">
-                <MainH2 class="pl-12 p-10 pb-3">Chat general</MainH2>
-                <div class="min-h-[400px] p-4 bg-gray-200 radius-comunidad ml-12">
-                    <ul v-if="!loadingMessages">
-                        <li 
-                            v-for="message in messages"
-                            :key="message.id"
-                            class="mb-2"
-                        >
-                            <p class="font-montserrat">
-                                <router-link 
-                                    class="text-blue-600 underline font-montserrat"
-                                    :to="userRoute(message.userId)"
-                                >
-                                    <b>{{ message.email }}</b>
-                                </router-link> 
-                                dijo:
-                            </p>
-                            <p class="font-montserrat">{{ message.content }}</p>
-                            <p class="font-montserrat">{{ formatDate(new Date(message.created_at)) }}</p>
-                        </li>
-                    </ul>
-                    <Loader v-else />
-                </div>
-                <form 
-                    action="#"
-                    @submit.prevent="sendMessage"
-                    class="mt-4 ml-12"
-                >
-                    <div class="mb-3 font-montserrat">
-                        <span class="block mb-2 font-semibold">Email</span>
-                        <span>{{ authUser.email }}</span>
-                    </div>
-                    <div class="mb-3 w-full font-montserrat">
-                        <MainLabel for="message" class="font-semibold">Mensaje</MainLabel>
-                        <div class="flex items-center">
-                            <textarea
-                                id="message"
-                                class="w-full p-2 border border-gray-500 rounded radius-mensaje mr-4 h-[120px]"
-                                v-model="newMessage.content"
-                                placeholder="Escribe tu mensaje"
-                            ></textarea>
-                            <MainButton 
-                                type="submit"
-                                class="text-center radius-mensaje"
-                            />
-                        </div>
-                    </div>      
-                </form>
-            </section> 
-        </div>
-        <div class="bg-black w-[120px] h-[800px] ml-auto">
-            <ul class="block">
-                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-14">
-                    <router-link></router-link>
-                </li>
-                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
-                    <router-link></router-link>
-                </li>
-                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
-                    <router-link></router-link>
-                </li>
-                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
-                    <router-link></router-link>
-                </li>
-                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
-                    <router-link></router-link>
-                </li>
-                <li class="bg-gray-100 w-20 h-20 rounded-full m-auto mt-7">
-                    <router-link></router-link>
-                </li>
-            </ul>
-        </div>     
-    </div>
-</template>
-
 <script>
 import Loader from '../components/Loader.vue';
 import MainButton from '../components/MainButton.vue';
@@ -151,3 +69,65 @@ export default {
     }
 }
 </script>
+
+
+<template>
+    <div class="bg-portada h-96">
+        <MainH1>Comunidad</MainH1>
+    </div>
+    <div class="flex justify-between">
+        <div class="flex flex-col gap-4 w-full">
+            <section class=" mr-20 mb-10">
+                <MainH2 class="pl-12 p-10 pb-3">Chat general</MainH2>
+                <div class="min-h-[400px] p-4 bg-gray-200 radius-comunidad ml-12">
+                    <ul v-if="!loadingMessages">
+                        <li 
+                            v-for="message in messages"
+                            :key="message.id"
+                            class="mb-2"
+                        >
+                            <p class="font-montserrat">
+                                <router-link 
+                                    class="text-blue-600 underline font-montserrat"
+                                    :to="userRoute(message.userId)"
+                                >
+                                    <b>{{ message.email }}</b>
+                                </router-link> 
+                                dijo:
+                            </p>
+                            <p class="font-montserrat">{{ message.content }}</p>
+                            <p class="font-montserrat">{{ formatDate(new Date(message.created_at)) }}</p>
+                        </li>
+                    </ul>
+                    <Loader v-else />
+                </div>
+                <form 
+                    action="#"
+                    @submit.prevent="sendMessage"
+                    class="mt-4 ml-12"
+                >
+                    <div class="mb-3 font-montserrat">
+                        <span class="block mb-2 font-semibold">Email</span>
+                        <span>{{ authUser.email }}</span>
+                    </div>
+                    <div class="mb-3 w-full font-montserrat">
+                        <MainLabel for="message" class="font-semibold">Mensaje</MainLabel>
+                        <div class="flex items-center">
+                            <textarea
+                                id="message"
+                                class="w-full p-2 border border-gray-500 rounded radius-mensaje mr-4 h-[120px]"
+                                v-model="newMessage.content"
+                                placeholder="Escribe tu mensaje"
+                            ></textarea>
+                            <MainButton 
+                                type="submit"
+                                class="text-center radius-mensaje"
+                            />
+                        </div>
+                    </div>      
+                </form>
+            </section> 
+        </div>
+    </div>
+</template>
+

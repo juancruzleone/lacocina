@@ -43,14 +43,6 @@ export default {
       console.error("Error fetching posts: ", error);
     }
   },
-  methods: {
-    editarCurso(post) {
-      // Implement your edit course logic here
-    },
-    eliminarCurso(postId) {
-      // Implement your delete course logic here
-    }
-  }
 }
 </script>
 
@@ -132,10 +124,8 @@ export default {
           <p class="text-white mt-2 font-montserrat">{{ postDestacado.descripcion_post }}</p>
           <div class="flex mt-4">
             <router-link :to="'/post/' + postDestacado.id">
-              <button class="bg-black text-white rounded-xl  p-2 mr-2">Ver más</button>
+              <button class="bg-black text-white rounded-xl p-2 mr-2 font-montserrat">Ver más</button>
             </router-link>
-            <button @click="editarCurso(postDestacado)" class="bg-black text-white rounded-xl p-2 mr-2">Editar</button>
-            <button @click="eliminarCurso(postDestacado.id)" class="bg-black text-white rounded-xl py-2 px-2">Eliminar</button>
           </div>
         </div>
       </div>

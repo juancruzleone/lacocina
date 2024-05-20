@@ -53,9 +53,9 @@ export default {
       <button
         v-if="user.id"
         @click="handleLogout"
-        class="font-montserrat text-white m-2 text-lg bg-red-500 px-4 py-2 rounded"
+        class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-4"
       >
-        Deslogear
+        <img src="/cerrar-sesion.webp" alt="icono cerrar sesión" class="w-10 h-10 p-1">
       </button>
     </div>
   </nav>

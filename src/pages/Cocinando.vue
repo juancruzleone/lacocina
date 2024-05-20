@@ -75,7 +75,7 @@ export default {
     <section class="pb-20">
       <MainH2 class="pl-12 pt-10 pb-5 font-montserrat">Posts recientes</MainH2>
       <div class="pl-12">
-        <div v-for="post in posts" :key="post.id" class="bg-contenedores w-[72%] h-[260px] radius-comunidad p-5 mb-8">
+        <div v-for="post in posts" :key="post.id" class="bg-contenedores w-[98%] radius-comunidad p-5 mb-8">
           <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ post.titulo_post }}</h3>
           <p class="font-montserrat bg-white w-[200px] text-center p-1 rounded-lg mt-3 mb-5">{{ post.categoria_post }}</p>
           <p class="text-white mt-2 font-montserrat">{{ post.descripcion_post }}</p>
