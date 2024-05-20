@@ -44,13 +44,17 @@ export default {
       if (posts.length > 0) {
         this.postDestacado = posts[0];
       }
-      this.loading = false;
     } catch (error) {
       console.error("Error fetching posts: ", error);
+    } finally {
+      this.loading = false;
     }
   },
 }
 </script>
+
+
+
 
 <template>
   <div>
@@ -123,9 +127,7 @@ export default {
     <section class="p-10 pb-20">
       <MainH2>Post destacado</MainH2>
       <div class="pt-5">
-        <div v-if="loading" class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl justify-center items-center">
-          <Loader/>
-        </div>
+        <Loader v-if="loading"/>
         <div v-else class="flex bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">
           <img :src="postDestacado.img1_post" :alt="postDestacado.titulo_post" class="w-60 rounded-lg mb-3 mr-5">
           <div>
@@ -143,3 +145,4 @@ export default {
     </section>
   </div>
 </template>
+
