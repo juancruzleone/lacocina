@@ -73,13 +73,16 @@
       <section v-if="post" class="pl-14 pt-10 pb-10">
         <MainH2 class="border-b-8 border-black">Contenido</MainH2>
         <div>
-          <!--<img :src="post.img1_post" alt="Imagen del post" class="w-full h-[400px] rounded-md mt-4 mb-10">-->
+          <img :src="post.img1_post" alt="Imagen del post" class="w-full h-[400px] rounded-md mt-4 mb-10">
           <div class="flex font-montserrat">
-            <div class="w-full">
+            <div class="w-full mr-10">
               <h3 class="font-bold text-xl mt-10">{{ post.subtitulo1_post }}</h3>
-              <p>{{ post.texto1_post }}</p>
+              <p class="mb-10">{{ post.texto1_post }}</p>
               <h3 class="font-bold text-xl mt-5">{{ post.subtitulo2_post }}</h3>
               <p>{{ post.texto2_post }}</p>
+            </div>
+            <div>
+              <img :src="post.img2_post" alt="Imagen del post" class="w-full h-[400px] radius-comunidad mt-4 mb-10">
             </div>
           </div>
         </div>
