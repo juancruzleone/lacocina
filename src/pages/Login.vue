@@ -40,7 +40,7 @@ export default {
         
         // Redireccionar solo si no hay error
         if (user) {
-          this.$router.push({ path: `/perfil/}` });
+          this.$router.push({ path: `/` });
         }
       } catch (error) {
         // Manejar otros errores y mostrar mensajes específicos
