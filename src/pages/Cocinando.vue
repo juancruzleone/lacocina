@@ -1,7 +1,7 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
 import MainH2 from '../components/MainH2.vue';
-import Loader from '../components/Loader.vue'
+import Loader from '../components/Loader.vue';
 import { db } from '../services/firebase.js';
 import { collection, getDocs } from "firebase/firestore";
 
@@ -10,7 +10,15 @@ export default {
   components: { MainH1, MainH2 },
   data() {
     return {
-      posts: []
+      posts: [],
+      categorias: [
+        { nombre: 'Análisis técnico', icono: '/grafico.svg' },
+        { nombre: 'Análisis fundamental', icono: '/analisis.svg' },
+        { nombre: 'Trading', icono: '/trading.svg' },
+        { nombre: 'Onchain', icono: '/onchain.svg' },
+        { nombre: 'Airdrops', icono: '/airdrop.svg' }
+      ],
+      categoriaSeleccionada: ''
     };
   },
   async created() {
@@ -22,8 +30,23 @@ export default {
       console.error("Error fetching posts: ", error);
     }
   },
+  computed: {
+    postsFiltrados() {
+      if (this.categoriaSeleccionada === '') {
+        return this.posts;
+      } else {
+        return this.posts.filter(post => post.categoria_post === this.categoriaSeleccionada);
+      }
+    }
+  },
+  methods: {
+    filtrarPostsPorCategoria(categoria) {
+      this.categoriaSeleccionada = categoria;
+    }
+  }
 }
 </script>
+
 
 <template>
   <div>
@@ -33,34 +56,10 @@ export default {
     <section>
       <MainH2 class="pl-12 pt-10 pb-5 text-center">Categorias</MainH2>
       <div class="flex ml-12 justify-center flex-wrap">
-        <div class="bg-contenedores w-52 h-44 radius-categoria m-5 flex flex-col items-center justify-center">
-          <h3 class="text-white font-montserrat text-center mt-3 cursor-pointer text-xl">Análisis técnico</h3>
-          <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mt-8">
-            <img src="/grafico.svg" alt="Icono de gráfico" class="w-16">
-          </div>
-        </div>
-        <div class="bg-contenedores w-52 h-44 radius-categoria m-5 flex flex-col items-center justify-center">
-          <h3 class="text-white font-montserrat text-center mt-3 cursor-pointer text-xl">Análisis fundamental</h3>
-          <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mt-8">
-            <img src="/analisis.svg" alt="Icono de análisis fundamental" class="w-16">
-          </div>
-        </div>
-        <div class="bg-contenedores w-52 h-44 radius-categoria m-5 flex flex-col items-center justify-center">
-          <h3 class="text-white font-montserrat text-center mt-3 cursor-pointer text-xl">Trading</h3>
-          <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mt-8">
-            <img src="/trading.svg" alt="Icono de trading" class="w-16">
-          </div>
-        </div>
-        <div class="bg-contenedores w-52 h-44 radius-categoria m-5 flex flex-col items-center justify-center">
-          <h3 class="text-white font-montserrat text-center mt-3 cursor-pointer text-xl">Onchain</h3>
-          <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mt-8">
-            <img src="/onchain.svg" alt="Icono de onchain" class="w-16">
-          </div>
-        </div>
-        <div class="bg-contenedores w-52 h-44 radius-categoria m-5 flex flex-col items-center justify-center">
-          <h3 class="text-white font-montserrat text-center mt-3 cursor-pointer text-xl">Airdrops</h3>
-          <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mt-8">
-            <img src="/airdrop.svg" alt="Icono de airdrop" class="w-16">
+        <div v-for="categoria in categorias" :key="categoria.nombre" class="bg-contenedores w-52 h-44 radius-categoria m-5 flex flex-col items-center justify-center" @click="filtrarPostsPorCategoria(categoria.nombre)">
+          <h3 class="text-white font-montserrat text-center mt-3 cursor-pointer text-xl">{{ categoria.nombre }}</h3>
+          <div :class="{ 'bg-analisis-fundamental': categoria.nombre === 'Análisis fundamental' }" class="bg-white rounded-full w-24 h-24 flex items-center justify-center mt-10">
+            <img :src="categoria.icono" :alt="categoria.nombre" class="w-16">
           </div>
         </div>
       </div>
@@ -68,7 +67,7 @@ export default {
     <section class="pb-20">
       <MainH2 class="pl-12 pt-10 pb-5 font-montserrat">Posts recientes</MainH2>
       <div class="pl-12">
-        <div v-for="post in posts" :key="post.id" class="bg-contenedores w-[98%] radius-comunidad p-5 mb-8 flex">
+        <div v-for="post in postsFiltrados" :key="post.id" class="bg-contenedores w-[98%] radius-comunidad p-5 mb-8 flex">
           <img :src="post.img1_post" :alt="post.titulo_post" class="w-60 rounded-lg mb-3 mr-5">
           <div>
             <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ post.titulo_post }}</h3>
@@ -76,8 +75,8 @@ export default {
             <p class="text-white mt-2 font-montserrat">{{ post.descripcion_post }}</p>
             <div class="flex mt-4">
               <router-link :to="'/post/' + post.id">
-              <button class="bg-black text-white rounded-xl  p-2 mr-2">Ver más</button>
-            </router-link>
+                <button class="bg-black text-white rounded-xl  p-2 mr-2">Ver más</button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -85,3 +84,4 @@ export default {
     </section>
   </div>
 </template>
+
