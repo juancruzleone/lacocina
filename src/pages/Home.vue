@@ -1,11 +1,15 @@
 <script>
 import MainH2 from '../components/MainH2.vue';
+import { db } from '../services/firebase.js';
+import { collection, getDocs, query, limit } from "firebase/firestore";
+
 
 export default {
   name: 'Home',
   components: { MainH2 },
   data() {
     return {
+      postDestacado: null,
       preguntas: [
         {
           pregunta: '¿Qué es La Cocina?',
@@ -23,16 +27,33 @@ export default {
           pregunta: '¿Cuál es la diferencia entre Bitcoin y Ethereum?',
           respuesta: 'Bitcoin y Ethereum son dos de las criptomonedas más populares, pero tienen diferencias fundamentales. Bitcoin se creó principalmente como un sistema de pago peer-to-peer, mientras que Ethereum es una plataforma que permite a los desarrolladores construir aplicaciones descentralizadas (DApps) utilizando contratos inteligentes.'
         }
-      ],
-      postDestacado: {
-        titulo: 'Cómo empezar en el mundo de las criptomonedas',
-        descripcion: 'Introducción a las criptomonedas y la tecnología blockchain, guía paso a paso para principiantes.',
-        enlace: '#'
+      ]
+    }
+  },
+  async created() {
+    try {
+      const postsCollection = collection(db, 'posts');
+      const postQuery = query(postsCollection, limit(1));
+      const postsSnapshot = await getDocs(postQuery);
+      const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      if (posts.length > 0) {
+        this.postDestacado = posts[0];
       }
+    } catch (error) {
+      console.error("Error fetching posts: ", error);
+    }
+  },
+  methods: {
+    editarCurso(post) {
+      // Implement your edit course logic here
+    },
+    eliminarCurso(postId) {
+      // Implement your delete course logic here
     }
   }
 }
 </script>
+
 
 <template>
   <div>
@@ -44,19 +65,19 @@ export default {
       <div class="w-[50%] pr-[12%]">
         <h2 class="font-montserrat font-bold text-7xl justify-center text-center">Quiénes somos?</h2>
         <div class="flex justify-center m-auto mt-6">
-          <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <div class="w-20 h-20 rounded-full m-3 border border-gray-900">
             <img src="/nacherx.webp" alt="foto de usuario de nacherx" class="rounded-full">
           </div>
-          <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <div class="w-20 h-20 rounded-full m-3 border border-gray-900">
             <img src="/cromer.webp" alt="foto de usuario de cromer" class="rounded-full">
           </div>
-          <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <div class="w-20 h-20 rounded-full m-3 border border-gray-900">
             <img src="/chefao.webp" alt="foto de usuario de chefao" class="rounded-full">
           </div>
-          <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <div class="w-20 h-20 rounded-full m-3 border border-gray-900">
             <img src="/teos.webp" alt="foto de usuario de teos" class="rounded-full">
           </div>
-          <div class="w-20 h-20 rounded-full m-3 border border-gray-900"> 
+          <div class="w-20 h-20 rounded-full m-3 border border-gray-900">
             <img src="/kichiro.webp" alt="foto de usuario de kichiro" class="rounded-full">
           </div>
         </div>
@@ -69,8 +90,8 @@ export default {
           <p class="font-montserrat text-xl w-82 mt-2">
             Nuestro objetivo es proporcionar un espacio donde los entusiastas de las criptomonedas puedan aprender, compartir conocimientos y participar en discusiones sobre diversos temas relacionados con las criptomonedas.</p>
           <p class="font-montserrat text-xl w-82 mt-2">
-            Contamos con 5 expertos, también conocidos como chefs, que publicarán contenido especializado sobre diferentes temas del mundo cripto. 
-          </p> 
+            Contamos con 5 expertos, también conocidos como chefs, que publicarán contenido especializado sobre diferentes temas del mundo cripto.
+          </p>
         </div>
       </div>
     </section>
@@ -104,18 +125,23 @@ export default {
     </section>
     <section class="p-10 pb-20">
       <MainH2>Post destacado</MainH2>
-      <div class="flex mt-5 bg-contenedores radius-comunidad shadow-2xl overflow-hidden">
-        <div>
-          <img src="/blockchain.webp" alt="foto de blockchain" class="rounded-l-lg">
+      <div class="pt-5">
+        <div v-if="postDestacado" class="bg-contenedores radius-comunidad p-5 mb-8 overflow-hidden shadow-2xl">
+          <h3 class="text-white font-montserrat mt-3 cursor-pointer text-2xl font-semibold">{{ postDestacado.titulo_post }}</h3>
+          <p class="font-montserrat bg-white w-[200px] text-center p-1 rounded-lg mt-3 mb-5">{{ postDestacado.categoria_post }}</p>
+          <p class="text-white mt-2 font-montserrat">{{ postDestacado.descripcion_post }}</p>
+          <div class="flex mt-4">
+            <router-link :to="'/post/' + postDestacado.id">
+              <button class="bg-black text-white rounded-xl  p-2 mr-2">Ver más</button>
+            </router-link>
+            <button @click="editarCurso(postDestacado)" class="bg-black text-white rounded-xl p-2 mr-2">Editar</button>
+            <button @click="eliminarCurso(postDestacado.id)" class="bg-black text-white rounded-xl py-2 px-2">Eliminar</button>
+          </div>
         </div>
-        <div class="p-5">
-          <h3 class="text-3xl font-bold text-white font-montserrat">{{ postDestacado.titulo }}</h3>
-          <p class="text-lg text-white mt-3">
-            {{ postDestacado.descripcion }}
-          </p>
-          <a :href="postDestacado.enlace" class="inline-block mt-5 bg-white text-black font-montserrat font-semibold py-2 px-4 rounded-lg">Leer más</a>
-        </div>     
       </div>
     </section>
   </div>
 </template>
+
+
+
