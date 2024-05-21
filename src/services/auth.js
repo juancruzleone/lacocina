@@ -11,7 +11,7 @@ let authUser = AUTH_EMPTY_STATE;
 let observers = [];
 
 onAuthStateChanged(auth, user => {
-    if(user) {
+    if (user) {
         authUser = {
             id: user.uid,
             email: user.email,
@@ -30,9 +30,9 @@ onAuthStateChanged(auth, user => {
  * @returns {Promise<{id: string, email: string}>}
  */
 export async function register(email, password) {
-    try {    
-        const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
-        await createUserProfile(userCredentials.user.uid, {email});
+    try {
+        const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+        await createUserProfile(userCredentials.user.uid, { email, role: 'Comensal' });
 
         console.log('Usuario creado: ', userCredentials);
         return {
@@ -40,8 +40,8 @@ export async function register(email, password) {
             email: userCredentials.user.email,
         };
     } catch (error) {
-        // TODO: Manejar el error.
         console.error('[auth.js register] Error al crear el usuario: ', error);
+        throw error; // Rethrow the error to be handled in the component
     }
 }
 
@@ -56,9 +56,9 @@ export function login(email, password) {
         .then(user => {
             console.log("Usuario autenticado: ", user);
             return {
-                id: user.uid,
-                email: user.email,
-            }
+                id: user.user.uid,
+                email: user.user.email,
+            };
         });
 }
 
@@ -88,7 +88,7 @@ export function subscribeToAuth(callback) {
  * @param {(user) => void} observer 
  */
 function notify(observer) {
-    observer({...authUser});
+    observer({ ...authUser });
 }
 
 /**
