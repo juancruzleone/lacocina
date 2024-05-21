@@ -6,6 +6,8 @@ import MainInput from '../components/MainInput.vue';
 import Loader from '../components/Loader.vue';
 import { db } from "../services/firebase.js";
 import { doc, getDoc } from "firebase/firestore";
+import { saveComment, subscribeToComments } from '../services/comments';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default {
   name: "Detalle",
@@ -15,13 +17,25 @@ export default {
       post: null,
       comments: [],
       newComment: {
-        author: "",
-        text: ""
-      }
+        email: "",
+        content: ""
+      },
+      user: null,
+      loadingComments: true,
+      error: null
     };
   },
   async mounted() {
+    this.auth = getAuth();
+    onAuthStateChanged(this.auth, user => {
+      this.user = user;
+      if (user) {
+        this.newComment.email = user.email;
+      }
+    });
+
     await this.getPostData();
+    this.subscribeToPostComments();
   },
   methods: {
     async getPostData() {
@@ -34,16 +48,35 @@ export default {
         console.error("El post no existe");
       }
     },
-    addComment() {
-      const date = new Date().toISOString().split("T")[0];
-      this.comments.push({ ...this.newComment, date });
-      this.newComment.author = "";
-      this.newComment.text = "";
+    async addComment() {
+      if (!this.user) {
+        this.error = "Tenes que iniciar sesión para comentar.";
+        return;
+      }
+
+      try {
+        const postId = this.$route.params.id;
+        await saveComment(postId, {
+          email: this.newComment.email,
+          content: this.newComment.content,
+        });
+        this.newComment.content = "";
+        this.error = null;
+      } catch (err) {
+        console.error("Error añadiendo comentario:", err);
+        this.error = "Hubo un problema al añadir su comentario.";
+      }
+    },
+    subscribeToPostComments() {
+      const postId = this.$route.params.id;
+      subscribeToComments(postId, comments => {
+        this.comments = comments;
+        this.loadingComments = false;
+      });
     }
   }
 };
 </script>
-
 
 <template>
   <div>
@@ -55,7 +88,6 @@ export default {
         </template>
       </div>
     </div>
-    <!-- Show loader while post data is being fetched -->
     <Loader v-if="!post" class="pl-12"/>
     <section v-if="post" class="pl-14 pt-10 pb-10">
       <MainH2 class="border-b-8 border-black">Contenido</MainH2>
@@ -77,28 +109,33 @@ export default {
     <section v-if="post" class="pl-14 pb-20">
       <MainH2 class="border-b-8 border-black">Comentarios</MainH2>
       <div>
-        <!-- Show loader while comments are being fetched -->
-        <Loader v-if="!comments.length" />
+        <Loader v-if="loadingComments" />
+        <div v-if="!loadingComments && comments.length === 0" class="font-montserrat font-semibold text-lg mt-2 text-red-500">
+          <p>No hay comentarios.</p>
+        </div>
         <div v-for="(comment, index) in comments" :key="index" class="bg-gray-100 p-4 mt-4 rounded-lg shadow-md">
-          <MainLabel>{{ comment.author }}</MainLabel>
-          <div class="text-gray-600 text-sm font-montserrat">{{ comment.date }}</div>
-          <MainLabel>{{ comment.text }}</MainLabel>
+          <MainLabel>{{ comment.email }}</MainLabel>
+          <div class="text-gray-600 text-sm font-montserrat">{{ comment.created_at }}</div>
+          <MainLabel>{{ comment.content }}</MainLabel>
         </div>
         <form @submit.prevent="addComment" class="mt-6">
-          <div class="mb-4">
-            <MainLabel for="author">Nombre:</MainLabel>
-            <MainInput v-model="newComment.author" type="text" id="author" required />
+          <div v-if="user" class="mb-3 font-montserrat">
+            <span class="block mb-2 font-semibold">Email</span>
+            <span>{{ user.email }}</span>
           </div>
-          <div class="mb-4">
-            <MainLabel for="text">Comentario:</MainLabel>
-            <textarea v-model="newComment.text" id="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+          <div v-else class="mb-3 font-montserrat text-white bg-red-500 p-2 rounded-lg">
+            <span class="block mb-2 font-semibold">Tenes que iniciar sesión para comentar</span>
           </div>
-          <div class="flex items-center justify-between font">
+          <div v-if="user" class="mb-4">
+            <MainLabel for="content" class="font-semibold">Comentario:</MainLabel>
+            <textarea v-model="newComment.content" id="content" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+          </div>
+          <div v-if="user" class="flex items-center justify-between font">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Agregar Comentario</button>
           </div>
+          <div v-if="error" class="text-red-500 mb-4 font-montseerat mt-4 text-ls">{{ error }}</div>
         </form>
       </div>
     </section>
   </div>
 </template>
-

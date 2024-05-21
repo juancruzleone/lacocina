@@ -8,6 +8,7 @@ export default {
       user: {
         id: null,
         email: null,
+        isAdmin: false, // Asegúrate de que esta propiedad se establece correctamente al autenticar
       }
     };
   },
@@ -22,6 +23,7 @@ export default {
         this.user = {
           id: null,
           email: null,
+          isAdmin: false,
         };
         this.$router.push({ path: '/login' });
       });
@@ -37,7 +39,9 @@ export default {
       <li><router-link to="/comunidad" class="font-montserrat text-white m-2 text-lg">Comunidad</router-link></li>
       <li><router-link to="/cocinando" class="font-montserrat text-white m-2 text-lg">Cocinando</router-link></li>
       <li><router-link to="/vip" class="font-montserrat text-white m-2 text-lg">Vip</router-link></li>
-      <li><router-link to="/panel" class="font-montserrat text-white m-2 text-lg">Panel</router-link></li>
+      <li v-if="user.isAdmin || user.email === 'juan.leone@davinci.edu.ar'">
+        <router-link to="/panel" class="font-montserrat text-white m-2 text-lg">Panel</router-link>
+      </li>
     </ul>
     <div class="flex items-center">
       <router-link
@@ -75,7 +79,9 @@ export default {
         <li><router-link to="/comunidad" class="font-montserrat text-white m-2 text-sm">Comunidad</router-link></li>
         <li><router-link to="/cocinando" class="font-montserrat text-white m-2 text-sm">Cocinando</router-link></li>
         <li><router-link to="/vip" class="font-montserrat text-white m-2 text-sm">Vip</router-link></li>
-        <li><router-link to="/panel" class="font-montserrat text-white m-2 text-sm">Panel</router-link></li>
+        <li v-if="user.isAdmin">
+          <router-link to="/panel" class="font-montserrat text-white m-2 text-sm">Panel</router-link>
+        </li>
         <li><router-link to="/contacto" class="font-montserrat text-white m-2 text-sm">Contacto</router-link></li>
       </ul>
     </div>
