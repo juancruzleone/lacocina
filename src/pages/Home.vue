@@ -136,7 +136,7 @@ export default {
               <p class="text-white mt-2 font-montserrat">{{ postDestacado.descripcion_post }}</p>
               <div class="flex mt-4">
               <router-link :to="'/post/' + postDestacado.id">
-                <button class="bg-black text-white rounded-xl p-2 mr-2 font-montserrat">Ver más</button>
+                <button class="bg-gray-500 text-white rounded-xl p-2 mr-2 font-montserrat">Ver más</button>
               </router-link>
             </div>
           </div>
