@@ -1,67 +1,83 @@
-import { doc, getDoc, setDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
 /**
- * 
- * @param {string} id 
- * @returns {Promise<{id: string, email: string, bio: string, isChef: boolean, isVip: boolean, posts: Array, comments: Array, role: string}>}
+ * Obtiene el perfil del usuario por ID.
+ *
+ * @param {string} id - El ID del usuario.
+ * @returns {Promise<{ ...userData }>} - Los datos del perfil del usuario.
  */
 export async function getUserProfileById(id) {
-    const userRef = doc(db, `users/${id}`);
+  const userRef = doc(db, `users/${id}`);
 
-    try {
-        const userDoc = await getDoc(userRef);
+  try {
+    const userDoc = await getDoc(userRef);
 
-        if (!userDoc.exists()) {
-            throw new Error("User not found");
-        }
-
-        const userData = userDoc.data();
-        
-        // Obtener los posts del usuario (suponiendo que los posts son una propiedad del perfil del usuario)
-        const posts = userData.posts || [];
-
-        // Array para almacenar los comentarios del usuario
-        let userComments = [];
-
-        // Obtener los comentarios de cada post
-        for (const postId of posts) {
-            const commentsRef = collection(db, `posts/${postId}/comments`);
-            const q = query(commentsRef, where("email", "==", userData.email));
-            const querySnapshot = await getDocs(q);
-            
-            querySnapshot.forEach((doc) => {
-                userComments.push({
-                    postId,
-                    ...doc.data(),
-                    id: doc.id,
-                });
-            });
-        }
-
-        return {
-            id: userDoc.id,
-            email: userData.email,
-            isChef: userData.isChef || false,
-            isVip: userData.isVip || false,
-            posts: posts,
-            comments: userComments,
-            role: userData.role || 'user', // Default role to 'user'
-        }
-    } catch (error) {
-        console.error('[user-profile.js getUserProfileById] Error al traer el perfil del usuario. ', error);
-        throw error; // Rethrow the error for handling in the component
+    if (!userDoc.exists()) {
+      throw new Error("Usuario no encontrado");
     }
+
+    const userData = userDoc.data();
+
+    return {
+      id: userDoc.id,
+      email: userData.email,
+      bio: userData.bio || '',
+      isChef: userData.isChef || false,
+      isVip: userData.isVip || false,
+      posts: userData.posts || [],
+      comments: [], // Inicialmente vacío hasta que se recupere
+      role: userData.role || 'user', // Rol predeterminado a 'user'
+    };
+  } catch (error) {
+    console.error('[user-profile.js getUserProfileById] Error al traer el perfil del usuario. ', error);
+    throw error; // Reenviar el error para su manejo en el componente
+  }
 }
 
 /**
- * 
- * @param {string} id - El id del usuario.
- * @param {{}} data - La data que queremos asociar.
- * @returns {Promise}
+ * Obtiene todos los comentarios realizados por el usuario en todas las publicaciones.
+ *
+ * @param {string} userEmail - La dirección de correo electrónico del usuario.
+ * @returns {Promise<Array<Object>>} - Una matriz de objetos de comentario.
+ */
+export async function getUserComments(userEmail) {
+  try {
+    const comments = [];
+
+    // Obtener la referencia de la colección de todos los comentarios
+    const commentsRef = collection(db, 'comments');
+
+    // Crear una consulta para filtrar comentarios por correo electrónico del usuario
+    const userCommentsQuery = query(commentsRef, where('email', '==', userEmail));
+
+    // Buscar todos los comentarios que coincidan con la consulta
+    const userCommentsSnapshot = await getDocs(userCommentsQuery);
+
+    // Recorrer cada comentario y agregarlo a los resultados
+    userCommentsSnapshot.forEach(commentDoc => {
+      comments.push({
+        id: commentDoc.id,
+        ...commentDoc.data()
+      });
+    });
+
+    return comments;
+  } catch (error) {
+    console.error('[user-profile.js getUserComments] Error al obtener los comentarios del usuario. ', error);
+    throw error; // Reenviar el error para su manejo en el componente
+  }
+}
+
+/**
+ * Crea un nuevo perfil de usuario.
+ *
+ * @param {string} id - El ID del usuario.
+ * @param {{}} data - Los datos del perfil del usuario.
+ * @returns {Promise} - Una promesa que se resuelve cuando se crea el perfil.
  */
 export async function createUserProfile(id, data) {
-    const userRef = doc(db, `users/${id}`);
+  const userRef = doc(db, `users/${id}`);
 
-    return setDoc(userRef, { ...data });
+  return setDoc(userRef, { ...data });
 }

@@ -112,7 +112,7 @@ export default {
                         <span>{{ authUser.email }}</span>
                     </div>
                     <div v-else class="mb-3 font-montserrat text-white bg-red-500 p-2 rounded-lg">
-                        <span class="block mb-2 font-semibold">Tenes que iniciar sesión para mandar mensajes</span>
+                        <span class="block mb-2 font-semibold">Tenes que iniciar sesión para enviar mensajes en el chat</span>
                     </div>
                     <div v-if="authUser.id" class="mb-3 w-full font-montserrat">
                         <MainLabel for="message" class="font-semibold">Mensaje</MainLabel>

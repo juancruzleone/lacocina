@@ -25,16 +25,17 @@
           </ul>
         </div>
         <div v-if="user.id" class="mb-8">
-          <h2 class="text-2xl font-bold mb-4 font-montserrat">Comentarios</h2>
-          <ul>
-            <li v-for="(comment, index) in user.comments" :key="index" class="mb-2">
-              <p>{{ comment.content }}</p>
-              <p class="text-gray-600 text-sm">{{ comment.created_at }}</p>
-              <p class="text-gray-600 text-sm"><strong>En publicación:</strong> {{ comment.postId }}</p>
-            </li>
-            <li v-if="user.comments.length === 0" class="text-gray-600 font-montserrat">No tiene comentarios.</li> 
-          </ul>
+            <h2 class="text-2xl font-bold mb-4 font-montserrat">Comentarios</h2>
+            <ul>
+                <li v-for="(comment, index) in user.comments" :key="index" class="mb-2">
+                    <p>{{ comment.content }}</p> <!-- Mostrar el contenido del comentario -->
+                    <p class="text-gray-600 text-sm">{{ comment.created_at }}</p> <!-- Mostrar la fecha del comentario -->
+                    <p class="text-gray-600 text-sm"><strong>Email:</strong> {{ comment.email }}</p> <!-- Mostrar el email del autor del comentario -->
+                </li>
+                <li v-if="user.comments.length === 0" class="text-gray-600 font-montserrat">No tiene comentarios.</li> 
+            </ul>
         </div>
+
       </div>
     </div>
   </div>
@@ -43,7 +44,7 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
 import Loader from '../components/Loader.vue'
-import { getUserProfileById } from '../services/user-profile'; 
+import { getUserProfileById, getUserComments } from '../services/user-profile'; // Importa la nueva función getUserComments
 
 export default {
   name: 'MiPerfil',
@@ -72,6 +73,9 @@ export default {
     async fetchUserData() {
       try {
         const userData = await getUserProfileById(this.id); 
+        // Obtén los comentarios del usuario
+        const userComments = await getUserComments(this.id);
+        userData.comments = userComments;
         this.user = userData;
       } catch (error) {
         console.error('Error al cargar el perfil:', error);
@@ -82,3 +86,4 @@ export default {
   }
 };
 </script>
+
