@@ -32,7 +32,7 @@ export default {
 <template>
     <section class="pl-12 mt-10 pb-20">
       <MainH2>Listado de usuarios</MainH2>
-      <Loader v-if="loading"/>
+      <Loader v-if="loading" class="mt-10"/>
       <div class="pt-5" v-if="!loading">
         <div v-for="user in users" :key="user.id" class="bg-contenedores w-[72%] h-[180px] radius-comunidad mt-6 p-5">
           <h3 class="text-white font-montserrat text-2xl font-semibold">{{ user.email }}</h3>
