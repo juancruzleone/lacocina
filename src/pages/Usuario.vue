@@ -40,13 +40,17 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    formatDate(timestamp) {
+      const date = new Date(timestamp.seconds * 1000);
+      return date.toLocaleString();
     }
   }
 };
 </script>
 
 <template>
-    <div>
+  <div>
     <div v-if="loading" class="bg-gray-200 h-96 flex items-center justify-center">
       <span class="text-xl font-bold text-gray-600 font-monserrat">Cargando perfil...</span>
     </div>
@@ -65,21 +69,21 @@ export default {
           <h2 class="text-2xl font-bold mb-4">Posts publicados</h2>
           <ul class="bg-contenedores p-3 rounded-lg w-[250px] h-[100px] flex">
             <li v-for="(post, index) in user.posts" :key="index" class="mb-2">
-              <p class="font-semibold text-white font-monserrat">{{ post.titulo_post }}</p>
+              <p class="font-semibold text-white font-monserrat mb-4">{{ post.titulo_post }}</p>
+              <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2">Ver más</router-link>
             </li>
             <li v-if="user.posts.length === 0" class="text-gray-600">No tiene posts.</li>
           </ul>
         </div>
         <div v-if="user.id" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 font-montserrat">Comentarios realizados</h2>
-            <ul class="bg-contenedores rounded-lg text-white p-3">
-                <li v-for="(comment, index) in user.comments" :key="index" class="mb-2 font-montserrat">
-                  <p class="text-white text-sm mb-4">{{ comment.created_at }}</p>
-                    <p>{{ comment.content }}</p>
-             
-                </li>
-                <li v-if="user.comments.length === 0" class="text-white font-montserrat">No tiene comentarios.</li> 
-            </ul>
+          <h2 class="text-2xl font-bold mb-4 font-montserrat">Comentarios realizados</h2>
+          <ul class="bg-contenedores rounded-lg text-white p-3">
+            <li v-for="(comment, index) in user.comments" :key="index" class="mb-2 font-montserrat">
+              <p class="text-white text-sm mb-4">{{ formatDate(comment.created_at) }}</p>
+              <p>{{ comment.content }}</p>
+            </li>
+            <li v-if="user.comments.length === 0" class="text-white font-montserrat">No tiene comentarios.</li>
+          </ul>
         </div>
       </div>
     </div>
