@@ -4,14 +4,11 @@ import MainH2 from '../components/MainH2.vue';
 import MainButton from '../components/MainButton.vue';
 import Loader from '../components/Loader.vue';
 import { fetchPosts, deletePost, updatePost, createPost } from '../services/posts';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export default {
   name: 'PostsPanel',
-  components: {
-    MainH1,
-    MainH2,
-    Loader
-  },
+  components: { MainH1, MainH2, Loader },
   data() {
     return {
       posts: [],
@@ -30,7 +27,7 @@ export default {
         descripcion_post: '',
         img1_post: '',
         img2_post: '',
-        autor_post: '' // Agregar el campo autor_post
+        autor_post: '' // Campo de autor_post agregado
       },
       editedPostData: {
         titulo_post: '',
@@ -42,8 +39,9 @@ export default {
         descripcion_post: '',
         img1_post: '',
         img2_post: '',
-        autor_post: '' // Agregar el campo autor_post
+        autor_post: '' // Campo de autor_post agregado
       },
+      user: null,
       createLoading: false,
       editLoading: false,
       deleteLoading: false
@@ -51,6 +49,7 @@ export default {
   },
   async created() {
     await this.loadPosts();
+    this.initAuth();
   },
   methods: {
     async loadPosts() {
@@ -162,6 +161,16 @@ export default {
     isValidUrl(url) {
       const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
       return urlPattern.test(url);
+    },
+    initAuth() {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user;
+        } else {
+          this.user = null;
+        }
+      });
     }
   },
   computed: {
@@ -268,12 +277,12 @@ export default {
     <Loader v-if="loading" class="mt-6"/>
     <div class="pt-5" v-if="!loading">
       <div v-for="post in posts" :key="post.id" class="flex bg-contenedores h-[310px] radius-comunidad mt-6 p-5">
-        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-60 rounded-lg mb-3 mr-5 h-[70%]... mt-10">
+        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-60 rounded-lg mb-3 mr-5 h-[70%]... mt-... 10">
         <div>
           <h3 class="text-white font-montserrat text-2xl font-semibold">{{ post.titulo_post }}</h3>
           <p class="bg-white w-[200px] text-center font-montserrat rounded-lg mt-4 p-2">{{ post.categoria_post }}</p>
           <p class="font-montserrat text-white mt-5 mb-5">{{ post.descripcion_post }}</p>
-          <p class="font-montserrat text-white mt-5 mb-5"><span class="font-bold mr-2">Autor:</span>{{ post.autor_post }}</p> <!-- Mostrar el autor del post -->
+          <p class="font-montserrat text-white mt-5 mb-5"><span class="font-bold mr-2">Autor:</span>{{ post.autor_post }}</p>
           <div class="flex">
             <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2">Ver más</router-link>
             <button @click="openEditModal(post.id)" class="bg-yellow-500 text-white font-montserrat text-center p-1 rounded-lg mr-2">Editar</button>
@@ -306,7 +315,7 @@ export default {
         <p v-if="img1ErrorMessage" class="text-red-500 font-montserrat">{{ img1ErrorMessage }}</p>
         <input type="text" v-model="newPostData.img2_post" placeholder="URL de la imagen 2">
         <p v-if="img2ErrorMessage" class="text-red-500 font-montserrat">{{ img2ErrorMessage }}</p>
-        <!-- Mensajes de validación -->
+        <p class="font-montserrat text-black mt-5 mb-5 border b-2 p-2 rounded-lg">{{ user.email }}</p>
         <p v-if="!isValidNewPost" class="text-red-500 font-montserrat">{{ generalErrorMessage }}</p>
         <button @click="createPost" :disabled="!isValidNewPost || createLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Crear</button>
         <button @click="closeCreateModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
@@ -335,15 +344,14 @@ export default {
         <p v-if="img1ErrorMessageEdit" class="text-red-500 font-montserrat">{{ img1ErrorMessageEdit }}</p>
         <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
         <p v-if="img2ErrorMessageEdit" class="text-red-500 font-montserrat">{{ img2ErrorMessageEdit }}</p>
-        <!-- Mensajes de validación -->
+        <input type="text" v-model="editedPostData.autor_post" placeholder="Autor del post" disabled class="font-montserrat text-red-500">
         <p v-if="!isValidEditedPost" class="text-red-500 font-montserrat">{{ generalErrorMessageEdit }}</p>
-        <button @click="editPost" :disabled="!isValidEditedPost || editLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar Cambios</button>
+        <button @click="editPost" :disabled="!isValidEditedPost || editLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar</button>
         <button @click="closeEditModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
       </div>
     </div>
   </section>
 </template>
-
 
 <style>
 .modal {
