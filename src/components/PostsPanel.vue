@@ -145,7 +145,8 @@ export default {
       return (
         this.newPostData.titulo_post.trim() !== '' &&
         this.newPostData.subtitulo1_post.trim() !== '' &&
-        this.newPostData.texto1_post.trim() !== ''
+        this.newPostData.texto1_post.trim() !== '' &&
+        this.newPostData.categoria_post.trim() !== ''
         // Agrega validaciones para otros campos obligatorios si es necesario
       );
     },
@@ -154,7 +155,8 @@ export default {
       return (
         this.editedPostData.titulo_post.trim() !== '' &&
         this.editedPostData.subtitulo1_post.trim() !== '' &&
-        this.editedPostData.texto1_post.trim() !== ''
+        this.editedPostData.texto1_post.trim() !== '' &&
+        this.editedPostData.categoria_post.trim() !== ''
         // Agrega validaciones para otros campos obligatorios si es necesario
       );
     }
@@ -196,7 +198,14 @@ export default {
         <textarea v-model="newPostData.texto1_post" placeholder="Texto 1"></textarea>
         <input type="text" v-model="newPostData.subtitulo2_post" placeholder="Subtítulo 2">
         <textarea v-model="newPostData.texto2_post" placeholder="Texto 2"></textarea>
-        <input type="text" v-model="newPostData.categoria_post" placeholder="Categoría">
+        <select v-model="newPostData.categoria_post" class="mt-5 mb-5">
+          <option value="">Selecciona una categoría</option>
+          <option value="Airdrops">Airdrops</option>
+          <option value="Análisis técnico">Análisis técnico</option>
+          <option value="Análisis fundamental">Análisis fundamental</option>
+          <option value="Trading">Trading</option>
+          <option value="Onchain">Onchain</option>
+        </select>
         <textarea v-model="newPostData.descripcion_post" placeholder="Descripción" class="font-montserrat"></textarea>
         <input type="text" v-model="newPostData.img1_post" placeholder="URL de la imagen 1">
         <input type="text" v-model="newPostData.img2_post" placeholder="URL de la imagen 2">
@@ -215,7 +224,14 @@ export default {
         <textarea v-model="editedPostData.texto1_post" placeholder="Texto 1"></textarea>
         <input type="text" v-model="editedPostData.subtitulo2_post" placeholder="Subtítulo 2">
         <textarea v-model="editedPostData.texto2_post" placeholder="Texto 2"></textarea>
-        <input type="text" v-model="editedPostData.categoria_post" placeholder="Categoría">
+        <select v-model="editedPostData.categoria_post" class="mt-5 mb-5">
+          <option value="">Selecciona una categoría</option>
+          <option value="Airdrops">Airdrops</option>
+          <option value="Análisis técnico">Análisis técnico</option>
+          <option value="Análisis fundamental">Análisis fundamental</option>
+          <option value="Trading">Trading</option>
+          <option value="Onchain">Onchain</option>
+        </select>
         <textarea v-model="editedPostData.descripcion_post" placeholder="Descripción"></textarea>
         <input type="text" v-model="editedPostData.img1_post" placeholder="URL de la imagen 1">
         <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
@@ -282,4 +298,3 @@ export default {
   border-radius: 25px;
 }
 </style>
-
