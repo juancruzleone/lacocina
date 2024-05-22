@@ -259,7 +259,7 @@ export default {
     <div class="mt-5">
       <button @click="openCreateModal" class="bg-blue-500 text-white font-montserrat text-center p-2 rounded-lg">Crear Post</button>
     </div>
-    <Loader v-if="loading"/>
+    <Loader v-if="loading" class="mt-6"/>
     <div class="pt-5" v-if="!loading">
       <div v-for="post in posts" :key="post.id" class="flex bg-contenedores w-[72%] h-[310px] radius-comunidad mt-6 p-5">
         <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-60 rounded-lg mb-3 mr-5 h-[70%] mt-10">
