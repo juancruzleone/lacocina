@@ -18,8 +18,8 @@
           <h2 class="text-2xl font-bold mb-4">Publicaciones</h2>
           <ul>
             <li v-for="(post, index) in user.posts" :key="index" class="mb-2">
-              <p class="font-semibold">{{ post.title }}</p>
-              <p class="text-gray-600 text-sm">{{ post.date }}</p>
+              <p class="font-semibold">{{ post.titulo_post }}</p>
+              <p class="text-gray-600 text-sm">{{ post.created_at }}</p>
             </li>
             <li v-if="user.posts.length === 0" class="text-gray-600">No tiene publicaciones.</li>
           </ul>
@@ -28,14 +28,13 @@
             <h2 class="text-2xl font-bold mb-4 font-montserrat">Comentarios</h2>
             <ul>
                 <li v-for="(comment, index) in user.comments" :key="index" class="mb-2">
-                    <p>{{ comment.content }}</p> <!-- Mostrar el contenido del comentario -->
-                    <p class="text-gray-600 text-sm">{{ comment.created_at }}</p> <!-- Mostrar la fecha del comentario -->
-                    <p class="text-gray-600 text-sm"><strong>Email:</strong> {{ comment.email }}</p> <!-- Mostrar el email del autor del comentario -->
+                    <p>{{ comment.content }}</p>
+                    <p class="text-gray-600 text-sm">{{ comment.created_at }}</p>
+                    <p class="text-gray-600 text-sm"><strong>Email:</strong> {{ comment.email }}</p>
                 </li>
                 <li v-if="user.comments.length === 0" class="text-gray-600 font-montserrat">No tiene comentarios.</li> 
             </ul>
         </div>
-
       </div>
     </div>
   </div>
@@ -43,8 +42,7 @@
 
 <script>
 import MainH1 from '../components/MainH1.vue';
-import Loader from '../components/Loader.vue'
-import { getUserProfileById, getUserComments } from '../services/user-profile'; // Importa la nueva función getUserComments
+import { getUserProfileById, getUserComments, getAllPosts } from '../services/user-profile';
 
 export default {
   name: 'MiPerfil',
@@ -52,7 +50,7 @@ export default {
   props: ['id'],
   data() {
     return {
-      loading: true, 
+      loading: true,
       user: {
         id: null,
         email: null,
@@ -62,7 +60,7 @@ export default {
         isVip: false,
         posts: [],
         comments: [],
-        role: '', 
+        role: '',
       }
     };
   },
@@ -72,18 +70,19 @@ export default {
   methods: {
     async fetchUserData() {
       try {
-        const userData = await getUserProfileById(this.id); 
-        // Obtén los comentarios del usuario
-        const userComments = await getUserComments(this.id);
+        const userData = await getUserProfileById(this.id);
+        const userComments = await getUserComments(userData.email); 
+        const allPosts = await getAllPosts(); 
+        const userPosts = allPosts.filter(post => post.autor_post === userData.email); 
         userData.comments = userComments;
+        userData.posts = userPosts;
         this.user = userData;
       } catch (error) {
         console.error('Error al cargar el perfil:', error);
       } finally {
-        this.loading = false; 
+        this.loading = false;
       }
     }
   }
 };
 </script>
-
