@@ -350,6 +350,17 @@ export default {
         <button @click="closeEditModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
       </div>
     </div>
+    <div v-if="isDeleteModalOpen" class="modal">
+      <div class="modal-content font-montserrat">
+        <Loader v-if="deleteLoading"/>
+        <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Eliminar Post</h2>
+        <p class="font-montserrat text-black mt-5 mb-5">¿Estás seguro de que deseas eliminar este post?</p>
+        <div class="flex justify-start"> <!-- Cambiado a justify-start para alinear los botones a la izquierda -->
+          <button @click="deletePost(selectedPostId)" :disabled="deleteLoading" class="font-montserrat bg-red-500 rounded-lg text-white p-2 mr-2">Eliminar</button> <!-- Añadido margen a la derecha -->
+          <button @click="closeDeleteModal" class="font-montserrat bg-gray-500 rounded-lg text-white p-2">Cancelar</button>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
