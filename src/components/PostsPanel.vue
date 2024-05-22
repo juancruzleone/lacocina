@@ -1,7 +1,7 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
 import MainH2 from '../components/MainH2.vue';
-import MainButton from '../components/MainButton.vue'
+import MainButton from '../components/MainButton.vue';
 import Loader from '../components/Loader.vue';
 import { fetchPosts, deletePost, updatePost, createPost } from '../services/posts';
 
@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       posts: [],
-      loading: true, // Para controlar el estado de carga
+      loading: true,
       isCreateModalOpen: false,
       isEditModalOpen: false,
       isDeleteModalOpen: false,
@@ -37,7 +37,10 @@ export default {
         descripcion_post: '',
         img1_post: '',
         img2_post: ''
-      }
+      },
+      createLoading: false,
+      editLoading: false,
+      deleteLoading: false
     };
   },
   async created() {
@@ -47,26 +50,29 @@ export default {
     async loadPosts() {
       try {
         this.posts = await fetchPosts();
-        this.loading = false; // Una vez que los posts se carguen correctamente, establece loading en false
+        this.loading = false;
       } catch (error) {
         console.error("Error fetching posts: ", error);
       }
     },
     async deletePost(postId) {
       try {
+        this.deleteLoading = true;
         await deletePost(postId);
-        this.loadPosts(); // Refresca la lista de posts después de la eliminación
+        await this.loadPosts();
         this.closeDeleteModal();
+        this.deleteLoading = false;
       } catch (error) {
         console.error("Error deleting post: ", error);
+        this.deleteLoading = false;
       }
     },
     async createPost() {
       try {
+        this.createLoading = true;
         await createPost(this.newPostData);
-        this.loadPosts(); // Refresca la lista de posts después de la creación
+        await this.loadPosts();
         this.closeCreateModal();
-        // Reinicia los datos del nuevo post
         this.newPostData = {
           titulo_post: '',
           subtitulo1_post: '',
@@ -78,16 +84,18 @@ export default {
           img1_post: '',
           img2_post: ''
         };
+        this.createLoading = false;
       } catch (error) {
         console.error("Error creating post: ", error);
+        this.createLoading = false;
       }
     },
     async editPost() {
       try {
+        this.editLoading = true;
         await updatePost(this.selectedPostId, this.editedPostData);
-        this.loadPosts(); // Refresca la lista de posts después de la edición
+        await this.loadPosts();
         this.closeEditModal();
-        // Reinicia los datos del post editado
         this.editedPostData = {
           titulo_post: '',
           subtitulo1_post: '',
@@ -99,8 +107,10 @@ export default {
           img1_post: '',
           img2_post: ''
         };
+        this.editLoading = false;
       } catch (error) {
         console.error("Error updating post: ", error);
+        this.editLoading = false;
       }
     },
     openCreateModal() {
@@ -111,7 +121,6 @@ export default {
     },
     openEditModal(postId) {
       this.selectedPostId = postId;
-      // Obtener los datos del post seleccionado
       const selectedPost = this.posts.find(post => post.id === postId);
       if (selectedPost) {
         this.editedPostData = {
@@ -137,28 +146,48 @@ export default {
     },
     closeDeleteModal() {
       this.isDeleteModalOpen = false;
+    },
+    isValidUrl(url) {
+      const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+      return urlPattern.test(url);
     }
   },
   computed: {
-    // Validación para el modal de crear post
     isValidNewPost() {
+      const hasWordInsteadOfLink1 = !this.isValidUrl(this.newPostData.img1_post) && this.newPostData.img1_post.trim() !== '';
+      const hasWordInsteadOfLink2 = !this.isValidUrl(this.newPostData.img2_post) && this.newPostData.img2_post.trim() !== '';
       return (
         this.newPostData.titulo_post.trim() !== '' &&
         this.newPostData.subtitulo1_post.trim() !== '' &&
         this.newPostData.texto1_post.trim() !== '' &&
-        this.newPostData.categoria_post.trim() !== ''
-        // Agrega validaciones para otros campos obligatorios si es necesario
+        this.newPostData.categoria_post.trim() !== '' &&
+        (this.isValidUrl(this.newPostData.img1_post) || hasWordInsteadOfLink1) &&
+        (this.isValidUrl(this.newPostData.img2_post) || hasWordInsteadOfLink2)
       );
     },
-    // Validación para el modal de editar post
     isValidEditedPost() {
+      const hasWordInsteadOfLink1 = !this.isValidUrl(this.editedPostData.img1_post) && this.editedPostData.img1_post.trim() !== '';
+      const hasWordInsteadOfLink2 = !this.isValidUrl(this.editedPostData.img2_post) && this.editedPostData.img2_post.trim() !== '';
       return (
         this.editedPostData.titulo_post.trim() !== '' &&
         this.editedPostData.subtitulo1_post.trim() !== '' &&
         this.editedPostData.texto1_post.trim() !== '' &&
-        this.editedPostData.categoria_post.trim() !== ''
-        // Agrega validaciones para otros campos obligatorios si es necesario
+        this.editedPostData.categoria_post.trim() !== '' &&
+        (this.isValidUrl(this.editedPostData.img1_post) || hasWordInsteadOfLink1) &&
+        (this.isValidUrl(this.editedPostData.img2_post) || hasWordInsteadOfLink2)
       );
+    },
+    img1ErrorMessage() {
+      if (!this.isValidUrl(this.newPostData.img1_post) && this.newPostData.img1_post.trim() !== '') {
+        return "Por favor ingresa una URL válida para la imagen 1.";
+      }
+      return "";
+    },
+    img2ErrorMessage() {
+      if (!this.isValidUrl(this.newPostData.img2_post) && this.newPostData.img2_post.trim() !== '') {
+        return "Por favor ingresa una URL válida para la imagen 2.";
+      }
+      return "";
     }
   }
 }
@@ -191,7 +220,7 @@ export default {
     <!-- Modales -->
     <div v-if="isCreateModalOpen" class="modal">
       <div class="modal-content font-monstserrat">
-        <Loader v-if="loading"/>
+        <Loader v-if="createLoading"/>
         <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Crear Nuevo Post</h2>
         <input type="text" v-model="newPostData.titulo_post" placeholder="Título">
         <input type="text" v-model="newPostData.subtitulo1_post" placeholder="Subtítulo 1">
@@ -211,13 +240,13 @@ export default {
         <input type="text" v-model="newPostData.img2_post" placeholder="URL de la imagen 2">
         <!-- Mensajes de validación -->
         <p v-if="!isValidNewPost" class="text-red-500 font-montserrat">Por favor completa todos los campos obligatorios.</p>
-        <button @click="createPost" :disabled="!isValidNewPost" class="font-montserrat bg-blue-400 rounded-lg mt-2">Crear</button>
+        <button @click="createPost" :disabled="!isValidNewPost || createLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Crear</button>
         <button @click="closeCreateModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
       </div>
     </div>
     <div v-if="isEditModalOpen" class="modal">
       <div class="modal-content font-montserrat">
-        <Loader v-if="loading"/>
+        <Loader v-if="editLoading"/>
         <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Editar Post</h2>
         <input type="text" v-model="editedPostData.titulo_post" placeholder="Título">
         <input type="text" v-model="editedPostData.subtitulo1_post" placeholder="Subtítulo 1">
@@ -237,13 +266,13 @@ export default {
         <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
         <!-- Mensajes de validación -->
         <p v-if="!isValidEditedPost" class="text-red-500 font-montserrat">Por favor completa todos los campos obligatorios.</p>
-        <button @click="editPost" :disabled="!isValidEditedPost" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar Cambios</button>
+        <button @click="editPost" :disabled="!isValidEditedPost || editLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar Cambios</button>
         <button @click="closeEditModal" class="font-montserrat bg-red-500 text-white rounded-lg">Cancelar</button>
       </div>
     </div>
     <div v-if="isDeleteModalOpen" class="modal">
       <div class="modal-content">
-        <Loader v-if="loading"/>
+        <Loader v-if="deleteLoading"/>
         <p class="font-montserrat">¿Estás seguro de que deseas eliminar este post?</p>
         <div class="mt-4">
           <button @click="deletePost(selectedPostId)" class="font-montserrat text-white bg-red-500 rounded-lg">Eliminar</button>
