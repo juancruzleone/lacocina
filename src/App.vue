@@ -14,7 +14,7 @@ export default {
   },
   mounted() {
     subscribeToAuth((newUserData) => {
-      this.user = { ...newUserData };
+      this.user = { ...newUserData, isAdmin: this.checkAdminStatus(newUserData.email) };
     });
   },
   methods: {
@@ -27,6 +27,10 @@ export default {
         };
         this.$router.push({ path: '/login' });
       });
+    },
+    checkAdminStatus(email) {
+      const allowedEmails = ['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'kichiro@gmail.com', 'chefao@gmail.com', 'nacherx@gmail.com', 'teos@gmail.com'];
+      return allowedEmails.includes(email);
     }
   }
 };

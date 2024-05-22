@@ -1,5 +1,4 @@
-// router.js
-
+// Router.js
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from '../pages/Home.vue'
 import Comunidad from '../pages/Comunidad.vue'
@@ -21,13 +20,17 @@ const routes = [
     { path: '/post/:id',            component: PostDetalle},
     { path: '/login',               component: Login},
     { path: '/register',            component: Register},
-    { path: '/panel',               component: Panel, beforeEnter: (to, from, next) => {
-        if (isAuthenticatedEmail('juan.leone@davinci.edu.ar') || isAuthenticatedEmail('cromer@gmail.com') || isAuthenticatedEmail('nacherx@gmail.com') || isAuthenticatedEmail('chefao@gmail.com') || isAuthenticatedEmail('teos@gmail.com') || isAuthenticatedEmail('kichiro@gmail.com')) {
-            next();
-        } else {
-            next('/login');
+    { 
+        path: '/panel', 
+        component: Panel, 
+        beforeEnter: (to, from, next) => {
+            if (isAuthenticatedEmail(['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'kichiro@gmail.com', 'chefao@gmail.com', 'nacherx@gmail.com', 'teos@gmail.com'])) {
+                next();
+            } else {
+                next('/login');
+            }
         }
-    }},
+    },
     { path: '/perfil/:id',          component: MiPerfil, props:true},
     { path: '/:catchAll(.*)',       component: Page404 }, 
 ]

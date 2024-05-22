@@ -1,5 +1,4 @@
-// auth.js
-
+// Auth.js
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "./firebase";
 import { createUserProfile } from "./user-profile";
@@ -102,11 +101,10 @@ function notifyAll() {
 }
 
 /**
- * Verifica si el usuario autenticado tiene el correo especificado.
- * @param {string} email - El correo electrónico a verificar.
+ * Verifica si el usuario autenticado tiene alguno de los correos electrónicos especificados.
+ * @param {string[]} emails - Array de correos electrónicos a verificar.
  * @returns {boolean} - true si el correo coincide, false en caso contrario.
  */
-export function isAuthenticatedEmail(email) {
-    const allowedEmails = ['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'nacherx@gmail.com', 'chefao@gmail.com', 'teos@gmail.com', 'kichiro@gmail.com'];
-    return allowedEmails.includes(email);
+export function isAuthenticatedEmail(emails) {
+    return emails.includes(authUser.email);
 }
