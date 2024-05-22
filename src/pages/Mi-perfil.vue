@@ -15,24 +15,23 @@
           <p v-if="user.isVip" class="text-green-500 font-semibold">Miembro VIP</p>
         </div>
         <div v-if="user.id" class="mb-8 font-montserrat">
-          <h2 class="text-2xl font-bold mb-4">Publicaciones</h2>
-          <ul>
+          <h2 class="text-2xl font-bold mb-4">Posts publicados</h2>
+          <ul class="bg-contenedores p-3 rounded-lg w-[250px] h-[100px] flex">
             <li v-for="(post, index) in user.posts" :key="index" class="mb-2">
-              <p class="font-semibold">{{ post.titulo_post }}</p>
-              <p class="text-gray-600 text-sm">{{ post.created_at }}</p>
+              <p class="font-semibold text-white font-monserrat">{{ post.titulo_post }}</p>
             </li>
-            <li v-if="user.posts.length === 0" class="text-gray-600">No tiene publicaciones.</li>
+            <li v-if="user.posts.length === 0" class="text-gray-600">No tiene posts.</li>
           </ul>
         </div>
         <div v-if="user.id" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 font-montserrat">Comentarios</h2>
-            <ul>
-                <li v-for="(comment, index) in user.comments" :key="index" class="mb-2">
+            <h2 class="text-2xl font-bold mb-4 font-montserrat">Comentarios realizados</h2>
+            <ul class="bg-contenedores rounded-lg text-white p-3">
+                <li v-for="(comment, index) in user.comments" :key="index" class="mb-2 font-montserrat">
+                  <p class="text-white text-sm mb-4">{{ comment.created_at }}</p>
                     <p>{{ comment.content }}</p>
-                    <p class="text-gray-600 text-sm">{{ comment.created_at }}</p>
-                    <p class="text-gray-600 text-sm"><strong>Email:</strong> {{ comment.email }}</p>
+             
                 </li>
-                <li v-if="user.comments.length === 0" class="text-gray-600 font-montserrat">No tiene comentarios.</li> 
+                <li v-if="user.comments.length === 0" class="text-white font-montserrat">No tiene comentarios.</li> 
             </ul>
         </div>
       </div>

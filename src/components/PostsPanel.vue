@@ -29,7 +29,8 @@ export default {
         categoria_post: '',
         descripcion_post: '',
         img1_post: '',
-        img2_post: ''
+        img2_post: '',
+        autor_post: '' // Agregar el campo autor_post
       },
       editedPostData: {
         titulo_post: '',
@@ -40,7 +41,8 @@ export default {
         categoria_post: '',
         descripcion_post: '',
         img1_post: '',
-        img2_post: ''
+        img2_post: '',
+        autor_post: '' // Agregar el campo autor_post
       },
       createLoading: false,
       editLoading: false,
@@ -72,9 +74,10 @@ export default {
       }
     },
     async createPost() {
-      if (!this.isValidNewPost) return; // Verificamos si la validación pasa
+      if (!this.isValidNewPost) return;
       try {
         this.createLoading = true;
+        this.newPostData.autor_post = this.user.email; // Establecer el autor del post como el correo electrónico del usuario autenticado
         await createPost(this.newPostData);
         await this.loadPosts();
         this.closeCreateModal();
@@ -87,7 +90,8 @@ export default {
           categoria_post: '',
           descripcion_post: '',
           img1_post: '',
-          img2_post: ''
+          img2_post: '',
+          autor_post: '' // Restablecer el valor del autor_post
         };
         this.createLoading = false;
       } catch (error) {
@@ -96,7 +100,7 @@ export default {
       }
     },
     async editPost() {
-      if (!this.isValidEditedPost) return; // Verificamos si la validación pasa
+      if (!this.isValidEditedPost) return;
       try {
         this.editLoading = true;
         await updatePost(this.selectedPostId, this.editedPostData);
@@ -111,7 +115,8 @@ export default {
           categoria_post: '',
           descripcion_post: '',
           img1_post: '',
-          img2_post: ''
+          img2_post: '',
+          autor_post: '' // Restablecer el valor del autor_post
         };
         this.editLoading = false;
       } catch (error) {
@@ -138,7 +143,8 @@ export default {
           categoria_post: selectedPost.categoria_post,
           descripcion_post: selectedPost.descripcion_post,
           img1_post: selectedPost.img1_post,
-          img2_post: selectedPost.img2_post
+          img2_post: selectedPost.img2_post,
+          autor_post: selectedPost.autor_post // Establecer el autor del post en el campo autor_post
         };
       }
       this.isEditModalOpen = true;
@@ -174,7 +180,7 @@ export default {
       return (
         allFieldsCompleted &&
         ((this.isValidUrl(this.newPostData.img1_post) || hasWordInsteadOfLink1) &&
-        (this.isValidUrl(this.newPostData.img2_post) || hasWordInsteadOfLink2))
+         (this.isValidUrl(this.newPostData.img2_post) || hasWordInsteadOfLink2))
       );
     },
     isValidEditedPost() {
@@ -192,7 +198,7 @@ export default {
       return (
         allFieldsCompleted &&
         ((this.isValidUrl(this.editedPostData.img1_post) || hasWordInsteadOfLink1) &&
-        (this.isValidUrl(this.editedPostData.img2_post) || hasWordInsteadOfLink2))
+         (this.isValidUrl(this.editedPostData.img2_post) || hasWordInsteadOfLink2))
       );
     },
     img1ErrorMessage() {
@@ -261,17 +267,18 @@ export default {
     </div>
     <Loader v-if="loading" class="mt-6"/>
     <div class="pt-5" v-if="!loading">
-      <div v-for="post in posts" :key="post.id" class="flex bg-contenedores w-[72%] h-[310px] radius-comunidad mt-6 p-5">
-        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-60 rounded-lg mb-3 mr-5 h-[70%] mt-10">
+      <div v-for="post in posts" :key="post.id" class="flex bg-contenedores h-[310px] radius-comunidad mt-6 p-5">
+        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-60 rounded-lg mb-3 mr-5 h-[70%]... mt-10">
         <div>
-            <h3 class="text-white font-montserrat text-2xl font-semibold">{{ post.titulo_post }}</h3>
-            <p class="bg-white w-[140px] text-center font-montserrat rounded-lg mt-2 p-1">{{ post.categoria_post }}</p>
-            <p class="font-montserrat text-white mt-5 mb-5">{{ post.descripcion_post }}</p>
-            <div class="flex">
-              <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2">Ver más</router-link>
-              <button @click="openEditModal(post.id)" class="bg-yellow-500 text-white font-montserrat text-center p-1 rounded-lg mr-2">Editar</button>
-              <button @click="openDeleteModal(post.id)" class="bg-red-500 text-white font-montserrat text-center p-1 rounded-lg">Eliminar</button>
-            </div>
+          <h3 class="text-white font-montserrat text-2xl font-semibold">{{ post.titulo_post }}</h3>
+          <p class="bg-white w-[200px] text-center font-montserrat rounded-lg mt-4 p-2">{{ post.categoria_post }}</p>
+          <p class="font-montserrat text-white mt-5 mb-5">{{ post.descripcion_post }}</p>
+          <p class="font-montserrat text-white mt-5 mb-5"><span class="font-bold mr-2">Autor:</span>{{ post.autor_post }}</p> <!-- Mostrar el autor del post -->
+          <div class="flex">
+            <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2">Ver más</router-link>
+            <button @click="openEditModal(post.id)" class="bg-yellow-500 text-white font-montserrat text-center p-1 rounded-lg mr-2">Editar</button>
+            <button @click="openDeleteModal(post.id)" class="bg-red-500 text-white font-montserrat text-center p-1 rounded-lg">Eliminar</button>
+          </div>
         </div>
       </div>
     </div>
@@ -305,43 +312,35 @@ export default {
         <button @click="closeCreateModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
       </div>
     </div>
+
     <div v-if="isEditModalOpen" class="modal">
-  <div class="modal-content font-montserrat">
-    <Loader v-if="editLoading"/>
-    <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Editar Post</h2>
-    <input type="text" v-model="editedPostData.titulo_post" placeholder="Título">
-    <input type="text" v-model="editedPostData.subtitulo1_post" placeholder="Subtítulo 1">
-    <textarea v-model="editedPostData.texto1_post" placeholder="Texto 1"></textarea>
-    <input type="text" v-model="editedPostData.subtitulo2_post" placeholder="Subtítulo 2">
-    <textarea v-model="editedPostData.texto2_post" placeholder="Texto 2"></textarea>
-    <select v-model="editedPostData.categoria_post" class="mt-5 mb-5">
-      <option value="">Selecciona una categoría</option>
-      <option value="Airdrops">Airdrops</option>
-      <option value="Análisis técnico">Análisis técnico</option>
-      <option value="Análisis fundamental">Análisis fundamental</option>
-      <option value="Trading">Trading</option>
-      <option value="Onchain">Onchain</option>
-    </select>
-    <textarea v-model="editedPostData.descripcion_post" placeholder="Descripción" class="font-montserrat"></textarea>
-    <input type="text" v-model="editedPostData.img1_post" placeholder="URL de la imagen 1">
-    <p v-if="img1ErrorMessageEdit" class="text-red-500 font-montserrat">{{ img1ErrorMessageEdit }}</p>
-    <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
-    <p v-if="img2ErrorMessageEdit" class="text-red-500 font-montserrat">{{ img2ErrorMessageEdit }}</p>
-    <!-- Mensajes de validación -->
-    <p v-if="!isValidEditedPost" class="text-red-500 font-montserrat">{{ generalErrorMessageEdit }}</p>
-    <button @click="editPost" :disabled="!isValidEditedPost || editLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar Cambios</button>
-    <button @click="closeEditModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
-  </div>
-</div>
-<div v-if="isDeleteModalOpen" class="modal">
-  <div class="modal-content font-montserrat">
-    <Loader v-if="deleteLoading"/>
-    <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Eliminar Post</h2>
-    <p class="font-montserrat">¿Estás seguro de que deseas eliminar este post?</p>
-    <button @click="deletePost(selectedPostId)" :disabled="deleteLoading" class="font-montserrat bg-red-500 rounded-lg text-white">Eliminar</button>
-    <button @click="closeDeleteModal" class="font-montserrat bg-gray-500 rounded-lg text-white">Cancelar</button>
-  </div>
-</div>
+      <div class="modal-content font-montserrat">
+        <Loader v-if="editLoading"/>
+        <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Editar Post</h2>
+        <input type="text" v-model="editedPostData.titulo_post" placeholder="Título">
+        <input type="text" v-model="editedPostData.subtitulo1_post" placeholder="Subtítulo 1">
+        <textarea v-model="editedPostData.texto1_post" placeholder="Texto 1"></textarea>
+        <input type="text" v-model="editedPostData.subtitulo2_post" placeholder="Subtítulo 2">
+        <textarea v-model="editedPostData.texto2_post" placeholder="Texto 2"></textarea>
+        <select v-model="editedPostData.categoria_post" class="mt-5 mb-5">
+          <option value="">Selecciona una categoría</option>
+          <option value="Airdrops">Airdrops</option>
+          <option value="Análisis técnico">Análisis técnico</option>
+          <option value="Análisis fundamental">Análisis fundamental</option>
+          <option value="Trading">Trading</option>
+          <option value="Onchain">Onchain</option>
+        </select>
+        <textarea v-model="editedPostData.descripcion_post" placeholder="Descripción" class="font-montserrat"></textarea>
+        <input type="text" v-model="editedPostData.img1_post" placeholder="URL de la imagen 1">
+        <p v-if="img1ErrorMessageEdit" class="text-red-500 font-montserrat">{{ img1ErrorMessageEdit }}</p>
+        <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
+        <p v-if="img2ErrorMessageEdit" class="text-red-500 font-montserrat">{{ img2ErrorMessageEdit }}</p>
+        <!-- Mensajes de validación -->
+        <p v-if="!isValidEditedPost" class="text-red-500 font-montserrat">{{ generalErrorMessageEdit }}</p>
+        <button @click="editPost" :disabled="!isValidEditedPost || editLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar Cambios</button>
+        <button @click="closeEditModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
+      </div>
+    </div>
   </section>
 </template>
 

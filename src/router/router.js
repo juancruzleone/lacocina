@@ -1,3 +1,5 @@
+// router.js
+
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from '../pages/Home.vue'
 import Comunidad from '../pages/Comunidad.vue'
@@ -20,7 +22,7 @@ const routes = [
     { path: '/login',               component: Login},
     { path: '/register',            component: Register},
     { path: '/panel',               component: Panel, beforeEnter: (to, from, next) => {
-        if (isAuthenticatedEmail('juan.leone@davinci.edu.ar')) {
+        if (isAuthenticatedEmail('juan.leone@davinci.edu.ar') || isAuthenticatedEmail('cromer@gmail.com') || isAuthenticatedEmail('nacherx@gmail.com') || isAuthenticatedEmail('chefao@gmail.com') || isAuthenticatedEmail('teos@gmail.com') || isAuthenticatedEmail('kichiro@gmail.com')) {
             next();
         } else {
             next('/login');
