@@ -17,14 +17,26 @@ export default {
       isDeleteModalOpen: false,
       selectedPostId: null,
       newPostData: {
-        title: '',
-        category: '',
-        description: ''
+        titulo_post: '',
+        subtitulo1_post: '',
+        texto1_post: '',
+        subtitulo2_post: '',
+        texto2_post: '',
+        categoria_post: '',
+        descripcion_post: '',
+        img1_post: '',
+        img2_post: ''
       },
       editedPostData: {
-        title: '',
-        category: '',
-        description: ''
+        titulo_post: '',
+        subtitulo1_post: '',
+        texto1_post: '',
+        subtitulo2_post: '',
+        texto2_post: '',
+        categoria_post: '',
+        descripcion_post: '',
+        img1_post: '',
+        img2_post: ''
       }
     };
   },
@@ -56,9 +68,15 @@ export default {
         this.closeCreateModal();
         // Reinicia los datos del nuevo post
         this.newPostData = {
-          title: '',
-          category: '',
-          description: ''
+          titulo_post: '',
+          subtitulo1_post: '',
+          texto1_post: '',
+          subtitulo2_post: '',
+          texto2_post: '',
+          categoria_post: '',
+          descripcion_post: '',
+          img1_post: '',
+          img2_post: ''
         };
       } catch (error) {
         console.error("Error creating post: ", error);
@@ -71,9 +89,15 @@ export default {
         this.closeEditModal();
         // Reinicia los datos del post editado
         this.editedPostData = {
-          title: '',
-          category: '',
-          description: ''
+          titulo_post: '',
+          subtitulo1_post: '',
+          texto1_post: '',
+          subtitulo2_post: '',
+          texto2_post: '',
+          categoria_post: '',
+          descripcion_post: '',
+          img1_post: '',
+          img2_post: ''
         };
       } catch (error) {
         console.error("Error updating post: ", error);
@@ -91,9 +115,15 @@ export default {
       const selectedPost = this.posts.find(post => post.id === postId);
       if (selectedPost) {
         this.editedPostData = {
-          title: selectedPost.title,
-          category: selectedPost.category,
-          description: selectedPost.description
+          titulo_post: selectedPost.titulo_post,
+          subtitulo1_post: selectedPost.subtitulo1_post,
+          texto1_post: selectedPost.texto1_post,
+          subtitulo2_post: selectedPost.subtitulo2_post,
+          texto2_post: selectedPost.texto2_post,
+          categoria_post: selectedPost.categoria_post,
+          descripcion_post: selectedPost.descripcion_post,
+          img1_post: selectedPost.img1_post,
+          img2_post: selectedPost.img2_post
         };
       }
       this.isEditModalOpen = true;
@@ -108,9 +138,30 @@ export default {
     closeDeleteModal() {
       this.isDeleteModalOpen = false;
     }
+  },
+  computed: {
+    // Validación para el modal de crear post
+    isValidNewPost() {
+      return (
+        this.newPostData.titulo_post.trim() !== '' &&
+        this.newPostData.subtitulo1_post.trim() !== '' &&
+        this.newPostData.texto1_post.trim() !== ''
+        // Agrega validaciones para otros campos obligatorios si es necesario
+      );
+    },
+    // Validación para el modal de editar post
+    isValidEditedPost() {
+      return (
+        this.editedPostData.titulo_post.trim() !== '' &&
+        this.editedPostData.subtitulo1_post.trim() !== '' &&
+        this.editedPostData.texto1_post.trim() !== ''
+        // Agrega validaciones para otros campos obligatorios si es necesario
+      );
+    }
   }
 }
 </script>
+
 
 <template>
   <section class="pl-12 mt-10 pb-20">
@@ -127,35 +178,50 @@ export default {
             <p class="bg-white w-[140px] text-center font-montserrat rounded-lg mt-2 p-1">{{ post.categoria_post }}</p>
             <p class="font-montserrat text-white mt-5 mb-5">{{ post.descripcion_post }}</p>
             <div class="flex">
-              <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-link p-1 radius-mensaje mr-2">Ver más</router-link>
+              <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2">Ver más</router-link>
               <button @click="openEditModal(post.id)" class="bg-yellow-500 text-white font-montserrat text-center p-1 rounded-lg mr-2">Editar</button>
               <button @click="openDeleteModal(post.id)" class="bg-red-500 text-white font-montserrat text-center p-1 rounded-lg">Eliminar</button>
             </div>
         </div>
-
       </div>
     </div>
 
     <!-- Modales -->
     <div v-if="isCreateModalOpen" class="modal">
-      <div class="modal-content">
+      <div class="modal-content font-monstserrat">
         <Loader v-if="loading"/>
-        <h2 class="font-montserrat">Crear Nuevo Post</h2>
+        <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Crear Nuevo Post</h2>
         <input type="text" v-model="newPostData.titulo_post" placeholder="Título">
+        <input type="text" v-model="newPostData.subtitulo1_post" placeholder="Subtítulo 1">
+        <textarea v-model="newPostData.texto1_post" placeholder="Texto 1"></textarea>
+        <input type="text" v-model="newPostData.subtitulo2_post" placeholder="Subtítulo 2">
+        <textarea v-model="newPostData.texto2_post" placeholder="Texto 2"></textarea>
         <input type="text" v-model="newPostData.categoria_post" placeholder="Categoría">
         <textarea v-model="newPostData.descripcion_post" placeholder="Descripción" class="font-montserrat"></textarea>
-        <button @click="createPost" class="font-montserrat bg-blue-400 rounded-lg">Crear</button>
+        <input type="text" v-model="newPostData.img1_post" placeholder="URL de la imagen 1">
+        <input type="text" v-model="newPostData.img2_post" placeholder="URL de la imagen 2">
+        <!-- Mensajes de validación -->
+        <p v-if="!isValidNewPost" class="text-red-500 font-montserrat">Por favor completa todos los campos obligatorios.</p>
+        <button @click="createPost" :disabled="!isValidNewPost" class="font-montserrat bg-blue-400 rounded-lg mt-2">Crear</button>
         <button @click="closeCreateModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
       </div>
     </div>
     <div v-if="isEditModalOpen" class="modal">
-      <div class="modal-content">
+      <div class="modal-content font-montserrat">
         <Loader v-if="loading"/>
-        <h2 class="font-montserrat">Editar Post</h2>
+        <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Editar Post</h2>
         <input type="text" v-model="editedPostData.titulo_post" placeholder="Título">
+        <input type="text" v-model="editedPostData.subtitulo1_post" placeholder="Subtítulo 1">
+        <textarea v-model="editedPostData.texto1_post" placeholder="Texto 1"></textarea>
+        <input type="text" v-model="editedPostData.subtitulo2_post" placeholder="Subtítulo 2">
+        <textarea v-model="editedPostData.texto2_post" placeholder="Texto 2"></textarea>
         <input type="text" v-model="editedPostData.categoria_post" placeholder="Categoría">
         <textarea v-model="editedPostData.descripcion_post" placeholder="Descripción"></textarea>
-        <button @click="editPost" class="font-montserrat bg-blue-400 rounded-lg">Guardar Cambios</button>
+        <input type="text" v-model="editedPostData.img1_post" placeholder="URL de la imagen 1">
+        <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
+        <!-- Mensajes de validación -->
+        <p v-if="!isValidEditedPost" class="text-red-500 font-montserrat">Por favor completa todos los campos obligatorios.</p>
+        <button @click="editPost" :disabled="!isValidEditedPost" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar Cambios</button>
         <button @click="closeEditModal" class="font-montserrat bg-red-500 text-white rounded-lg">Cancelar</button>
       </div>
     </div>
@@ -171,7 +237,6 @@ export default {
     </div>
   </section>
 </template>
-
 
 
 <style>
@@ -210,6 +275,11 @@ export default {
 
 .modal-content button:last-child {
   margin-right: 0;
+}
+
+
+.radius-mensaje {
+  border-radius: 25px;
 }
 </style>
 

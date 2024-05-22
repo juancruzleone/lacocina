@@ -107,3 +107,4 @@ function notifyAll() {
 export function isAuthenticatedEmail(email) {
     return authUser.email === email;
 }
+
