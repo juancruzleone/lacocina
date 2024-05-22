@@ -37,7 +37,7 @@ export default {
         <div v-for="user in users" :key="user.id" class="bg-contenedores w-[72%] h-[180px] radius-comunidad mt-6 p-5">
           <h3 class="text-white font-montserrat text-2xl font-semibold">{{ user.email }}</h3>
           <p class="font-montserrat text-black mt-5 mb-8 bg-white w-[100px] text-center rounded-lg">{{ user.role }}</p>
-          <router-link :to="'/perfil/' + user.id" class="bg-gray-500 text-white font-montserrat text-center font-link p-2 rounded-lg">Ver perfil</router-link>
+          <router-link :to="'/usuario/' + user.id" class="bg-gray-500 text-white font-montserrat text-center font-link p-2 rounded-lg">Ver perfil</router-link>
         </div>
       </div>
     </section>

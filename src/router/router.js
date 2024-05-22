@@ -8,6 +8,7 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Panel from '../pages/Panel.vue'
 import MiPerfil from '../pages/Mi-perfil.vue'
+import Usuario from '../pages/Usuario.vue'
 import PostDetalle from '../pages/Detalle.vue'
 import Page404 from '../pages/404.vue' 
 import { isAuthenticatedEmail } from '../services/auth';
@@ -31,6 +32,7 @@ const routes = [
             }
         }
     },
+    { path: '/usuario/:id',          component: Usuario, props:true},
     { path: '/perfil/:id',          component: MiPerfil, props:true},
     { path: '/:catchAll(.*)',       component: Page404 }, 
 ]
