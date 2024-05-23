@@ -31,6 +31,30 @@ export default {
         {
           pregunta: "¿La Cocina es gratuita?",
           respuesta: "Sí, unirte a nuestra comunidad y acceder a la mayoría de nuestro contenido es completamente gratuito. Sin embargo, también ofrecemos contenido exclusivo para nuestros miembros VIP."
+        },
+        {
+          pregunta: "¿Qué es una criptomoneda?",
+          respuesta: "Una criptomoneda es una moneda digital o virtual que utiliza criptografía para asegurar y verificar las transacciones. A diferencia de las monedas tradicionales, las criptomonedas son descentralizadas y funcionan en tecnología blockchain."
+        },
+        {
+          pregunta: "¿Cómo puedo comprar criptomonedas?",
+          respuesta: "Puedes comprar criptomonedas en diversos exchanges de criptomonedas. Necesitarás crear una cuenta, verificar tu identidad y transferir fondos para realizar compras."
+        },
+        {
+          pregunta: "¿Es seguro invertir en criptomonedas?",
+          respuesta: "Invertir en criptomonedas conlleva riesgos, al igual que cualquier otra inversión. Es importante investigar, entender los riesgos y considerar solo invertir lo que estás dispuesto a perder."
+        },
+        {
+          pregunta: "¿Qué es la blockchain?",
+          respuesta: "El blockchain es una tecnología que permite la existencia de las criptomonedas. Es un libro de contabilidad digital distribuido y descentralizado que registra todas las transacciones a través de una red de computadoras."
+        },
+        {
+          pregunta: "¿Qué beneficios ofrece unirse a La Cocina?",
+          respuesta: "Al unirte a La Cocina, tendrás acceso a una comunidad activa de entusiastas de criptomonedas, contenido educativo, análisis de mercado, tutoriales, y la posibilidad de participar en eventos y discusiones exclusivas."
+        },
+        {
+          pregunta: "¿Qué son los NFTs?",
+          respuesta: "Los NFTs (tokens no fungibles) son activos digitales únicos que representan la propiedad de un artículo o contenido específico, como arte, música, videos, y más. Utilizan tecnología blockchain para verificar su autenticidad y propiedad."
         }
       ]
     };
@@ -52,7 +76,6 @@ export default {
   },
 }
 </script>
-
 
 
 
