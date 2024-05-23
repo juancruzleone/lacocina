@@ -249,7 +249,7 @@ export default {
 
     <!-- Modal de Eliminar Post -->
     <div v-if="isDeleteModalOpen" class="modal">
-      <div class="modal-content font-montserrat flex justify-between">
+      <div class="modal-content font-montserrat  justify-between">
         <Loader v-if="deleteLoading"/>
         <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Eliminar Post</h2>
         <p class="font-montserrat text-black mt-5 mb-5">¿Estás seguro de que deseas eliminar este post?</p>
