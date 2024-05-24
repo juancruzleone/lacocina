@@ -86,7 +86,6 @@ export default {
         <li v-if="user.isAdmin">
           <router-link to="/panel" class="font-montserrat text-white m-2 text-sm">Panel</router-link>
         </li>
-        <li><router-link to="/contacto" class="font-montserrat text-white m-2 text-sm">Contacto</router-link></li>
       </ul>
     </div>
   </footer>
