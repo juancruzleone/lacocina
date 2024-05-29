@@ -231,9 +231,9 @@ export default {
     </div>
     <Loader v-if="loading" class="mt-6"/>
     <div class="pt-5" v-if="!loading">
-      <div v-for="post in posts" :key="post.id" class="flex flex-col md:flex-row bg-contenedores h-auto md:h-[310px] radius-comunidad mt-6 p-5">
-        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-full md:w-60 rounded-lg mb-3 md:mr-5 h-auto md:h-[70%] mt-10">
-        <div class="flex-1">
+      <div v-for="post in posts" :key="post.id" class="bg-contenedores h-auto md:h-auto radius-comunidad mt-6 p-5">
+        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-full rounded-lg mb-3 h-auto md:h-[70%] mt-10">
+        <div>
           <h3 class="text-white font-montserrat text-lg md:text-xl font-semibold">{{ post.titulo_post }}</h3>
           <p class="bg-white w-full md:w-[200px] text-center font-montserrat rounded-lg mt-4 p-2">{{ post.categoria_post }}</p>
           <p class="font-montserrat text-white mt-5 mb-5">{{ post.descripcion_post }}</p>
@@ -313,7 +313,6 @@ export default {
   </section>
 </template>
 
-
 <style>
 .modal {
   position: fixed;
@@ -351,7 +350,6 @@ export default {
 .modal-content button:last-child {
   margin-right: 0;
 }
-
 
 .radius-mensaje {
   border-radius: 25px;
