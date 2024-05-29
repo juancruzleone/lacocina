@@ -73,14 +73,14 @@ export default {
 </script>
 
 <template>
-    <div class="bg-portada h-96">
+    <div class="bg-portada h-48 md:h-96">
         <MainH1>Comunidad</MainH1>
     </div>
-    <div class="flex justify-between">
+    <div class="flex flex-col md:flex-row justify-between p-5 md:p-10">
         <div class="flex flex-col gap-4 w-full">
-            <section class=" mr-20 mb-10">
-                <MainH2 class="pl-12 p-10 pb-3">Chat general</MainH2>
-                <div class="min-h-[400px] p-4 bg-gray-200 radius-comunidad ml-12">
+            <section class="mb-10">
+                <MainH2 class="pl-5 md:pl-12 pb-3">Chat general</MainH2>
+                <div class="min-h-[400px] p-4 bg-gray-200 rounded-lg ml-5 md:ml-12">
                     <ul v-if="!loadingMessages">
                         <li 
                             v-for="message in messages"
@@ -105,7 +105,7 @@ export default {
                 <form 
                     action="#"
                     @submit.prevent="sendMessage"
-                    class="mt-4 ml-12"
+                    class="mt-4 ml-5 md:ml-12"
                 >
                     <div v-if="authUser.id" class="mb-3 font-montserrat">
                         <span class="block mb-2 font-semibold">Email</span>
@@ -116,16 +116,16 @@ export default {
                     </div>
                     <div v-if="authUser.id" class="mb-3 w-full font-montserrat">
                         <MainLabel for="message" class="font-semibold">Mensaje</MainLabel>
-                        <div class="flex items-center">
+                        <div class="flex flex-col md:flex-row items-center">
                             <textarea
                                 id="message"
-                                class="w-full p-2 border border-gray-500 rounded radius-mensaje mr-4 h-[120px]"
+                                class="w-full p-2 border border-gray-500 rounded-lg md:rounded radius-mensaje mr-0 md:mr-4 h-24 md:h-[120px]"
                                 v-model="newMessage.content"
                                 placeholder="Escribe tu mensaje"
                             ></textarea>
                             <MainButton 
                                 type="submit"
-                                class="text-center radius-mensaje"
+                                class="mt-2 md:mt-0 md:ml-4 text-center radius-mensaje"
                             />
                         </div>
                     </div>
