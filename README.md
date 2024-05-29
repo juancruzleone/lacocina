@@ -24,6 +24,3 @@ Abre [http://localhost:5173](http://localhost:5173) en tu navegador para ver el 
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Firebase Documentation](https://firebase.google.com/docs)
 
-## Licencia 📝
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
