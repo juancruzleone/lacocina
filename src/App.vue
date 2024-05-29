@@ -1,49 +1,10 @@
-<script>
-import { subscribeToAuth, logout } from './services/auth';
-
-export default {
-  name: 'App',
-  data() {
-    return {
-      showNavMenu: false,
-      user: {
-        id: null,
-        email: null,
-        isAdmin: false,
-      },
-    };
-  },
-  mounted() {
-    subscribeToAuth((newUserData) => {
-      this.user = { ...newUserData, isAdmin: this.checkAdminStatus(newUserData.email) };
-    });
-  },
-  methods: {
-    handleLogout() {
-      logout().then(() => {
-        this.user = {
-          id: null,
-          email: null,
-          isAdmin: false,
-        };
-        this.$router.push({ path: '/login' });
-      });
-    },
-    checkAdminStatus(email) {
-      const allowedEmails = ['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'kichiro@gmail.com', 'chefao@gmail.com', 'nacherx@gmail.com', 'teos@gmail.com'];
-      return allowedEmails.includes(email);
-    },
-  },
-};
-</script>
-
 <template>
   <div>
     <!-- Nav -->
     <nav class="bg-contenedores flex items-center justify-between pt-2 pb-2 pl-10">
       <div class="flex items-center">
         <!-- Botón para mostrar/ocultar menú de navegación en dispositivos móviles -->
-        <button @click="showNavMenu = !showNavMenu" class="md:hidden text-white">
+        <button @click="toggleNavMenu" class="md:hidden text-white">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
@@ -89,20 +50,38 @@ export default {
       :class="showNavMenu ? 'translate-x-0' : '-translate-x-full'"
     >
       <div class="flex justify-end p-4">
-        <button @click="showNavMenu = false" class="text-gray-500 hover:text-gray-700">
+        <button @click="toggleNavMenu" class="text-gray-500 hover:text-gray-700">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
-      <nav class="flex flex-col items-start justify-center h-full">
-        <ul>
-          <li><router-link to="/" class="font-montserrat text-black block mb-6 text-2xl">Inicio</router-link></li>
-          <li><router-link to="/comunidad" class="font-montserrat text-black block mb-6 text-2xl">Comunidad</router-link></li>
-          <li><router-link to="/cocinando" class="font-montserrat text-black block mb-6 text-2xl">Cocinando</router-link></li>
-          <li><router-link to="/vip" class="font-montserrat text-black block mb-6 text-2xl">Vip</router-link></li>
+      <nav class="flex flex-col items-center justify-center h-full">
+        <ul class="text-center">
+          <li>
+            <router-link to="/" class="font-montserrat text-black block mb-6 text-2xl" @click.native="toggleNavMenu">
+              Inicio
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/comunidad" class="font-montserrat text-black block mb-6 text-2xl" @click.native="toggleNavMenu">
+              Comunidad
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/cocinando" class="font-montserrat text-black block mb-6 text-2xl" @click.native="toggleNavMenu">
+              Cocinando
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/vip" class="font-montserrat text-black block mb-6 text-2xl" @click.native="toggleNavMenu">
+              Vip
+            </router-link>
+          </li>
           <li v-if="user.isAdmin || user.email === 'juan.leone@davinci.edu.ar'">
-            <router-link to="/panel" class="font-montserrat text-black block mb-6 text-2xl">Panel</router-link>
+            <router-link to="/panel" class="font-montserrat text-black block mb-6 text-2xl" @click.native="toggleNavMenu">
+              Panel
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -133,3 +112,45 @@ export default {
     </footer>
   </div>
 </template>
+<script>
+import { subscribeToAuth, logout } from './services/auth';
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      showNavMenu: false,
+      user: {
+        id: null,
+        email: null,
+        isAdmin: false,
+      },
+    };
+  },
+  mounted() {
+    subscribeToAuth((newUserData) => {
+      this.user = { ...newUserData, isAdmin: this.checkAdminStatus(newUserData.email) };
+    });
+  },
+  methods: {
+    handleLogout() {
+      logout().then(() => {
+        this.user = {
+          id: null,
+          email: null,
+          isAdmin: false,
+        };
+        this.$router.push({ path: '/login' });
+      });
+    },
+    checkAdminStatus(email) {
+      const allowedEmails = ['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'kichiro@gmail.com', 'chefao@gmail.com', 'nacherx@gmail.com', 'teos@gmail.com'];
+      return allowedEmails.includes(email);
+    },
+    toggleNavMenu() {
+      this.showNavMenu = !this.showNavMenu;
+    },
+  },
+};
+</script>
+
