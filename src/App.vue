@@ -1,3 +1,46 @@
+<script>
+import { subscribeToAuth, logout } from './services/auth';
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      showNavMenu: false,
+      user: {
+        id: null,
+        email: null,
+        isAdmin: false,
+      },
+    };
+  },
+  mounted() {
+    subscribeToAuth((newUserData) => {
+      this.user = { ...newUserData, isAdmin: this.checkAdminStatus(newUserData.email) };
+    });
+  },
+  methods: {
+    handleLogout() {
+      logout().then(() => {
+        this.user = {
+          id: null,
+          email: null,
+          isAdmin: false,
+        };
+        this.$router.push({ path: '/login' });
+      });
+    },
+    checkAdminStatus(email) {
+      const allowedEmails = ['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'kichiro@gmail.com', 'chefao@gmail.com', 'nacherx@gmail.com', 'teos@gmail.com'];
+      return allowedEmails.includes(email);
+    },
+    toggleNavMenu() {
+      this.showNavMenu = !this.showNavMenu;
+    },
+  },
+};
+</script>
+
+
 <template>
   <div>
     <!-- Nav -->
@@ -112,45 +155,5 @@
     </footer>
   </div>
 </template>
-<script>
-import { subscribeToAuth, logout } from './services/auth';
 
-export default {
-  name: 'App',
-  data() {
-    return {
-      showNavMenu: false,
-      user: {
-        id: null,
-        email: null,
-        isAdmin: false,
-      },
-    };
-  },
-  mounted() {
-    subscribeToAuth((newUserData) => {
-      this.user = { ...newUserData, isAdmin: this.checkAdminStatus(newUserData.email) };
-    });
-  },
-  methods: {
-    handleLogout() {
-      logout().then(() => {
-        this.user = {
-          id: null,
-          email: null,
-          isAdmin: false,
-        };
-        this.$router.push({ path: '/login' });
-      });
-    },
-    checkAdminStatus(email) {
-      const allowedEmails = ['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'kichiro@gmail.com', 'chefao@gmail.com', 'nacherx@gmail.com', 'teos@gmail.com'];
-      return allowedEmails.includes(email);
-    },
-    toggleNavMenu() {
-      this.showNavMenu = !this.showNavMenu;
-    },
-  },
-};
-</script>
 
