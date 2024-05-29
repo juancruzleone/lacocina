@@ -55,8 +55,9 @@ export default {
       <span class="text-xl font-bold text-gray-600 font-monserrat">Cargando perfil...</span>
     </div>
     <div v-else>
-      <div class="bg-portada h-96 flex bg-cover bg-center">
-        <MainH1>Perfil de: {{ user.email }}</MainH1>
+      <div class="h-64 sm:h-96 bg-cover bg-center bg-portada">
+        <h1 class="text-3xl pt-20 sm:text-4xl font-bold pl-12">Perfil de:</h1>
+        <p class="pl-12 font-montserrat text-xl mt-2">{{ user.email }}</p>
       </div>
       <div class="p-8 pl-14">
         <div v-if="user.id" class="mb-8 font-montserrat">

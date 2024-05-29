@@ -1,4 +1,3 @@
-// Login.vue
 <script>
 import MainButton from '../components/MainButton.vue';
 import MainH1 from '../components/MainH1.vue';
