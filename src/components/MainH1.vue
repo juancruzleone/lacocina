@@ -5,5 +5,5 @@ export default {
 </script>
 
 <template>
-    <h1 class="font-montserrat font-bold text-5xl pl-12  pt-20"><slot /></h1>
+    <h1 class="font-montserrat font-bold text-5xl pl-12 pt-20"><slot /></h1>
 </template>
