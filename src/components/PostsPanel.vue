@@ -224,32 +224,31 @@ export default {
 
 
 <template>
-  <section class="pl-12 mt-10 pb-20">
-    <MainH2>Posts publicados</MainH2>
+  <section class="pl-4 md:pl-12 mt-10 pb-20">
+    <MainH2 class="text-2xl md:text-3xl">Posts publicados</MainH2>
     <div class="mt-5">
       <button @click="openCreateModal" class="bg-blue-500 text-white font-montserrat text-center p-2 rounded-lg">Crear Post</button>
     </div>
     <Loader v-if="loading" class="mt-6"/>
     <div class="pt-5" v-if="!loading">
-      <div v-for="post in posts" :key="post.id" class="flex bg-contenedores h-[310px] radius-comunidad mt-6 p-5">
-        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-60 rounded-lg mb-3 mr-5 h-[70%] mt-10">
-        <div>
-          <h3 class="text-white font-montserrat text-2xl font-semibold">{{ post.titulo_post }}</h3>
-          <p class="bg-white w-[200px] text-center font-montserrat rounded-lg mt-4 p-2">{{ post.categoria_post }}</p>
+      <div v-for="post in posts" :key="post.id" class="flex flex-col md:flex-row bg-contenedores h-auto md:h-[310px] radius-comunidad mt-6 p-5">
+        <img :src="post.img1_post" alt="Portada del post {{ post.titulo_post }}" class="w-full md:w-60 rounded-lg mb-3 md:mr-5 h-auto md:h-[70%] mt-10">
+        <div class="flex-1">
+          <h3 class="text-white font-montserrat text-lg md:text-xl font-semibold">{{ post.titulo_post }}</h3>
+          <p class="bg-white w-full md:w-[200px] text-center font-montserrat rounded-lg mt-4 p-2">{{ post.categoria_post }}</p>
           <p class="font-montserrat text-white mt-5 mb-5">{{ post.descripcion_post }}</p>
           <p class="font-montserrat text-white mt-5 mb-5"><span class="font-bold mr-2">Autor:</span>{{ post.autor_post }}</p>
-          <div class="flex">
-            <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2">Ver más</router-link>
-            <button @click="openEditModal(post.id)" class="bg-yellow-500 text-white font-montserrat text-center p-1 rounded-lg mr-2">Editar</button>
-            <button @click="openDeleteModal(post.id)" class="bg-red-500 text-white font-montserrat text-center p-1 rounded-lg">Eliminar</button>
+          <div class="flex flex-col md:flex-row">
+            <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2 mb-2 md:mb-0">Ver más</router-link>
+            <button @click="openEditModal(post.id)" class="bg-yellow-500 text-white font-montserrat text-center p-1 rounded-lg mr-2 mb-2 md:mb-0">Editar</button>
+            <button @click="openDeleteModal(post.id)" class="bg-red-500 text-white font-montserrat text-center p-1 rounded-lg mb-2 md:mb-0">Eliminar</button>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Modal de Eliminar Post -->
+    <!-- Modales de Eliminar, Crear y Editar Post -->
     <div v-if="isDeleteModalOpen" class="modal">
-      <div class="modal-content font-montserrat  justify-between">
+      <div class="modal-content font-montserrat justify-between">
         <Loader v-if="deleteLoading"/>
         <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Eliminar Post</h2>
         <p class="font-montserrat text-black mt-5 mb-5">¿Estás seguro de que deseas eliminar este post?</p>
@@ -257,8 +256,6 @@ export default {
         <button @click="closeDeleteModal" class="font-montserrat bg-gray-500 rounded-lg text-white p-2">Cancelar</button>
       </div>
     </div>
-
-    <!-- Modales de Crear y Editar Post -->
     <div v-if="isCreateModalOpen" class="modal">
       <div class="modal-content font-montserrat">
         <Loader v-if="createLoading"/>
@@ -286,34 +283,33 @@ export default {
         <button @click="closeCreateModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
       </div>
     </div>
-
     <div v-if="isEditModalOpen" class="modal">
-  <div class="modal-content font-montserrat">
-    <Loader v-if="editLoading"/>
-    <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Editar Post</h2>
-    <input type="text" v-model="editedPostData.titulo_post" placeholder="Título">
-    <input type="text" v-model="editedPostData.subtitulo1_post" placeholder="Subtítulo 1">
-    <textarea v-model="editedPostData.texto1_post" placeholder="Texto 1"></textarea>
-    <input type="text" v-model="editedPostData.subtitulo2_post" placeholder="Subtítulo 2">
-    <textarea v-model="editedPostData.texto2_post" placeholder="Texto 2"></textarea>
-    <select v-model="editedPostData.categoria_post" class="mt-5 mb-5">
-      <option value="">Selecciona una categoría</option>
-      <option value="Airdrops">Airdrops</option>
-      <option value="Análisis técnico">Análisis técnico</option>
-      <option value="Análisis fundamental">Análisis fundamental</option>
-      <option value="Trading">Trading</option>
-      <option value="Onchain">Onchain</option>
-    </select>
-    <textarea v-model="editedPostData.descripcion_post" placeholder="Descripción" class="font-montserrat"></textarea>
-    <input type="text" v-model="editedPostData.img1_post" placeholder="URL de la imagen 1">
-    <p v-if="!isValidUrl(editedPostData.img1_post)" class="text-red-500 font-montserrat">Por favor ingresa una URL válida para la imagen 1.</p>
-    <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
-    <p v-if="!isValidUrl(editedPostData.img2_post)" class="text-red-500 font-montserrat">Por favor ingresa una URL válida para la imagen 2.</p>
-    <p v-if="!isValidEditedPost" class="text-red-500 font-montserrat mt-6">Por favor completa todos los campos requeridos y asegúrate de que las URLs de las imágenes sean válidas.</p>
-    <button @click="editPost" :disabled="!isValidEditedPost || editLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar</button>
-    <button @click="closeEditModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
-  </div>
-</div>
+      <div class="modal-content font-montserrat">
+        <Loader v-if="editLoading"/>
+        <h2 class="font-montserrat mt-5 mb-5 font-bold text-xl">Editar Post</h2>
+        <input type="text" v-model="editedPostData.titulo_post" placeholder="Título">
+        <input type="text" v-model="editedPostData.subtitulo1_post" placeholder="Subtítulo 1">
+        <textarea v-model="editedPostData.texto1_post" placeholder="Texto 1"></textarea>
+        <input type="text" v-model="editedPostData.subtitulo2_post" placeholder="Subtítulo 2">
+        <textarea v-model="editedPostData.texto2_post" placeholder="Texto 2"></textarea>
+        <select v-model="editedPostData.categoria_post" class="mt-5 mb-5">
+          <option value="">Selecciona una categoría</option>
+          <option value="Airdrops">Airdrops</option>
+          <option value="Análisis técnico">Análisis técnico</option>
+          <option value="Análisis fundamental">Análisis fundamental</option>
+          <option value="Trading">Trading</option>
+          <option value="Onchain">Onchain</option>
+        </select>
+        <textarea v-model="editedPostData.descripcion_post" placeholder="Descripción" class="font-montserrat"></textarea>
+        <input type="text" v-model="editedPostData.img1_post" placeholder="URL de la imagen 1">
+        <p v-if="!isValidUrl(editedPostData.img1_post)" class="text-red-500 font-montserrat">Por favor ingresa una URL válida para la imagen 1.</p>
+        <input type="text" v-model="editedPostData.img2_post" placeholder="URL de la imagen 2">
+        <p v-if="!isValidUrl(editedPostData.img2_post)" class="text-red-500 font-montserrat">Por favor ingresa una URL válida para la imagen 2.</p>
+        <p v-if="!isValidEditedPost" class="text-red-500 font-montserrat mt-6">Por favor completa todos los campos requeridos y asegúrate de que las URLs de las imágenes sean válidas.</p>
+        <button @click="editPost" :disabled="!isValidEditedPost || editLoading" class="font-montserrat bg-blue-400 rounded-lg mt-2">Guardar</button>
+        <button @click="closeEditModal" class="font-montserrat bg-red-500 rounded-lg text-white">Cancelar</button>
+      </div>
+    </div>
   </section>
 </template>
 
