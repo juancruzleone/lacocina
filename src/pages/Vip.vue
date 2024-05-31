@@ -1,4 +1,3 @@
-
 <script>
 import Reviews from '../components/Reviews.vue';
 import MainH1 from '../components/MainH1.vue';

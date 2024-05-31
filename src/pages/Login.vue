@@ -1,48 +1,3 @@
-<template>
-  <div class="flex flex-col md:flex-row">
-    <div class="md:flex-1">
-      <img src="/crypto-2.webp" alt="foto de bitcoins" class="w-full h-auto md:hidden">
-      <div class="hidden md:flex justify-center items-center">
-        <img src="/crypto-2.webp" alt="foto de bitcoins" class="w-[1400px] h-[1000px]">
-      </div>
-    </div>
-    <div class="md:flex-1 flex flex-col items-center justify-center">
-      <MainH1 class="pt-5 md:pt-32">Ingresa con tu Cuenta</MainH1>
-      <div class="w-full max-w-md px-4 mt-10">
-        <form 
-          action="#"
-          @submit.prevent="handleSubmit"
-        >
-          <div class="mb-3">
-            <MainLabel for="email">Email</MainLabel>
-            <MainInput
-              type="email"
-              id="email"
-              v-model="user.email"
-            />
-          </div>
-          <div class="mb-3">
-            <MainLabel for="password">Contraseña</MainLabel>
-            <MainInput
-              type="password"
-              id="password"
-              v-model="user.password"
-            />
-          </div>
-          <MainButton
-            type="submit"
-            class="mb-[10px]"
-          >Ingresar</MainButton>
-        </form>
-        <!-- Mostrar mensajes de error en la pantalla -->
-        <div v-if="errorMessage" class="text-red-500 mt-3">
-          {{ errorMessage }}
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
 import MainButton from '../components/MainButton.vue';
 import MainH1 from '../components/MainH1.vue';
@@ -100,3 +55,49 @@ export default {
   }
 }
 </script>
+
+
+<template>
+  <div class="flex flex-col md:flex-row">
+    <div class="md:flex-1">
+      <img src="/crypto-2.webp" alt="foto de bitcoins" class="w-full h-auto md:hidden">
+      <div class="hidden md:flex justify-center items-center">
+        <img src="/crypto-2.webp" alt="foto de bitcoins" class="w-[1400px] h-[1000px]">
+      </div>
+    </div>
+    <div class="md:flex-1 flex flex-col items-center justify-center">
+      <MainH1 class="pt-5 md:pt-32">Ingresa con tu Cuenta</MainH1>
+      <div class="w-full max-w-md px-4 mt-10">
+        <form 
+          action="#"
+          @submit.prevent="handleSubmit"
+        >
+          <div class="mb-3">
+            <MainLabel for="email">Email</MainLabel>
+            <MainInput
+              type="email"
+              id="email"
+              v-model="user.email"
+            />
+          </div>
+          <div class="mb-3">
+            <MainLabel for="password">Contraseña</MainLabel>
+            <MainInput
+              type="password"
+              id="password"
+              v-model="user.password"
+            />
+          </div>
+          <MainButton
+            type="submit"
+            class="mb-[10px]"
+          >Ingresar</MainButton>
+        </form>
+        <!-- Mostrar mensajes de error en la pantalla -->
+        <div v-if="errorMessage" class="text-red-500 mt-3">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

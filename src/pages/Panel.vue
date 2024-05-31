@@ -29,7 +29,7 @@ export default {
       <MainH1 class="text-2xl md:text-3xl lg:text-4xl">Panel admin</MainH1>
     </div>
     <section class="flex flex-col md:flex-row">
-      <nav class="bg-contenedores w-full md:w-[250px] h-auto md:h-full">
+      <nav class="bg-contenedores w-full md:w-[250px] h-auto md:h-50">
         <ul class="pt-4 pl-12">
           <li @click="showPostsPanel" class="bg-gray-500 w-[90%] rounded-lg p-2 mt-4 md:mt-10 cursor-pointer">
             <span class="text-white font-montserrat text-sm md:text-base">Posts</span>
