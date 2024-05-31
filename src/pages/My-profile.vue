@@ -3,7 +3,7 @@ import MainH1 from '../components/MainH1.vue';
 import { getUserProfileById, getUserComments, getAllPosts } from '../services/user-profile';
 
 export default {
-  name: 'MiPerfil',
+  name: 'MyProfile',
   components: { MainH1 },
   props: ['id'],
   data() {

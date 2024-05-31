@@ -1,14 +1,14 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
 import MainH2 from '../components/MainH2.vue';
-import Loader from '../components/Loader.vue'; // Asegúrate de tener un componente de loader disponible
+import Loader from '../components/Loader.vue'; 
 
 import { db } from '../services/firebase.js';
 import { collection, getDocs } from "firebase/firestore";
 
 export default {
-  name: 'Cocinando',
-  components: { MainH1, MainH2, Loader }, // Agrega el componente Loader
+  name: 'Kitchen',
+  components: { MainH1, MainH2, Loader }, 
   data() {
     return {
       posts: [],
@@ -20,7 +20,7 @@ export default {
         { nombre: 'Airdrops', icono: '/airdrop.svg' }
       ],
       categoriaSeleccionada: '',
-      loading: true // Agrega una variable para controlar la visibilidad del loader
+      loading: true 
     };
   },
   async created() {
@@ -28,7 +28,7 @@ export default {
       const postsCollection = collection(db, 'posts');
       const postsSnapshot = await getDocs(postsCollection);
       this.posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      this.loading = false; // Una vez que los posts se carguen correctamente, establece loading en false
+      this.loading = false; 
     } catch (error) {
       console.error("Error fetching posts: ", error);
     }
@@ -68,9 +68,8 @@ export default {
     </section>
     <section class="pb-20 sm:pb-24 md:pb-28">
       <MainH2 class="px-6 sm:px-12 pt-10 pb-5 font-montserrat">Posts recientes</MainH2>
-      <!-- Agrega el loader con v-if -->
       <Loader v-if="loading" class="px-6 sm:px-12"/>
-      <div class="px-6 sm:px-12" v-if="!loading"> <!-- Agrega v-if="!loading" para que el contenido solo se muestre cuando no se esté cargando -->
+      <div class="px-6 sm:px-12" v-if="!loading"> 
         <div v-for="post in postsFiltrados" :key="post.id" class="bg-contenedores w-full sm:w-[98%] radius-comunidad p-5 mb-8 flex flex-col sm:flex-row">
           <img :src="post.img1_post" :alt="post.titulo_post" class="w-full sm:w-60 rounded-lg mb-3 sm:mr-5">
           <div>

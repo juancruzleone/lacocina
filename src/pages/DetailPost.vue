@@ -9,8 +9,8 @@ import { saveComment, subscribeToComments } from '../services/comments';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default {
-  name: "Detalle",
-  components: { MainH1, MainH2, MainLabel, MainInput, Loader },
+  name: "DetailPost",
+  components: { MainH2, MainLabel, MainInput, Loader },
   data() {
     return {
       post: null,

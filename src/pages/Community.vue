@@ -9,7 +9,7 @@ import { subscribeToAuth } from '../services/auth';
 import { saveChatMessage, subscribeToChatMessages } from '../services/chat';
 
 export default {
-    name: "Chat",
+    name: "Community",
     components: { MainH1, MainH2, Loader, MainLabel, MainButton, MainInput },
     data: () => {
         return {

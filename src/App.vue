@@ -26,7 +26,7 @@ export default {
           email: null,
           isAdmin: false,
         };
-        this.$router.push({ path: '/login' });
+        this.$router.push({ path: '/inicio-sesion' });
       });
     },
     checkAdminStatus(email) {
@@ -75,10 +75,10 @@ export default {
           :to="'/perfil/' + user.id"
           class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-4"
         >
-          <img src="/usuario.webp" alt="icono login" class="w-10 h-10 p-1">
+          <img src="/usuario.webp" alt="icono de inicio de sesion" class="w-10 h-10 p-1">
         </router-link>
-        <router-link v-else to="/register" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-4">
-          <img src="/usuario.webp" alt="icono login" class="w-10 h-10 p-1">
+        <router-link v-else to="/registro" class="font-montserrat text-white m-2 flex items-center bg-white rounded-full p-2 mr-4">
+          <img src="/usuario.webp" alt="icono de inicio de sesion" class="w-10 h-10 p-1">
         </router-link>
         <button
           v-if="user.id"

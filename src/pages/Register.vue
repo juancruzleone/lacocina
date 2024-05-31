@@ -59,7 +59,7 @@ export default {
       <div class="md:flex-1 flex flex-col items-center justify-center">
         <div class="flex pt-5 mt-10">
             <p class="font-montserrat text-xl p-2 mr-2">¿Tienes una cuenta?</p>
-            <router-link to="/login" class="bg-contenedores p-2 rounded-lg text-white font-montserrat">Inicia sesión</router-link>
+            <router-link to="/inicio-sesion" class="bg-contenedores p-2 rounded-lg text-white font-montserrat">Inicia sesión</router-link>
         </div>
         <MainH1 class="md:pt-32 mb-6">Crea una Cuenta</MainH1>
         <div class="w-full max-w-md px-4">

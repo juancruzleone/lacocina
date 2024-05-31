@@ -1,26 +1,26 @@
 // Router.js
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from '../pages/Home.vue'
-import Comunidad from '../pages/Comunidad.vue'
+import Community from '../pages/Community.vue'
 import Vip from '../pages/Vip.vue'
-import Cocinando from '../pages/Cocinando.vue'
+import Kitchen from '../pages/Kitchen.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Panel from '../pages/Panel.vue'
-import MiPerfil from '../pages/Mi-perfil.vue'
-import Usuario from '../pages/Usuario.vue'
-import PostDetalle from '../pages/Detalle.vue'
+import MiPerfil from '../pages/My-profile.vue'
+import Usuario from '../pages/Users.vue'
+import DetailPost from '../pages/DetailPost.vue'
 import Page404 from '../pages/404.vue' 
 import { isAuthenticatedEmail } from '../services/auth';
 
 const routes = [
     { path: '/',                    component: Home},
-    { path: '/comunidad',           component: Comunidad},
+    { path: '/comunidad',           component: Community},
     { path: '/vip',                 component: Vip},
-    { path: '/cocinando',           component: Cocinando},
-    { path: '/post/:id',            component: PostDetalle},
-    { path: '/login',               component: Login},
-    { path: '/register',            component: Register},
+    { path: '/cocinando',           component: Kitchen},
+    { path: '/post/:id',            component: DetailPost},
+    { path: '/inicio-sesion',       component: Login},
+    { path: '/registro',            component: Register},
     { 
         path: '/panel', 
         component: Panel, 
