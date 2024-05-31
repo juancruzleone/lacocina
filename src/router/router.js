@@ -7,8 +7,8 @@ import Kitchen from '../pages/Kitchen.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Panel from '../pages/Panel.vue'
-import MiPerfil from '../pages/My-profile.vue'
-import Usuario from '../pages/Users.vue'
+import MyProfile from '../pages/My-profile.vue'
+import Users from '../pages/Users.vue'
 import DetailPost from '../pages/DetailPost.vue'
 import Page404 from '../pages/404.vue' 
 import { isAuthenticatedEmail } from '../services/auth';
@@ -28,12 +28,12 @@ const routes = [
             if (isAuthenticatedEmail(['juan.leone@davinci.edu.ar', 'cromer@gmail.com', 'kichiro@gmail.com', 'chefao@gmail.com', 'nacherx@gmail.com', 'teos@gmail.com'])) {
                 next();
             } else {
-                next('/login');
+                next('/inicio-sesion');
             }
         }
     },
-    { path: '/usuario/:id',          component: Usuario, props:true},
-    { path: '/perfil/:id',          component: MiPerfil, props:true},
+    { path: '/usuario/:id',         component: Users, props:true},
+    { path: '/perfil/:id',          component: MyProfile, props:true},
     { path: '/:catchAll(.*)',       component: Page404 }, 
 ]
 
