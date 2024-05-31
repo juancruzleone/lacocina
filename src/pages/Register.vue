@@ -7,8 +7,12 @@
         </div>
       </div>
       <div class="md:flex-1 flex flex-col items-center justify-center">
-        <MainH1 class="pt-5 md:pt-32">Crea una Cuenta</MainH1>
-        <div class="w-full max-w-md px-4 mt-10">
+        <div class="flex pt-5 mt-10">
+            <p class="font-montserrat text-xl p-2 mr-2">¿Tienes una cuenta?</p>
+            <router-link to="/login" class="bg-contenedores p-2 rounded-lg text-white font-montserrat">Inicia sesión</router-link>
+        </div>
+        <MainH1 class="md:pt-32 mb-6">Crea una Cuenta</MainH1>
+        <div class="w-full max-w-md px-4">
           <form 
             action="#"
             @submit.prevent="handleSubmit"
@@ -43,10 +47,6 @@
           </form>
           <div v-if="errorMessage" class="text-red-500 mt-3">
             {{ errorMessage }}
-          </div>
-          <div class="flex pt-5">
-            <p class="font-montserrat text-xl p-2 mr-2">¿Tienes una cuenta?</p>
-            <router-link to="/login" class="bg-contenedores p-2 rounded-lg text-white font-montserrat">Inicia sesión</router-link>
           </div>
         </div>
       </div>

@@ -1,0 +1,34 @@
+Carrera: Programación y diseño web
+Materia: Clientes Web Mobile
+Cuatrimestre: Cuarto
+Año: 2024
+Turno: Mañana
+Comisión: DWM4AH
+Apellido: Leone
+Nombre: Juan Cruz
+Docente: Santiago Gallino
+Entrega: Primer parcial
+
+
+
+Usuarios:
+Admin:
+-- Email: juan.leone@davinci.edu.ar
+-- Contraseña: 123456
+
+
+Chefs:
+-- Email: cromer@gmail.com
+-- Contraseña:
+
+-- Email: nacherx@gmail.com 
+-- Contraseña: 123456
+
+-- Email: kichiro@gmail.com 
+-- Contraseña: 123456
+
+-- Email: teos@gmail.com 
+-- Contraseña: 123456
+
+-- Email: chefao@gmail.com 
+-- Contraseña: 123456

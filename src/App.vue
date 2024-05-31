@@ -53,7 +53,10 @@ export default {
           </svg>
         </button>
         <!-- Logo o título del sitio -->
-        <h1 class="text-white font-montserrat text-lg ml-2">La Cocina</h1>
+        <router-link to="/">
+          <h1 class="text-white font-montserrat text-lg ml-2">La Cocina</h1>
+        </router-link>
+       
       </div>
       <!-- Menú de navegación en dispositivos de escritorio -->
       <ul class="hidden md:flex">
