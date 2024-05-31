@@ -66,7 +66,7 @@ export default {
           <a href="#" class="p-3 text-black font-montserrat font-semibold bg-white rounded-lg text-center mt-10 w-full md:w-96">¡Compra tu membresía VIP!</a>
           <p class="font-bold ml-0 md:ml-4 mt-10 text-3xl">15$</p>
         </div>
-        <p class="mt-4 font-montserrat text-xl font-bold text-white">Hazte VIP hoy y disfruta de todos los beneficios exclusivos que tenemos reservados para ti.</p>
+        <p class="mt-4 font-montserrat text-xl font-bold text-green-700">Hazte VIP hoy y disfruta de todos los beneficios exclusivos que tenemos reservados para ti.</p>
       </div>
     </section>
     <section class="pb-20 pt-20 pl-14 mb-20">

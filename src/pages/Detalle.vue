@@ -1,5 +1,4 @@
 <script>
-import MainH1 from '../components/MainH1.vue';
 import MainH2 from '../components/MainH2.vue';
 import MainLabel from '../components/MainLabel.vue';
 import MainInput from '../components/MainInput.vue';
@@ -81,7 +80,7 @@ export default {
 <template>
   <div>
     <div class="bg-portada min-h-[200px] md:min-h-[400px] bg-cover bg-center flex flex-col justify-center items-start text-left px-4 md:px-14 py-8 md:py-14">
-      <MainH1 class="text-2xl md:text-5xl pl-0">{{ post ? post.titulo_post : '' }}</MainH1>
+      <h1 class="text-2xl md:text-5xl pl-0 font-montserrat font-boldpt-20">{{ post ? post.titulo_post : '' }}</h1>
       <template v-if="post">
         <p class="font-montserrat text-left bg-black text-white w-auto px-4 py-2 rounded-lg mt-4">{{ post.categoria_post }}</p>
       </template>

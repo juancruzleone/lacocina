@@ -68,7 +68,7 @@ export default {
         </div>
         <div v-if="user.id" class="mb-8 font-montserrat">
           <h2 class="text-2xl font-bold mb-4">Posts publicados</h2>
-          <ul class="bg-contenedores p-3 rounded-lg w-[250px] h-[100px] flex">
+          <ul class="bg-contenedores p-3 rounded-lg w-[250px] h-auto flex">
             <li v-for="(post, index) in user.posts" :key="index" class="mb-2">
               <p class="font-semibold text-white font-monserrat mb-4">{{ post.titulo_post }}</p>
               <router-link :to="'/post/' + post.id" class="text-white bg-gray-500 font-montserrat text-center font-montserrat p-1 radius-mensaje mr-2">Ver más</router-link>
